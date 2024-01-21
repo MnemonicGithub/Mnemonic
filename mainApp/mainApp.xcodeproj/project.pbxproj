@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A173D68D2B5179AC00B069F2 /* CommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173D68C2B5179AB00B069F2 /* CommonModel.swift */; };
 		A173D68F2B53D5C600B069F2 /* UIComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173D68E2B53D5C600B069F2 /* UIComponent.swift */; };
+		A173D6912B5509C600B069F2 /* Bip39WordLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173D6902B5509C600B069F2 /* Bip39WordLists.swift */; };
+		A173D6942B550ADB00B069F2 /* Bip39ValidatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173D6932B550ADB00B069F2 /* Bip39ValidatorViewModel.swift */; };
 		A19BEEBB2B5128E600DED46A /* mainAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEBA2B5128E600DED46A /* mainAppApp.swift */; };
 		A19BEEBD2B5128E600DED46A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEBC2B5128E600DED46A /* ContentView.swift */; };
 		A19BEEBF2B5128E700DED46A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A19BEEBE2B5128E700DED46A /* Assets.xcassets */; };
@@ -23,10 +25,10 @@
 		A19BEEED2B512A1000DED46A /* CloneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEEC2B512A1000DED46A /* CloneView.swift */; };
 		A19BEEEF2B512A3100DED46A /* RestoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEEE2B512A3100DED46A /* RestoreView.swift */; };
 		A19BEEF12B512A3A00DED46A /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEF02B512A3A00DED46A /* SwiftUIView.swift */; };
-		A19BEEF52B512B5900DED46A /* ProtocolBip39.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEF42B512B5900DED46A /* ProtocolBip39.swift */; };
+		A19BEEF52B512B5900DED46A /* Bip39Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEF42B512B5900DED46A /* Bip39Validator.swift */; };
 		A19BEEF72B512B9500DED46A /* DataAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEF62B512B9500DED46A /* DataAlgorithm.swift */; };
-		A19BEEF92B512BCF00DED46A /* TextFiledBoundary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEF82B512BCF00DED46A /* TextFiledBoundary.swift */; };
-		A19BEEFB2B512BE300DED46A /* InAppStoreReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEFA2B512BE300DED46A /* InAppStoreReview.swift */; };
+		A19BEEF92B512BCF00DED46A /* TextFiledBoundaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEF82B512BCF00DED46A /* TextFiledBoundaryViewModel.swift */; };
+		A19BEEFB2B512BE300DED46A /* InAppStoreReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEFA2B512BE300DED46A /* InAppStoreReviewView.swift */; };
 		A19BEEFD2B512C0500DED46A /* NFCInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEFC2B512C0500DED46A /* NFCInterface.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +52,8 @@
 /* Begin PBXFileReference section */
 		A173D68C2B5179AB00B069F2 /* CommonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonModel.swift; sourceTree = "<group>"; };
 		A173D68E2B53D5C600B069F2 /* UIComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIComponent.swift; sourceTree = "<group>"; };
+		A173D6902B5509C600B069F2 /* Bip39WordLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bip39WordLists.swift; sourceTree = "<group>"; };
+		A173D6932B550ADB00B069F2 /* Bip39ValidatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bip39ValidatorViewModel.swift; sourceTree = "<group>"; };
 		A19BEEB72B5128E600DED46A /* mainApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mainApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A19BEEBA2B5128E600DED46A /* mainAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainAppApp.swift; sourceTree = "<group>"; };
 		A19BEEBC2B5128E600DED46A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -67,10 +71,10 @@
 		A19BEEEC2B512A1000DED46A /* CloneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloneView.swift; sourceTree = "<group>"; };
 		A19BEEEE2B512A3100DED46A /* RestoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreView.swift; sourceTree = "<group>"; };
 		A19BEEF02B512A3A00DED46A /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
-		A19BEEF42B512B5900DED46A /* ProtocolBip39.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolBip39.swift; sourceTree = "<group>"; };
+		A19BEEF42B512B5900DED46A /* Bip39Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bip39Validator.swift; sourceTree = "<group>"; };
 		A19BEEF62B512B9500DED46A /* DataAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAlgorithm.swift; sourceTree = "<group>"; };
-		A19BEEF82B512BCF00DED46A /* TextFiledBoundary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFiledBoundary.swift; sourceTree = "<group>"; };
-		A19BEEFA2B512BE300DED46A /* InAppStoreReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppStoreReview.swift; sourceTree = "<group>"; };
+		A19BEEF82B512BCF00DED46A /* TextFiledBoundaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFiledBoundaryViewModel.swift; sourceTree = "<group>"; };
+		A19BEEFA2B512BE300DED46A /* InAppStoreReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppStoreReviewView.swift; sourceTree = "<group>"; };
 		A19BEEFC2B512C0500DED46A /* NFCInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCInterface.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +103,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A173D6922B550A9A00B069F2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A173D6932B550ADB00B069F2 /* Bip39ValidatorViewModel.swift */,
+				A19BEEF82B512BCF00DED46A /* TextFiledBoundaryViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		A19BEEAE2B5128E600DED46A = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +138,7 @@
 				A19BEEBA2B5128E600DED46A /* mainAppApp.swift */,
 				A19BEEBE2B5128E700DED46A /* Assets.xcassets */,
 				A19BEEF22B512A7C00DED46A /* View */,
+				A173D6922B550A9A00B069F2 /* ViewModel */,
 				A19BEEF32B512B2600DED46A /* Utility */,
 				A19BEEC02B5128E700DED46A /* Preview Content */,
 			);
@@ -166,6 +180,8 @@
 				A19BEEEA2B5129FB00DED46A /* BackupView.swift */,
 				A19BEEEC2B512A1000DED46A /* CloneView.swift */,
 				A19BEEEE2B512A3100DED46A /* RestoreView.swift */,
+				A19BEEFA2B512BE300DED46A /* InAppStoreReviewView.swift */,
+				A173D68E2B53D5C600B069F2 /* UIComponent.swift */,
 				A19BEEF02B512A3A00DED46A /* SwiftUIView.swift */,
 			);
 			path = View;
@@ -174,13 +190,11 @@
 		A19BEEF32B512B2600DED46A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				A173D68E2B53D5C600B069F2 /* UIComponent.swift */,
 				A173D68C2B5179AB00B069F2 /* CommonModel.swift */,
-				A19BEEF82B512BCF00DED46A /* TextFiledBoundary.swift */,
-				A19BEEF42B512B5900DED46A /* ProtocolBip39.swift */,
+				A19BEEF42B512B5900DED46A /* Bip39Validator.swift */,
+				A173D6902B5509C600B069F2 /* Bip39WordLists.swift */,
 				A19BEEF62B512B9500DED46A /* DataAlgorithm.swift */,
 				A19BEEFC2B512C0500DED46A /* NFCInterface.swift */,
-				A19BEEFA2B512BE300DED46A /* InAppStoreReview.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -318,19 +332,21 @@
 				A19BEEF72B512B9500DED46A /* DataAlgorithm.swift in Sources */,
 				A19BEEBD2B5128E600DED46A /* ContentView.swift in Sources */,
 				A173D68D2B5179AC00B069F2 /* CommonModel.swift in Sources */,
+				A173D6942B550ADB00B069F2 /* Bip39ValidatorViewModel.swift in Sources */,
 				A19BEEBB2B5128E600DED46A /* mainAppApp.swift in Sources */,
 				A19BEEF12B512A3A00DED46A /* SwiftUIView.swift in Sources */,
 				A19BEEE52B51296100DED46A /* LandingPageView.swift in Sources */,
 				A19BEEEF2B512A3100DED46A /* RestoreView.swift in Sources */,
 				A19BEEE72B51296D00DED46A /* AboutUsView.swift in Sources */,
 				A19BEEED2B512A1000DED46A /* CloneView.swift in Sources */,
-				A19BEEF52B512B5900DED46A /* ProtocolBip39.swift in Sources */,
+				A19BEEF52B512B5900DED46A /* Bip39Validator.swift in Sources */,
+				A173D6912B5509C600B069F2 /* Bip39WordLists.swift in Sources */,
 				A19BEEFD2B512C0500DED46A /* NFCInterface.swift in Sources */,
 				A19BEEEB2B5129FB00DED46A /* BackupView.swift in Sources */,
 				A19BEEE92B51298F00DED46A /* GuideView.swift in Sources */,
 				A173D68F2B53D5C600B069F2 /* UIComponent.swift in Sources */,
-				A19BEEFB2B512BE300DED46A /* InAppStoreReview.swift in Sources */,
-				A19BEEF92B512BCF00DED46A /* TextFiledBoundary.swift in Sources */,
+				A19BEEFB2B512BE300DED46A /* InAppStoreReviewView.swift in Sources */,
+				A19BEEF92B512BCF00DED46A /* TextFiledBoundaryViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

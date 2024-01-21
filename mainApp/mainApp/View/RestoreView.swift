@@ -12,32 +12,25 @@ struct RestoreView: View {
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        ZStack {
-            Rectangle()
-                .foregroundColor(Color.indigo)
-                .edgesIgnoringSafeArea(.all)
-                .opacity(0.6)
+        VStack {
+            Image(systemName: "text.word.spacing")
+                .imageScale(.large)
+                .foregroundStyle(.white)
+            Text("Restore!")
+                .imageScale(.large)
+                .foregroundStyle(.white)
             
-            VStack {
-                Image(systemName: "text.word.spacing")
-                    .imageScale(.large)
-                    .foregroundStyle(.white)
-                Text("Restore!")
-                    .imageScale(.large)
-                    .foregroundStyle(.white)
-                
-                RestoreActionView()
-            }
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Image(systemName: "chevron.left.circle.fill")
-                            .font(.title)
-                            .foregroundColor(.white)
-                    }
+            RestoreActionView()
+        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    dismiss()
+                }) {
+                    Image(systemName: "chevron.left.circle.fill")
+                        .font(.title)
+                        .foregroundColor(.white)
                 }
             }
         }
@@ -48,12 +41,19 @@ struct RestoreActionView: View {
     var body: some View {
         
         VStack {
-            NavigationLinkButtonTypeA(text: "Start Read", viewValue: PathInfo.restoreViewStartReadValue)
-            NavigationLinkButtonTypeA(text: "Enter Password", viewValue: PathInfo.restoreViewEnterPasswordValue)
-            NavigationLinkButtonTypeA(text: "Show Mnemonic", viewValue: PathInfo.restoreViewShowMnemonicValue)
-            .navigationDestination(for: Int.self) { viewValue in
-                PathInfo.gotoLink(viewValue: viewValue)
+            NavigationBox(viewValue: PathInfo.restoreViewStartReadValue) {
+                SecondaryButtonModel(text: "Start Read")
             }
+            NavigationBox(viewValue: PathInfo.restoreViewEnterPasswordValue) {
+                SecondaryButtonModel(text: "Enter Password")
+            }
+            NavigationBox(viewValue: PathInfo.restoreViewShowMnemonicValue) {
+                SecondaryButtonModel(text: "Show Mnemonic")
+            }
+            
+        }
+        .navigationDestination(for: Int.self) { viewValue in
+            PathInfo.gotoLink(viewValue: viewValue)
         }
     }
 }
@@ -99,4 +99,5 @@ struct rvShowMnemonicView: View {
 
 #Preview {
     RestoreView()
+        .preferredColorScheme(.dark)
 }

@@ -13,31 +13,50 @@ final class Router: ObservableObject {
 
 struct ContentView: View {
     @StateObject var router: Router = Router()
-    @State var isOpenLandingPageView = false
-    @State var isOpenAboutUsView = false
-    @State var isOpenGudieView = false
+    @State var isOpenDententView: Bool = false
+    @State var isOpenAboutUsView: Bool = false
+    @State var isOpenGudieView: Bool = false
+    
+
+
     
     var body: some View {
         NavigationStack(path: $router.path) {
             VStack {
                 Group {
-                    SheetButton(toggle: $isOpenLandingPageView, text: "LandingPageView")
-                    SheetButton(toggle: $isOpenAboutUsView, text: "AboutUsView")
-                    SheetButton(toggle: $isOpenGudieView, text: "GuideView")
+                    HStack {
+                        ButtonBox(toggle: $isOpenGudieView) {
+                            PrimaryIconButtonModel(image: "bell")
+                        }
+                        ButtonBox(toggle: $isOpenAboutUsView) {
+                            PrimaryIconButtonModel(image: "info.circle")
+                        }
+                    }
+                    ButtonBox(toggle: $isOpenDententView) {
+                        SecondaryButtonModel(text: "Detent")
+                    }
                 }
 
                 Group {
-                    NavigationLinkButton(text: "BackupView", viewValue: PathInfo.backupViewValue)
-                    NavigationLinkButton(text: "CloneView", viewValue: PathInfo.cloneViewValue)
-                    NavigationLinkButton(text: "RestoreView", viewValue: PathInfo.restoreViewValue)
+                    NavigationBox(viewValue: PathInfo.landingPageViewValue) {
+                        PrimaryButtonModel(text: "LandingPageView")
+                    }
+                    NavigationBox(viewValue: PathInfo.backupViewValue) {
+                        PrimaryButtonModel(text: "BackupView")
+                    }
+                    NavigationBox(viewValue: PathInfo.cloneViewValue) {
+                        PrimaryButtonModel(text: "CloneView")
+                    }
+                    NavigationBox(viewValue: PathInfo.restoreViewValue) {
+                        PrimaryButtonModel(text: "RestoreView")
+                    }
                 }
-
             }
             .navigationDestination(for: Int.self) { viewValue in
                 PathInfo.gotoLink(viewValue: viewValue)
             }
-            .sheet(isPresented: $isOpenLandingPageView) {
-                LandingPageView()
+            .sheet(isPresented: $isOpenDententView) {
+                DententView()
             }
             .sheet(isPresented: $isOpenAboutUsView) {
                 AboutUsView()
@@ -52,5 +71,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .environment(\.colorScheme, .light)
-}
+        .preferredColorScheme(.dark)
+ }

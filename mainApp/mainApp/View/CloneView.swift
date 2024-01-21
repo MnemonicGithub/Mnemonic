@@ -12,32 +12,25 @@ struct CloneView: View {
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        ZStack {
-            Rectangle()
-                .foregroundColor(Color.purple)
-                .edgesIgnoringSafeArea(.all)
-                .opacity(0.6)
+        VStack {
+            Image(systemName: "doc.on.doc.fill")
+                .imageScale(.large)
+                .foregroundStyle(.white)
+            Text("Clone!")
+                .imageScale(.large)
+                .foregroundStyle(.white)
             
-            VStack {
-                Image(systemName: "doc.on.doc.fill")
-                    .imageScale(.large)
-                    .foregroundStyle(.white)
-                Text("Clone!")
-                    .imageScale(.large)
-                    .foregroundStyle(.white)
-                
-                CloneActionView()
-            }
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Image(systemName: "chevron.left.circle.fill")
-                            .font(.title)
-                            .foregroundColor(.white)
-                    }
+            CloneActionView()
+        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    dismiss()
+                }) {
+                    Image(systemName: "chevron.left.circle.fill")
+                        .font(.title)
+                        .foregroundColor(.white)
                 }
             }
         }
@@ -48,11 +41,15 @@ struct CloneActionView: View {
     var body: some View {
         
         VStack {
-            NavigationLinkButtonTypeA(text: "Start Read", viewValue: PathInfo.cloneViewStartReadValue)
-            NavigationLinkButtonTypeA(text: "Start Clone", viewValue: PathInfo.cloneViewStartCloneValue)
-            .navigationDestination(for: Int.self) { viewValue in
-                PathInfo.gotoLink(viewValue: viewValue)
+            NavigationBox(viewValue: PathInfo.backupViewSetMnemonicValue) {
+                SecondaryButtonModel(text: "Start Read")
             }
+            NavigationBox(viewValue: PathInfo.backupViewSetPasswordValue) {
+                SecondaryButtonModel(text: "Start Clone")
+            }
+        }
+        .navigationDestination(for: Int.self) { viewValue in
+            PathInfo.gotoLink(viewValue: viewValue)
         }
     }
 }
@@ -85,4 +82,5 @@ struct cvStartCloneView: View {
 
 #Preview {
     CloneView()
+        .preferredColorScheme(.dark)
 }

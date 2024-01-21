@@ -12,35 +12,28 @@ struct BackupView: View {
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
-            ZStack {
-                Rectangle()
-                    .foregroundColor(Color.brown)
-                    .edgesIgnoringSafeArea(.all)
-                    .opacity(0.6)
-                
-                VStack {
-                    Image(systemName: "lock.shield")
-                        .imageScale(.large)
-                        .foregroundStyle(.white)
-                    Text("Backup!")
-                        .imageScale(.large)
-                        .foregroundStyle(.white)
-                    
-                    BackupActionView()
-                }
-                .navigationBarBackButtonHidden(true)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button(action: {
-                            dismiss()
-                        }) {
-                            Image(systemName: "chevron.left.circle.fill")
-                                .font(.title)
-                                .foregroundColor(.white)
-                        }
-                    }
+        VStack {
+            Image(systemName: "lock.shield")
+                .imageScale(.large)
+                .foregroundStyle(.white)
+            Text("Backup!")
+                .imageScale(.large)
+                .foregroundStyle(.white)
+            
+            BackupActionView()
+        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    dismiss()
+                }) {
+                    Image(systemName: "chevron.left.circle.fill")
+                        .font(.title)
+                        .foregroundColor(.white)
                 }
             }
+        }
     }
 }
 
@@ -48,12 +41,18 @@ struct BackupActionView: View {
     var body: some View {
         
         VStack {
-            NavigationLinkButtonTypeA(text: "Set Mnemonic", viewValue: PathInfo.backupViewSetMnemonicValue)
-            NavigationLinkButtonTypeA(text: "Set Password", viewValue: PathInfo.backupViewSetPasswordValue)
-            NavigationLinkButtonTypeA(text: "Start Backup", viewValue: PathInfo.backupViewStartBackup)
-            .navigationDestination(for: Int.self) { viewValue in
-                PathInfo.gotoLink(viewValue: viewValue)
+            NavigationBox(viewValue: PathInfo.backupViewSetMnemonicValue) {
+                SecondaryButtonModel(text: "Set Mnemonic")
             }
+            NavigationBox(viewValue: PathInfo.backupViewSetPasswordValue) {
+                SecondaryButtonModel(text: "Set Password")
+            }
+            NavigationBox(viewValue: PathInfo.backupViewStartBackup) {
+                SecondaryButtonModel(text: "Start Backup")
+            }
+        }
+        .navigationDestination(for: Int.self) { viewValue in
+            PathInfo.gotoLink(viewValue: viewValue)
         }
     }
 }
@@ -99,4 +98,5 @@ struct bvStartBackView: View {
 
 #Preview {
     BackupView()
+        .preferredColorScheme(.dark)
 }
