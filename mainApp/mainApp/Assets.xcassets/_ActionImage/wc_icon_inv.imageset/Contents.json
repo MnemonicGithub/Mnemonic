@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "wc_icon_inv.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

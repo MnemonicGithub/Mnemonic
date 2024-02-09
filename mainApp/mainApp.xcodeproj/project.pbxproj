@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A148DE4C2B5CEA1300736B5F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A148DE4E2B5CEA1300736B5F /* Localizable.strings */; };
+		A148DE512B5E07D700736B5F /* UIStyleMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = A148DE502B5E07D700736B5F /* UIStyleMap.swift */; };
+		A148DE532B5E4A8D00736B5F /* UINavigationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = A148DE522B5E4A8D00736B5F /* UINavigationMap.swift */; };
 		A173D68D2B5179AC00B069F2 /* CommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173D68C2B5179AB00B069F2 /* CommonModel.swift */; };
 		A173D68F2B53D5C600B069F2 /* UIComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173D68E2B53D5C600B069F2 /* UIComponent.swift */; };
 		A173D6912B5509C600B069F2 /* Bip39WordLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173D6902B5509C600B069F2 /* Bip39WordLists.swift */; };
@@ -24,12 +27,10 @@
 		A19BEEEB2B5129FB00DED46A /* BackupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEEA2B5129FB00DED46A /* BackupView.swift */; };
 		A19BEEED2B512A1000DED46A /* CloneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEEC2B512A1000DED46A /* CloneView.swift */; };
 		A19BEEEF2B512A3100DED46A /* RestoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEEE2B512A3100DED46A /* RestoreView.swift */; };
-		A19BEEF12B512A3A00DED46A /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEF02B512A3A00DED46A /* SwiftUIView.swift */; };
 		A19BEEF52B512B5900DED46A /* Bip39Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEF42B512B5900DED46A /* Bip39Validator.swift */; };
 		A19BEEF72B512B9500DED46A /* DataAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEF62B512B9500DED46A /* DataAlgorithm.swift */; };
-		A19BEEF92B512BCF00DED46A /* TextFiledBoundaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEF82B512BCF00DED46A /* TextFiledBoundaryViewModel.swift */; };
-		A19BEEFB2B512BE300DED46A /* InAppStoreReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEFA2B512BE300DED46A /* InAppStoreReviewView.swift */; };
-		A19BEEFD2B512C0500DED46A /* NFCInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEFC2B512C0500DED46A /* NFCInterface.swift */; };
+		A19BEEF92B512BCF00DED46A /* UserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEF82B512BCF00DED46A /* UserInfoViewModel.swift */; };
+		A19BEEFD2B512C0500DED46A /* NfcOperationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEFC2B512C0500DED46A /* NfcOperationsHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A145A8872B74AD6D0026F91D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A145A8882B74ADFF0026F91D /* mainApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mainApp.entitlements; sourceTree = "<group>"; };
+		A148DE4D2B5CEA1300736B5F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A148DE502B5E07D700736B5F /* UIStyleMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStyleMap.swift; sourceTree = "<group>"; };
+		A148DE522B5E4A8D00736B5F /* UINavigationMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationMap.swift; sourceTree = "<group>"; };
 		A173D68C2B5179AB00B069F2 /* CommonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonModel.swift; sourceTree = "<group>"; };
 		A173D68E2B53D5C600B069F2 /* UIComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIComponent.swift; sourceTree = "<group>"; };
 		A173D6902B5509C600B069F2 /* Bip39WordLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bip39WordLists.swift; sourceTree = "<group>"; };
@@ -70,12 +76,10 @@
 		A19BEEEA2B5129FB00DED46A /* BackupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupView.swift; sourceTree = "<group>"; };
 		A19BEEEC2B512A1000DED46A /* CloneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloneView.swift; sourceTree = "<group>"; };
 		A19BEEEE2B512A3100DED46A /* RestoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreView.swift; sourceTree = "<group>"; };
-		A19BEEF02B512A3A00DED46A /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		A19BEEF42B512B5900DED46A /* Bip39Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bip39Validator.swift; sourceTree = "<group>"; };
 		A19BEEF62B512B9500DED46A /* DataAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAlgorithm.swift; sourceTree = "<group>"; };
-		A19BEEF82B512BCF00DED46A /* TextFiledBoundaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFiledBoundaryViewModel.swift; sourceTree = "<group>"; };
-		A19BEEFA2B512BE300DED46A /* InAppStoreReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppStoreReviewView.swift; sourceTree = "<group>"; };
-		A19BEEFC2B512C0500DED46A /* NFCInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCInterface.swift; sourceTree = "<group>"; };
+		A19BEEF82B512BCF00DED46A /* UserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewModel.swift; sourceTree = "<group>"; };
+		A19BEEFC2B512C0500DED46A /* NfcOperationsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfcOperationsHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,8 +110,11 @@
 		A173D6922B550A9A00B069F2 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A148DE502B5E07D700736B5F /* UIStyleMap.swift */,
+				A173D68E2B53D5C600B069F2 /* UIComponent.swift */,
+				A148DE522B5E4A8D00736B5F /* UINavigationMap.swift */,
 				A173D6932B550ADB00B069F2 /* Bip39ValidatorViewModel.swift */,
-				A19BEEF82B512BCF00DED46A /* TextFiledBoundaryViewModel.swift */,
+				A19BEEF82B512BCF00DED46A /* UserInfoViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -135,12 +142,15 @@
 		A19BEEB92B5128E600DED46A /* mainApp */ = {
 			isa = PBXGroup;
 			children = (
+				A145A8882B74ADFF0026F91D /* mainApp.entitlements */,
+				A145A8872B74AD6D0026F91D /* Info.plist */,
 				A19BEEBA2B5128E600DED46A /* mainAppApp.swift */,
 				A19BEEBE2B5128E700DED46A /* Assets.xcassets */,
 				A19BEEF22B512A7C00DED46A /* View */,
 				A173D6922B550A9A00B069F2 /* ViewModel */,
 				A19BEEF32B512B2600DED46A /* Utility */,
 				A19BEEC02B5128E700DED46A /* Preview Content */,
+				A148DE4E2B5CEA1300736B5F /* Localizable.strings */,
 			);
 			path = mainApp;
 			sourceTree = "<group>";
@@ -180,9 +190,6 @@
 				A19BEEEA2B5129FB00DED46A /* BackupView.swift */,
 				A19BEEEC2B512A1000DED46A /* CloneView.swift */,
 				A19BEEEE2B512A3100DED46A /* RestoreView.swift */,
-				A19BEEFA2B512BE300DED46A /* InAppStoreReviewView.swift */,
-				A173D68E2B53D5C600B069F2 /* UIComponent.swift */,
-				A19BEEF02B512A3A00DED46A /* SwiftUIView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -194,7 +201,7 @@
 				A19BEEF42B512B5900DED46A /* Bip39Validator.swift */,
 				A173D6902B5509C600B069F2 /* Bip39WordLists.swift */,
 				A19BEEF62B512B9500DED46A /* DataAlgorithm.swift */,
-				A19BEEFC2B512C0500DED46A /* NFCInterface.swift */,
+				A19BEEFC2B512C0500DED46A /* NfcOperationsHandler.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -304,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A19BEEC22B5128E700DED46A /* Preview Assets.xcassets in Resources */,
+				A148DE4C2B5CEA1300736B5F /* Localizable.strings in Resources */,
 				A19BEEBF2B5128E700DED46A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -333,20 +341,20 @@
 				A19BEEBD2B5128E600DED46A /* ContentView.swift in Sources */,
 				A173D68D2B5179AC00B069F2 /* CommonModel.swift in Sources */,
 				A173D6942B550ADB00B069F2 /* Bip39ValidatorViewModel.swift in Sources */,
+				A148DE532B5E4A8D00736B5F /* UINavigationMap.swift in Sources */,
 				A19BEEBB2B5128E600DED46A /* mainAppApp.swift in Sources */,
-				A19BEEF12B512A3A00DED46A /* SwiftUIView.swift in Sources */,
 				A19BEEE52B51296100DED46A /* LandingPageView.swift in Sources */,
 				A19BEEEF2B512A3100DED46A /* RestoreView.swift in Sources */,
 				A19BEEE72B51296D00DED46A /* AboutUsView.swift in Sources */,
 				A19BEEED2B512A1000DED46A /* CloneView.swift in Sources */,
 				A19BEEF52B512B5900DED46A /* Bip39Validator.swift in Sources */,
 				A173D6912B5509C600B069F2 /* Bip39WordLists.swift in Sources */,
-				A19BEEFD2B512C0500DED46A /* NFCInterface.swift in Sources */,
+				A19BEEFD2B512C0500DED46A /* NfcOperationsHandler.swift in Sources */,
+				A148DE512B5E07D700736B5F /* UIStyleMap.swift in Sources */,
 				A19BEEEB2B5129FB00DED46A /* BackupView.swift in Sources */,
 				A19BEEE92B51298F00DED46A /* GuideView.swift in Sources */,
 				A173D68F2B53D5C600B069F2 /* UIComponent.swift in Sources */,
-				A19BEEFB2B512BE300DED46A /* InAppStoreReviewView.swift in Sources */,
-				A19BEEF92B512BCF00DED46A /* TextFiledBoundaryViewModel.swift in Sources */,
+				A19BEEF92B512BCF00DED46A /* UserInfoViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,12 +390,24 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		A148DE4E2B5CEA1300736B5F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A148DE4D2B5CEA1300736B5F /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		A19BEED92B5128E700DED46A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -451,6 +471,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -507,14 +528,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = mainApp/mainApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"mainApp/Preview Content\"";
-				DEVELOPMENT_TEAM = H35PYW3ZNM;
+				DEVELOPMENT_TEAM = 439P2P24S8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = mainApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Mnemonic;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NFCReaderUsageDescription = "App needs scanning NFC permission";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -526,7 +550,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Mnemonic.mainApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andy.example.nfc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -542,14 +566,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = mainApp/mainApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"mainApp/Preview Content\"";
-				DEVELOPMENT_TEAM = H35PYW3ZNM;
+				DEVELOPMENT_TEAM = 439P2P24S8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = mainApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Mnemonic;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NFCReaderUsageDescription = "App needs scanning NFC permission";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -561,7 +588,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Mnemonic.mainApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andy.example.nfc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

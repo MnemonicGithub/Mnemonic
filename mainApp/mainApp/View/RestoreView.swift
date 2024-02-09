@@ -9,95 +9,136 @@ import Foundation
 import SwiftUI
 
 struct RestoreView: View {
-    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var dataBox: DataBox
 
     var body: some View {
         VStack {
-            Image(systemName: "text.word.spacing")
-                .imageScale(.large)
-                .foregroundStyle(.white)
-            Text("Restore!")
-                .imageScale(.large)
-                .foregroundStyle(.white)
-            
+            PrimaryActionBlockNoBorderModel(textTitle: "LandingC2WTitle", textContent: "LandingC2WContent", image: AppImage.landingC2W)
             RestoreActionView()
+        }
+        .background {
+            Image(AppImage.actionWallpaper)
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
-                    dismiss()
-                }) {
-                    Image(systemName: "chevron.left.circle.fill")
-                        .font(.title)
-                        .foregroundColor(.white)
-                }
+                ToobarBackButtonModel()
             }
         }
     }
 }
 
 struct RestoreActionView: View {
+    @EnvironmentObject var dataBox: DataBox
+    private var nfcOperationsHandler = NfcOperationsHandler()
+    
     var body: some View {
-        
-        VStack {
-            NavigationBox(viewValue: PathInfo.restoreViewStartReadValue) {
-                SecondaryButtonModel(text: "Start Read")
-            }
-            NavigationBox(viewValue: PathInfo.restoreViewEnterPasswordValue) {
-                SecondaryButtonModel(text: "Enter Password")
-            }
-            NavigationBox(viewValue: PathInfo.restoreViewShowMnemonicValue) {
-                SecondaryButtonModel(text: "Show Mnemonic")
+        VStack(alignment: .center, spacing: 20) {
+            Button(action: {
+                if let answer = nfcOperationsHandler.startNFCReading() {
+                    let parsingAnswer = answer.split(separator: " ")
+                    dataBox.actionC2WStep1 = true
+                    dataBox.setCardName(String(parsingAnswer[0]))
+                    dataBox.setMnemonic(String(parsingAnswer[1]))
+                } else {
+                    dataBox.actionC2WStep1 = false
+                }
+            }) {
+                if dataBox.actionC2WStep1 {
+                    SecondaryStepBlock(textStep: "ActionSTEP1", textTitle: "C2WStep1Title", textContent: "C2WStep1Content")
+                } else {
+                    PrimaryStepBlock(textStep: "ActionSTEP1", textTitle: "C2WStep1Title", textContent: "C2WStep1Content")
+                }
             }
             
-        }
-        .navigationDestination(for: Int.self) { viewValue in
-            PathInfo.gotoLink(viewValue: viewValue)
-        }
-    }
-}
-
-struct rvStartReadView: View {
-    @EnvironmentObject var router: Router
-
-    var body: some View {
-        
-        VStack {
-            Button("Dismiss") {
-                router.path = .init()
+            NavigationBox(viewValue: PathInfo.restoreViewShowMnemonicValue) {
+                PrimaryStepBlock(textStep: "ActionSTEP2", textTitle: "C2WStep2Title", textContent: "C2WStep2Content")
+                    .opacity(dataBox.actionC2WStep1 ? 1 : 0.4)
             }
+            .disabled(!dataBox.actionC2WStep1)
+            
+            Spacer()
         }
     }
 }
 
-struct rvEnterPassworView: View {
-    @EnvironmentObject var router: Router
-
-    var body: some View {
-        
-        VStack {
-            Button("Dismiss") {
-                router.path = .init()
-            }
-        }
-    }
-}
+//struct rvStartReadView: View {
+//    var body: some View {
+//        BackToRootButtonModel()
+//    }
+//}
 
 struct rvShowMnemonicView: View {
     @EnvironmentObject var router: Router
+    @EnvironmentObject var dataBox: DataBox
+    private var dataAlgorithm = DataAlgorithm()
+    @State var isDone: Bool = false
+    @State var isDecryptSuccess: Bool = false
+    @State var password: String = ""
+    @State private var plainText: String = ""
 
     var body: some View {
-        
-        VStack {
-            Button("Dismiss") {
-                router.path = .init()
+        ScrollView {
+            if isDecryptSuccess {
+                VStack(alignment: .leading, spacing: 30) {
+                    HStack(alignment: .center) {
+                        Spacer()
+                        
+                        VStack {
+                            NamePasswordBoxModel(name: dataBox.getCardName(), password: password)
+                            MnemonicBoxModel(words: plainText)
+                        }
+
+                        Spacer()
+                    }
+                    Button(action: {
+                        router.path = .init()
+                    }) {
+                        SecondaryInteractiveButtonModel(text: "Finish", isActive: $isDecryptSuccess)
+                    }
+                }
+                .padding(.top, 30)
+            } else {
+                EnterPasswordModel(isVerify: $isDecryptSuccess, password: $password) {
+                    withAnimation {
+                        (isDecryptSuccess, plainText) = dataAlgorithm.toPlain(cardName: dataBox.getCardName(), password: password, cipherText: dataBox.getMnemonic())
+                    }
+                }
+                .zIndex(1)
             }
+        }
+        .background {
+            Image(AppImage.actionWallpaper)
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                ToobarBackButtonModel(title: "C2WStep2Title")
+            }
+        }
+        .onDisappear {
+            dataAlgorithm.clearData()
         }
     }
 }
 
-#Preview {
-    RestoreView()
+struct RVPreviews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            RestoreView()
+//            rvStartReadView()
+            rvShowMnemonicView()
+        }
+        .environmentObject(DataBox())
         .preferredColorScheme(.dark)
+    }
 }
+
+
+

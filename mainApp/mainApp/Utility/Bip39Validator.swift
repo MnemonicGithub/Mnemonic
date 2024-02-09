@@ -18,6 +18,12 @@ public struct Bip39Validator {
     }
     
     func isValidMnemonic(_ mnemonic: Array<String>) -> Bool {
+        
+        let allowedCounts: Set<Int> = [12, 15, 18, 21, 24]
+        if !allowedCounts.contains(mnemonic.count) {
+            return false
+        }
+        
         var bits = ""
         for word in mnemonic {
             guard let i = wordList.firstIndex(of: word) else { return false }

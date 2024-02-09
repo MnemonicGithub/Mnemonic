@@ -13,34 +13,47 @@ struct AboutUsView: View {
 
     var body: some View {
         ZStack {
-            Rectangle()
-                .foregroundColor(Color.orange)
-                .edgesIgnoringSafeArea(.all)
-                .opacity(0.6)
-            
-            VStack {
-                Image(systemName: "person.3.fill")
-                    .imageScale(.large)
-                    .foregroundStyle(.white)
-                Text("About Us!")
-                    .imageScale(.large)
-                    .foregroundStyle(.white)
-            }
-            
-            VStack {
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Image(systemName: "chevron.down.circle.fill")
-                            .font(.largeTitle)
-                            .foregroundColor(.white)
-                    }
-                    .padding()
+            AppColor.backgroundColor
+                .ignoresSafeArea()
+            ScrollView {
+                VStack(alignment: .leading) {
+                    
+//                    HStack(alignment: .center) {
+//                        Spacer()
+//
+//                        Button(action: {
+//                            dismiss()
+//                        }) {
+//                            Image(systemName: "chevron.down.circle.fill")
+//                                .font(.largeTitle)
+//                                .foregroundColor(.white)
+//                        }
+//                    }
+//                    .padding(.top)
+//                    .padding(.trailing)
+                    
+                    Text("Welcome and join our story!")
+                        .font(AppFont.fontH2)
+                        .foregroundColor(AppColor.textPrimary)
+                    
+                    Image("update_illustration")
+                    Image("update_illustration")
+                    Image("update_illustration")
+                    Image("update_illustration")
+                    Image("update_illustration")
+                    Image("update_illustration")
+                    Image("update_illustration")
+                    Image("update_illustration")
+                    Image("update_illustration")
+                    Image("update_illustration")
+
                 }
-                Spacer()
+                .padding(.top, 20)
+                .padding()
             }
+            .scrollIndicators(.hidden)
+            .presentationDetents([.medium, .large])
+            .presentationDragIndicator(.automatic)
         }
     }
 }

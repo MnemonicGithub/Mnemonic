@@ -9,78 +9,129 @@ import Foundation
 import SwiftUI
 
 struct CloneView: View {
-    @Environment(\.dismiss) var dismiss
-
+    @EnvironmentObject var router: Router
+    @EnvironmentObject var dataBox: DataBox
+    @State var isSuccess: Bool = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "doc.on.doc.fill")
-                .imageScale(.large)
-                .foregroundStyle(.white)
-            Text("Clone!")
-                .imageScale(.large)
-                .foregroundStyle(.white)
+        ZStack {
+            VStack {
+                PrimaryActionBlockNoBorderModel(textTitle: "LandingC2CTitle", textContent: "LandingC2CContent", image: AppImage.landingC2C)
+                CloneActionView(toggle: $isSuccess)
+            }
+            .background {
+                Image(AppImage.actionWallpaper)
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea()
+            }
             
-            CloneActionView()
+            if isSuccess {
+                SuccessAlertModel(toggle: $isSuccess) {
+                    router.path = .init()
+                }
+                .zIndex(1)
+            }
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
-                    dismiss()
-                }) {
-                    Image(systemName: "chevron.left.circle.fill")
-                        .font(.title)
-                        .foregroundColor(.white)
-                }
+                ToobarBackButtonModel()
             }
         }
     }
 }
 
 struct CloneActionView: View {
+    @EnvironmentObject var dataBox: DataBox
+    var nfcOperationsHandler = NfcOperationsHandler()
+    @State var cloneData: String = ""
+    @Binding var toggle: Bool
+    
     var body: some View {
-        
-        VStack {
-            NavigationBox(viewValue: PathInfo.backupViewSetMnemonicValue) {
-                SecondaryButtonModel(text: "Start Read")
+        VStack(alignment: .center, spacing: 20) {
+            Button(action: {
+                if let answer = nfcOperationsHandler.startNFCReading() {
+                    dataBox.actionC2CStep1 = true
+                    self.cloneData = answer
+                } else {
+                    dataBox.actionC2CStep1 = false
+                }
+            }) {
+                if dataBox.actionC2CStep1 {
+                    SecondaryStepBlock(textStep: "ActionSTEP1", textTitle: "C2CStep1Title", textContent: "C2CStep1Content")
+                } else {
+                    PrimaryStepBlock(textStep: "ActionSTEP1", textTitle: "C2CStep1Title", textContent: "C2CStep1Content")
+                }
             }
-            NavigationBox(viewValue: PathInfo.backupViewSetPasswordValue) {
-                SecondaryButtonModel(text: "Start Clone")
+            
+            Button(action: {
+                if (nfcOperationsHandler.startNFCWriting(rawString: cloneData)) {
+                    withAnimation {
+                        toggle.toggle()
+                    }
+                }
+            }) {
+                PrimaryStepBlock(textStep: "ActionSTEP2", textTitle: "C2CStep2Title", textContent: "C2CStep2Content")
+                    .opacity(dataBox.actionC2CStep1 ? 1 : 0.4)
             }
-        }
-        .navigationDestination(for: Int.self) { viewValue in
-            PathInfo.gotoLink(viewValue: viewValue)
+            .disabled(!dataBox.actionC2CStep1)
+
+            Spacer()
         }
     }
 }
 
-struct cvStartReadView: View {
-    @EnvironmentObject var router: Router
+//struct cvStartReadView: View {
+//    var body: some View {
+//        SetBackground() {
+//            VStack(alignment: .center, spacing: 30) {
+//                
+//                BackToRootButtonModel()
+//
+//            }
+//            .padding(.top, 30)
+//        }
+//        .navigationBarBackButtonHidden(true)
+//        .toolbar {
+//            ToolbarItem(placement: .navigationBarLeading) {
+//                ToobarBackButtonModel(title: "C2CStep1Title")
+//            }
+//        }
+//    }
+//}
 
-    var body: some View {
-        
-        VStack {
-            Button("Dismiss") {
-                router.path = .init()
-            }
+//struct cvStartCloneView: View {
+//    var body: some View {
+//        SetBackground() {
+//            VStack(alignment: .center, spacing: 30) {
+//                
+//                BackToRootButtonModel()
+//
+//            }
+//            .padding(.top, 30)
+//        }
+//        .navigationBarBackButtonHidden(true)
+//        .toolbar {
+//            ToolbarItem(placement: .navigationBarLeading) {
+//                ToobarBackButtonModel(title: "C2CStep2Title")
+//            }
+//        }
+//    }
+//}
+
+struct CVPreviews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            CloneView()
+                .environmentObject(DataBox())
+                .preferredColorScheme(.dark)
+            
+//            cvStartReadView()
+//                .preferredColorScheme(.dark)
+//            
+//            cvStartCloneView()
+//                .preferredColorScheme(.dark)
         }
     }
-}
-
-struct cvStartCloneView: View {
-    @EnvironmentObject var router: Router
-
-    var body: some View {
-        
-        VStack {
-            Button("Dismiss") {
-                router.path = .init()
-            }
-        }
-    }
-}
-
-#Preview {
-    CloneView()
-        .preferredColorScheme(.dark)
 }

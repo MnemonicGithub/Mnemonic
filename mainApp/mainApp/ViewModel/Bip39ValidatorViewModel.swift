@@ -38,4 +38,9 @@ class Bip39ValidatorViewModel: ObservableObject {
             .assign(to: \.isValidMnemonic, on: self)
             .store(in: &cancellableSet)
     }
+    
+    func clearData() {
+        word = ""
+        mnemonic = ""
+    }
 }

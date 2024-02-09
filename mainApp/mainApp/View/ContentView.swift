@@ -7,69 +7,67 @@
 
 import SwiftUI
 
-final class Router: ObservableObject {
-    @Published var path = NavigationPath()
-}
-
 struct ContentView: View {
-    @StateObject var router: Router = Router()
-    @State var isOpenDententView: Bool = false
-    @State var isOpenAboutUsView: Bool = false
-    @State var isOpenGudieView: Bool = false
-    
+    @AppStorage("isReadTerms") var isReadTerms = false
+    @State var isGetStarted: Bool = false
+    @State var isNeedUpadte: Bool = false
 
-
-    
     var body: some View {
-        NavigationStack(path: $router.path) {
-            VStack {
-                Group {
-                    HStack {
-                        ButtonBox(toggle: $isOpenGudieView) {
-                            PrimaryIconButtonModel(image: "bell")
-                        }
-                        ButtonBox(toggle: $isOpenAboutUsView) {
-                            PrimaryIconButtonModel(image: "info.circle")
-                        }
-                    }
-                    ButtonBox(toggle: $isOpenDententView) {
-                        SecondaryButtonModel(text: "Detent")
-                    }
-                }
+        ZStack {
+            Image(AppImage.welcomeWallpaper)
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
 
-                Group {
-                    NavigationBox(viewValue: PathInfo.landingPageViewValue) {
-                        PrimaryButtonModel(text: "LandingPageView")
+            HStack {
+                VStack(alignment: .leading, spacing: 10) {
+                    Spacer()
+                    
+                    Text("SloganFront")
+                        .font(AppFont.fontH)
+                        .foregroundColor(AppColor.textPrimary)
+                                        
+                    Text("SloganRear")
+                        .font(AppFont.fontH)
+                        .foregroundColor(AppColor.textPoint)
+                    
+                    Text("SloganDescription")
+                        .font(AppFont.fontBody2)
+                        .foregroundColor(AppColor.textPrimary)
+                    
+                    Spacer()
+
+                    ButtonBox(toggle: $isGetStarted) {
+                        SecondaryButtonModel(text: "GetStarted")
                     }
-                    NavigationBox(viewValue: PathInfo.backupViewValue) {
-                        PrimaryButtonModel(text: "BackupView")
-                    }
-                    NavigationBox(viewValue: PathInfo.cloneViewValue) {
-                        PrimaryButtonModel(text: "CloneView")
-                    }
-                    NavigationBox(viewValue: PathInfo.restoreViewValue) {
-                        PrimaryButtonModel(text: "RestoreView")
-                    }
+                    
+                    Spacer()
                 }
             }
-            .navigationDestination(for: Int.self) { viewValue in
-                PathInfo.gotoLink(viewValue: viewValue)
+            
+            if !isReadTerms {
+                TermsAlertModel(toggle: $isReadTerms)
+                    .zIndex(1)
             }
-            .sheet(isPresented: $isOpenDententView) {
-                DententView()
-            }
-            .sheet(isPresented: $isOpenAboutUsView) {
-                AboutUsView()
-            }
-            .sheet(isPresented: $isOpenGudieView) {
-                GuideView()
+            
+            if isNeedUpadte {
+                UpdateAlertModel(toggle: $isNeedUpadte)
+                .zIndex(1)
             }
         }
-        .environmentObject(router)
+        .onAppear {
+            // Check - Is the latest app version?
+            
+            
+        }
+        .fullScreenCover(isPresented: $isGetStarted) {
+            LandingPageView()
+        }
     }
 }
 
 #Preview {
     ContentView()
         .preferredColorScheme(.dark)
+        .environment(\.locale, .init(identifier: "en"))
  }

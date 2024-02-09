@@ -8,7 +8,7 @@
 import Foundation
 import CryptoKit
 
-public struct DataAlgorithm {
+final class DataAlgorithm {
     
     var cardName: String = ""
     var password: String = ""
@@ -25,7 +25,7 @@ public struct DataAlgorithm {
         return nil
     }
     
-    func toCipher(cardName: String, password: String, plainText: String)  -> String? {
+    func toCipher(cardName: String, password: String, plainText: String)  -> (Bool, cipherText: String) {
         
         // Get SymmetricKey
         if let symmetricKey: SymmetricKey = generateSymmetricKey(cardName: cardName, password: password) {
@@ -34,23 +34,21 @@ public struct DataAlgorithm {
                 do {
                     //Encrypt
                     let sealedBox = try AES.GCM.seal(plaintextData, using: symmetricKey)
-                    
-                    let combine = sealedBox.combined?.base64EncodedString()
-                    print("combine: \(String(describing: combine))")
-                    return combine
+                    let combine = sealedBox.combined?.base64EncodedString() ?? "Combine Error"
+                    return (true, combine)
                 } catch {
                     print("Error: \(error)")
-                    return "Encrypt Error"
+                    return (false, "Encrypt Error")
                 }
             } else {
-                return "Convert String to Data Error"
+                return (false, "Convert String to Data Error")
             }
         } else {
-            return "Get SymmetricKey Error"
+            return (false, "Get SymmetricKey Error")
         }
     }
     
-    func toPlain(cardName: String, password: String, cipherText: String)  -> String?  {
+    func toPlain(cardName: String, password: String, cipherText: String)  -> (Bool, plainText: String) {
         
         // Get SymmetricKey
         if let symmetricKey: SymmetricKey = generateSymmetricKey(cardName: cardName, password: password) {
@@ -60,19 +58,46 @@ public struct DataAlgorithm {
                     //Decrypt
                     let sealedBoxToOpen = try AES.GCM.SealedBox(combined: ciphertextData)
                     let decryptedData = try AES.GCM.open(sealedBoxToOpen, using: symmetricKey)
-                    
-                    let decryptedString = String(data: decryptedData, encoding: .utf8)
-                    print("Plaintext: \(String(describing: decryptedString))")
-                    return decryptedString
+                    let decryptedString = String(data: decryptedData, encoding: .utf8) ?? "UTF8 encode Error"
+                    return (true, decryptedString)
                 } catch {
                     print("Error: \(error)")
-                    return "Decrypt Error"
+                    return (false, "Decrypt Error")
                 }
             } else {
-                return "Convert base64String to Data Error"
+                return (false, "Convert base64String to Data Error")
             }
         } else {
-            return "Get SymmetricKey Error"
+            return (false, "Get SymmetricKey Error")
         }
+    }
+    
+    func action(cardName: String, password: String, words: String)  -> (Bool, cipherText: String, plainText: String) {
+        var cipherBox: String = ""
+        var plainBox: String = ""
+        var answer: Bool = false
+        
+        let (istoCipherSuccess, toCipherAnswer) = toCipher(cardName: cardName, password: password, plainText: words)
+        answer = istoCipherSuccess
+        cipherBox = toCipherAnswer
+        if !answer {
+            return (istoCipherSuccess, cipherBox, plainBox)
+        }
+
+        let (istoPlainSuccess, toPlainAnswer) = toPlain(cardName: cardName, password: password, cipherText: cipherBox)
+        answer = istoPlainSuccess
+        plainBox = toPlainAnswer
+        if !answer {
+            return (istoPlainSuccess, cipherBox, plainBox)
+        }
+
+        return (answer, cipherBox, plainBox)
+    }
+    
+    func clearData() {
+        cardName = ""
+        password = ""
+        plainText = ""
+        cipherText = ""
     }
 }
