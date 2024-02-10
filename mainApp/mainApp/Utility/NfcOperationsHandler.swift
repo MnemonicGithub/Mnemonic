@@ -88,7 +88,6 @@ class NfcOperationsHandler: NSObject, NFCNDEFReaderSessionDelegate{
                 return
             }
             
-            // Check whether a detected NDEF tag is available.
             if tag.isAvailable {
                 print("NDEF Available")
             } else {
@@ -99,68 +98,123 @@ class NfcOperationsHandler: NSObject, NFCNDEFReaderSessionDelegate{
 
             if session == self.readSession {
                 print("Performing read operation...")
-                tag.readNDEF { (ndefMessage: NFCNDEFMessage?, error: Error?) in
+                
+                tag.queryNDEFStatus { (status: NFCNDEFStatus, capacity, error) in
                     if let error = error {
-                        print("Error reading NDEF message: \(error.localizedDescription)")
-                        session.invalidate(errorMessage: NSLocalizedString("ErrorReadNDEFFailed", comment: ""))
+                        print("Error read NDEF ststus: \(error.localizedDescription)")
+                        session.invalidate(errorMessage: NSLocalizedString("ErrorReadNDEFStatusFailed", comment: ""))
+                        return
+                    }
+ 
+                    if  status == NFCNDEFStatus.notSupported {
+                        print("Tag is not NDEF formatted; NDEF read and write are disallowed.")
+                        session.invalidate(errorMessage: NSLocalizedString("ErrorStatusNotSupport", comment: ""))
                         return
                     }
                     
-                    if let ndefMessage = ndefMessage {
-                        print("Successfully read NDEF message:")
-                        var recordCount = 0
-                        for record in ndefMessage.records {
-                            recordCount += 1
-                            print("Payload count:", recordCount)
-                            //print("Payload data:", record)
-                            
-                            if let payloadString = String(data: record.payload, encoding: .utf8) {
-                                print("Payload string:", payloadString)
-                                
-                                if recordCount == 1 && !self.VerifyWeblink(rawString: payloadString) {
-                                    print("Payload could not valid.")
-                                    session.invalidate(errorMessage: NSLocalizedString("ErrorPayloadParsingFailed", comment: ""))
-                                    return
-                                }
-                                
-                                if recordCount == 2 && !self.VerifyFormat(rawString: payloadString) {
-                                    print("Payload could not valid.")
-                                    session.invalidate(errorMessage: NSLocalizedString("ErrorPayloadParsingFailed", comment: ""))
-                                    return
-                                }
-                                session.alertMessage = NSLocalizedString("NfcReadSuccess", comment: "")
-                            } else {
-                                print("Payload could not be decoded as UTF-8 string")
-                                session.invalidate(errorMessage: NSLocalizedString("ErrorPayloadDecodingFailed", comment: ""))
-                                return
-                            }
+                    tag.readNDEF { (ndefMessage: NFCNDEFMessage?, error: Error?) in
+                        if let error = error {
+                            print("Error reading NDEF message: \(error.localizedDescription)")
+                            session.invalidate(errorMessage: NSLocalizedString("ErrorReadNDEFMessageFailed", comment: ""))
+                            return
                         }
-                    } else {
-                        print("No NDEF message found on the NFC card.")
-                        session.invalidate(errorMessage: NSLocalizedString("ErrorNoPayloadDetect", comment: ""))
-                        return
+                        
+                        if let ndefMessage = ndefMessage {
+                            print("Successfully read NDEF message:")
+                            var recordCount = 0
+                            for record in ndefMessage.records {
+                                recordCount += 1
+                                print("Payload count:", recordCount)
+                                //print("Payload data:", record)
+                                
+                                if let payloadString = String(data: record.payload, encoding: .utf8) {
+                                    print("Payload string:", payloadString)
+                                    
+                                    if recordCount == 1 && !self.VerifyWeblink(rawString: payloadString) {
+                                        print("Payload could not valid.")
+                                        session.invalidate(errorMessage: NSLocalizedString("ErrorPayloadParsingFailed", comment: ""))
+                                        return
+                                    }
+                                    
+                                    if recordCount == 2 && !self.VerifyFormat(rawString: payloadString) {
+                                        print("Payload could not valid.")
+                                        session.invalidate(errorMessage: NSLocalizedString("ErrorPayloadParsingFailed", comment: ""))
+                                        return
+                                    }
+                                    session.alertMessage = NSLocalizedString("NfcReadSuccess", comment: "")
+                                } else {
+                                    print("Payload could not be decoded as UTF-8 string")
+                                    session.invalidate(errorMessage: NSLocalizedString("ErrorPayloadDecodingFailed", comment: ""))
+                                    return
+                                }
+                            }
+                        } else {
+                            print("No NDEF message found on the NFC card.")
+                            session.invalidate(errorMessage: NSLocalizedString("ErrorNoPayloadDetect", comment: ""))
+                            return
+                        }
+                        session.invalidate()
                     }
-                    session.invalidate()
                 }
             } else if session == self.writeSession {
                 print("Performing write operation...")
-//                // Cuz wellKnownTypeTextPayload is coding by UTF16, is will mismatch ondecoding...
-//                let textRecord = NFCNDEFPayload.wellKnownTypeTextPayload(string: "Have aNice Day!", locale: Locale(identifier: "en"))!
-//                let textRecord = NFCNDEFPayload.wellKnownTypeURIPayload(string: "Have aNice Day!")!
                 
-                let urlRecord = NFCNDEFPayload.wellKnownTypeURIPayload(string: AppLink.appStore)!
-                let textRecord = NFCNDEFPayload.wellKnownTypeURIPayload(string: self.actionText!)!
-                let ndefMessage = NFCNDEFMessage.init(records: [urlRecord, textRecord])
-                tag.writeNDEF(ndefMessage) { (writeError: Error?) in
-                    if let writeError = writeError {
-                        print("Error writing NDEF message: \(writeError.localizedDescription)")
-                        session.invalidate(errorMessage: NSLocalizedString("ErrorWriteFailed", comment: ""))
+                tag.queryNDEFStatus { (status: NFCNDEFStatus, capacity, error) in
+                    if let error = error {
+                        print("Error read NDEF ststus: \(error.localizedDescription)")
+                        session.invalidate(errorMessage: NSLocalizedString("ErrorReadNDEFStatusFailed", comment: ""))
                         return
                     }
-                    print("Successfully wrote NDEF message to the NFC card.")
-                    self.isWriteSuccess = true
-                    session.alertMessage = NSLocalizedString("NfcWriteSuccess", comment: "")
-                    session.invalidate()
+ 
+                    if  status == NFCNDEFStatus.notSupported {
+                        print("Tag is not NDEF formatted; NDEF read and write are disallowed.")
+                        session.invalidate(errorMessage: NSLocalizedString("ErrorStatusNotSupport", comment: ""))
+                        return
+                    } else if status == NFCNDEFStatus.readOnly {
+                        print("Tag is NDEF read-only; NDEF writing is disallowed.")
+                        session.invalidate(errorMessage: NSLocalizedString("ErrorStatusReadOnly", comment: ""))
+                        return
+                    }
+                    
+                    // NTAG215 up support.
+                    if capacity < 500 {
+                        print("Tag size is less than 500 bytes.")
+                        session.invalidate(errorMessage: NSLocalizedString("ErrorSizeInsufficient", comment: ""))
+                        return
+                    }
+                    
+                    // Cuz wellKnownTypeTextPayload is coding by UTF16, is will mismatch ondecoding...
+                    // let textRecord = NFCNDEFPayload.wellKnownTypeTextPayload(string: "Have aNice Day!", locale: Locale(identifier: "en"))!
+                    // let textRecord = NFCNDEFPayload.wellKnownTypeURIPayload(string: "Have aNice Day!")!
+                    let urlRecord = NFCNDEFPayload.wellKnownTypeURIPayload(string: AppLink.appStore)!
+                    let textRecord = NFCNDEFPayload.wellKnownTypeURIPayload(string: self.actionText!)!
+                    let ndefMessage = NFCNDEFMessage.init(records: [urlRecord, textRecord])
+                    tag.writeNDEF(ndefMessage) { (writeError: Error?) in
+                        if let writeError = writeError {
+                            print("Error writing NDEF message: \(writeError.localizedDescription)")
+                            session.invalidate(errorMessage: NSLocalizedString("ErrorWriteFailed", comment: ""))
+                            return
+                        } else {
+                            
+                            print("Successfully wrote NDEF message to the NFC card.")
+                            self.isWriteSuccess = true
+                            session.alertMessage = NSLocalizedString("NfcWriteSuccess", comment: "")
+                            session.invalidate()
+//                            // Enable to lock card.
+//                            tag.writeLock { (lockError: Error?) in
+//                                if let writeError = writeError {
+//                                    print("Error lock NFC tag: \(writeError.localizedDescription)")
+//                                    session.invalidate(errorMessage: NSLocalizedString("ErrorLockFailed", comment: ""))
+//                                    return
+//                                } else {
+//                                    print("Successfully wrote NDEF message to the NFC card.")
+//                                    self.isWriteSuccess = true
+//                                    session.alertMessage = NSLocalizedString("NfcWriteSuccess", comment: "")
+//                                    session.invalidate()
+//                                }
+//                            }
+                        }
+                    }
                 }
             }
         }
