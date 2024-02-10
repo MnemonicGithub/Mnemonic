@@ -185,8 +185,8 @@
 			children = (
 				A19BEEBC2B5128E600DED46A /* ContentView.swift */,
 				A19BEEE42B51296100DED46A /* LandingPageView.swift */,
-				A19BEEE62B51296D00DED46A /* AboutUsView.swift */,
 				A19BEEE82B51298F00DED46A /* GuideView.swift */,
+				A19BEEE62B51296D00DED46A /* AboutUsView.swift */,
 				A19BEEEA2B5129FB00DED46A /* BackupView.swift */,
 				A19BEEEC2B512A1000DED46A /* CloneView.swift */,
 				A19BEEEE2B512A3100DED46A /* RestoreView.swift */,

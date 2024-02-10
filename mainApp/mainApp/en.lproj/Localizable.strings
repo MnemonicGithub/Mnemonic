@@ -83,22 +83,22 @@
 "DecryptButton" = "Decrypt";
 
 // NFC Alert
-"NfcReadyAlert" = "Hold your iPhone near the NFC card and wait a second to read.";
-"NfcReadSuccess" = "Read the NFC card information Successful.";
-"NfcWriteSuccess" = "Congratulations!\nYour menmonic is backup Successful.";
-"ErrorNoTags" = "No NFC card found.\nPlease try again.";
-"ErrorConnectFailed" = "The NFC card connect failed.\nPlease try again.";
-"ErrorNotNDEF" = "The NFC card format is invalid.\nPlease try again.";
-"ErrorReadNDEFStatusFailed" = "Reading card status failed.\nPlease try again.";
-"ErrorStatusNotSupport" = "The NFC card read and write are disallowed.\nPlease try again.";
-"ErrorReadNDEFMessageFailed" = "Reading card infromation failed.\nPlease try again.";
-"ErrorPayloadParsingFailed" = "NFC card information is invalid.\nPlease try again.";
-"ErrorPayloadDecodingFailed" = "NFC card information can not decoding.\nPlease try again.";
-"ErrorNoPayloadDetect" = "No information found on the NFC card.\nPlease try again.";
-"ErrorStatusReadOnly" = "The NFC card is read-only.\nPlease try again.";
-"ErrorSizeInsufficient" = "The NFC card size is insufficient.\nPlease try again.";
-"ErrorWriteFailed" = "Failed to write information to NFC card.\nPlease try again.";
-"ErrorLockFailed" = "Failed to set read-only to NFC card.\nPlease try again.";
+"NfcReadyAlert" = "Hold your iPhone near the NFC card and wait for a moment to read.";
+"NfcReadSuccess" = "NFC card information read successfully.";
+"NfcWriteSuccess" = "Congratulations!\nYour mnemonic is successfully backed up.";
+"ErrorNoTags" = "No NFC card detected.\nPlease try again.";
+"ErrorConnectFailed" = "Failed to connect to the NFC card.\nPlease try again.";
+"ErrorNotNDEF" = "Invalid NFC card format.\nPlease try again.";
+"ErrorReadNDEFStatusFailed" = "Failed to read NFC card status.\nPlease try again.";
+"ErrorStatusNotSupport" = "NFC card read and write are disallowed\nPlease try another card.";
+"ErrorReadNDEFMessageFailed" = "Failed to read NFC card information.\nPlease try again.";
+"ErrorPayloadParsingFailed" = "Invalid NFC card information.\nPlease try again.";
+"ErrorPayloadDecodingFailed" = "Failed to decode NFC card information.\nPlease try again.";
+"ErrorNoPayloadDetect" = "No information detected on the NFC card.\nPlease try again.";
+"ErrorStatusReadOnly" = "NFC card is read-only.\nPlease try another card.";
+"ErrorSizeInsufficient" = "Insufficient NFC card size.\nPlease try another card.";
+"ErrorWriteFailed" = "Failed to write information to the NFC card.\nPlease try again.";
+"ErrorLockFailed" = "Failed to set NFC card to read-only mode.\nPlease try again.";
 
 
 
