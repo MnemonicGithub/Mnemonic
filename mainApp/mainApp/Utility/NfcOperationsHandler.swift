@@ -17,7 +17,6 @@ class NfcOperationsHandler: NSObject, NFCNDEFReaderSessionDelegate{
     var isWriteSuccess: Bool = false
     var actionText: String? = nil
     
-
     func startNFCReading() -> String? {
         
         readSession = NFCNDEFReaderSession(delegate: self, queue: nil, invalidateAfterFirstRead: false)
@@ -127,7 +126,10 @@ class NfcOperationsHandler: NSObject, NFCNDEFReaderSessionDelegate{
                                 print("Payload count:", recordCount)
                                 //print("Payload data:", record)
                                 
-                                if let payloadString = String(data: record.payload, encoding: .utf8) {
+                                // Ignore the Type.
+                                let payload: Data = Data(record.payload.dropFirst())
+                                
+                                if let payloadString = String(data: payload, encoding: .utf8) {
                                     print("Payload string:", payloadString)
                                     
                                     if recordCount == 1 && !self.VerifyWeblink(rawString: payloadString) {
@@ -183,9 +185,7 @@ class NfcOperationsHandler: NSObject, NFCNDEFReaderSessionDelegate{
                         return
                     }
                     
-                    // Cuz wellKnownTypeTextPayload is coding by UTF16, is will mismatch ondecoding...
-                    // let textRecord = NFCNDEFPayload.wellKnownTypeTextPayload(string: "Have aNice Day!", locale: Locale(identifier: "en"))!
-                    // let textRecord = NFCNDEFPayload.wellKnownTypeURIPayload(string: "Have aNice Day!")!
+                    // Note: wellKnownTypeTextPayload is coding by UTF16, is will need double size and mismatch with others...
                     let urlRecord = NFCNDEFPayload.wellKnownTypeURIPayload(string: AppLink.appStore)!
                     let textRecord = NFCNDEFPayload.wellKnownTypeURIPayload(string: self.actionText!)!
                     let ndefMessage = NFCNDEFMessage.init(records: [urlRecord, textRecord])
@@ -234,17 +234,11 @@ class NfcOperationsHandler: NSObject, NFCNDEFReaderSessionDelegate{
     }
     
     func VerifyWeblink(rawString: String) -> Bool{
-        var webLink: String = rawString
-        if webLink.first != nil {
-            webLink = String(webLink.dropFirst())
-            return AppLink.appStore.contains(webLink)
-        } else {
-            return false
-        }
+        return AppLink.appStore.contains(rawString)
     }
     
     func VerifyFormat(rawString: String) -> Bool{
-        if rawString.hasPrefix("\0MenmonicHero") {
+        if rawString.hasPrefix("MenmonicHero") {
             let parsingString = rawString.split(separator: ":")
             self.actionText = String(parsingString[1])
             return true
