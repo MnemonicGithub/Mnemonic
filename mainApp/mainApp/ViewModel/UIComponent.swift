@@ -765,6 +765,23 @@ struct NavigationBox<Content: View>: View {
 
 // MARK: - Alert Set
 
+struct LogoView: View {
+    var body: some View {
+        ZStack {
+            AppColor.backgroundColor
+                .ignoresSafeArea()
+                .opacity(0.2)
+            
+            Rectangle()
+                .fill(.ultraThinMaterial)
+                .edgesIgnoringSafeArea(.all)
+            
+            Image(AppImage.logoIcon)
+                .transition(.scale)
+        }
+    }
+}
+
 struct InAppReviewAlertModel: View {
     @AppStorage("isInAppReview") var isReview = false
     @Environment(\.requestReview) var requestReview

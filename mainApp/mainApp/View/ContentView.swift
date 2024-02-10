@@ -9,8 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     @AppStorage("isReadTerms") var isReadTerms = false
-    @State var isGetStarted: Bool = false
     @State var isNeedUpadte: Bool = false
+    @State var showLogo = true
+    @State var isGetStarted: Bool = false
 
     var body: some View {
         ZStack {
@@ -45,14 +46,26 @@ struct ContentView: View {
                 }
             }
             
-            if !isReadTerms {
+            if (!isReadTerms && !isNeedUpadte){
                 TermsAlertModel(toggle: $isReadTerms)
                     .zIndex(1)
             }
             
             if isNeedUpadte {
                 UpdateAlertModel(toggle: $isNeedUpadte)
-                .zIndex(1)
+                .zIndex(2)
+            }
+            
+            if showLogo {
+                LogoView()
+                    .zIndex(3)
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            withAnimation {
+                                showLogo.toggle()
+                            }
+                        }
+                    }
             }
         }
         .onAppear {
