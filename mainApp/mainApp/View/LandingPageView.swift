@@ -74,11 +74,11 @@ struct LandingPageView: View {
                 .onAppear {
                     dataBox.clearData()
                 }
-                .sheet(isPresented: $isOpenAboutUsView) {
-                    AboutUsView()
-                }
                 .sheet(isPresented: $isOpenGudieView) {
                     GuideView()
+                }
+                .sheet(isPresented: $isOpenAboutUsView) {
+                    AboutUsView()
                 }
                 .navigationDestination(for: Int.self) { viewValue in
                     PathInfo.gotoLink(viewValue: viewValue)

@@ -20,7 +20,7 @@ class NfcOperationsHandler: NSObject, NFCNDEFReaderSessionDelegate{
     func startNFCReading() -> String? {
         
         readSession = NFCNDEFReaderSession(delegate: self, queue: nil, invalidateAfterFirstRead: false)
-        readSession?.alertMessage = NSLocalizedString("NfcReadyAlert", comment: "")
+        readSession?.alertMessage = NSLocalizedString("NfcReadyReadAlert", comment: "")
         readSession?.begin()
         
         self.operationDone = false
@@ -46,7 +46,7 @@ class NfcOperationsHandler: NSObject, NFCNDEFReaderSessionDelegate{
         self.operationDone = false
         self.combineFormat(rawString: rawString)
         writeSession = NFCNDEFReaderSession(delegate: self, queue: nil, invalidateAfterFirstRead: false)
-        writeSession?.alertMessage = NSLocalizedString("NfcReadyAlert", comment: "")
+        writeSession?.alertMessage = NSLocalizedString("NfcReadyWriteAlert", comment: "")
         writeSession?.begin()
         
         taskDG.enter()
@@ -144,6 +144,7 @@ class NfcOperationsHandler: NSObject, NFCNDEFReaderSessionDelegate{
                                         return
                                     }
                                     session.alertMessage = NSLocalizedString("NfcReadSuccess", comment: "")
+                                    session.invalidate()
                                 } else {
                                     print("Payload could not be decoded as UTF-8 string")
                                     session.invalidate(errorMessage: NSLocalizedString("ErrorPayloadDecodingFailed", comment: ""))
@@ -155,7 +156,6 @@ class NfcOperationsHandler: NSObject, NFCNDEFReaderSessionDelegate{
                             session.invalidate(errorMessage: NSLocalizedString("ErrorNoPayloadDetect", comment: ""))
                             return
                         }
-                        session.invalidate()
                     }
                 }
             } else if session == self.writeSession {
@@ -178,17 +178,18 @@ class NfcOperationsHandler: NSObject, NFCNDEFReaderSessionDelegate{
                         return
                     }
                     
-                    // NTAG215 up support.
-                    if capacity < 500 {
-                        print("Tag size is less than 500 bytes.")
+                    // Note: wellKnownTypeTextPayload is coding by UTF16, is will need double size...
+                    let urlRecord = NFCNDEFPayload.wellKnownTypeURIPayload(string: AppLink.appStore)!
+                    let textRecord = NFCNDEFPayload.wellKnownTypeURIPayload(string: self.actionText!)!
+                    let ndefMessage = NFCNDEFMessage.init(records: [urlRecord, textRecord])
+                    
+                    // Confirm the capacity
+                    if ndefMessage.length > capacity {
+                        print("Tag capacity is less than ndefMessage length (\(ndefMessage.length)).")
                         session.invalidate(errorMessage: NSLocalizedString("ErrorSizeInsufficient", comment: ""))
                         return
                     }
                     
-                    // Note: wellKnownTypeTextPayload is coding by UTF16, is will need double size and mismatch with others...
-                    let urlRecord = NFCNDEFPayload.wellKnownTypeURIPayload(string: AppLink.appStore)!
-                    let textRecord = NFCNDEFPayload.wellKnownTypeURIPayload(string: self.actionText!)!
-                    let ndefMessage = NFCNDEFMessage.init(records: [urlRecord, textRecord])
                     tag.writeNDEF(ndefMessage) { (writeError: Error?) in
                         if let writeError = writeError {
                             print("Error writing NDEF message: \(writeError.localizedDescription)")
