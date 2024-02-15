@@ -12,9 +12,11 @@ class NfcOperationsHandler: NSObject, NFCNDEFReaderSessionDelegate{
     private let taskDG = DispatchGroup()
     private var readSession: NFCNDEFReaderSession?
     private var writeSession: NFCNDEFReaderSession?
+    private var checkSession: NFCNDEFReaderSession?
     
     var operationDone: Bool = false
     var isWriteSuccess: Bool = false
+    var isWriteAccept: Bool = false
     var actionText: String? = nil
     
     func startNFCReading() -> String? {
@@ -62,6 +64,29 @@ class NfcOperationsHandler: NSObject, NFCNDEFReaderSessionDelegate{
         taskDG.wait()
         
         return self.isWriteSuccess
+    }
+    
+    func startNFCTypeChecking() -> Bool {
+        
+        self.isWriteAccept = false
+        self.operationDone = false
+        checkSession = NFCNDEFReaderSession(delegate: self, queue: nil, invalidateAfterFirstRead: false)
+        checkSession?.alertMessage = NSLocalizedString("NfcReadyCheckAlert", comment: "")
+        checkSession?.begin()
+        
+        taskDG.enter()
+        DispatchQueue.global().async {
+            while true {
+                if self.operationDone{
+                    break
+                }
+                usleep(100000)
+            }
+            self.taskDG.leave()
+        }
+        taskDG.wait()
+        
+        return self.isWriteAccept
     }
     
     func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {
@@ -217,6 +242,39 @@ class NfcOperationsHandler: NSObject, NFCNDEFReaderSessionDelegate{
                         }
                     }
                 }
+            } else if session == self.checkSession {
+                print("Performing check operation...")
+                
+                tag.queryNDEFStatus { (status: NFCNDEFStatus, capacity, error) in
+                    if let error = error {
+                        print("Error read NDEF ststus: \(error.localizedDescription)")
+                        session.invalidate(errorMessage: NSLocalizedString("ErrorReadNDEFStatusFailed", comment: ""))
+                        return
+                    }
+ 
+                    if status == NFCNDEFStatus.readWrite {
+                        // Confirm the capacity > 450 (NTAG 215 / 504 bytes)
+                        if capacity > 450 {
+                            print("Tag is NDEF allowed to read and write. Tag capacity (\(capacity))")
+                            self.isWriteAccept = true
+                            session.alertMessage = NSLocalizedString("NfcCheckSuccess", comment: "")
+                            session.invalidate()
+                        } else {
+                            print("Tag capacity (\(capacity)) is less than 499 bytes.")
+                            session.invalidate(errorMessage: NSLocalizedString("ErrorSizeInsufficient", comment: ""))
+                            return
+                        }
+                    }
+                    else if  status == NFCNDEFStatus.notSupported {
+                        print("Tag is not NDEF formatted; NDEF read and write are disallowed.")
+                        session.invalidate(errorMessage: NSLocalizedString("ErrorStatusNotSupport", comment: ""))
+                        return
+                    } else if status == NFCNDEFStatus.readOnly {
+                        print("Tag is NDEF read-only; NDEF writing is disallowed.")
+                        session.invalidate(errorMessage: NSLocalizedString("ErrorStatusReadOnly", comment: ""))
+                        return
+                    }
+                }
             }
         }
     }
@@ -227,7 +285,7 @@ class NfcOperationsHandler: NSObject, NFCNDEFReaderSessionDelegate{
         } else {
             print("NFC Error：\(error.localizedDescription)")
         }
-        self.operationDone.toggle()
+        self.operationDone = true
     }
     
     func readerSessionDidBecomeActive(_ session: NFCNDEFReaderSession) {

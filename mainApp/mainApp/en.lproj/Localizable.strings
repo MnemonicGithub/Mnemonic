@@ -6,98 +6,108 @@
   
 */
 
-// Welcome Page
-"SloganFront" = "Your\nRecovery words";
-"SloganRear" = "Under\nControl";
-"SloganDescription" = "Mnemonic is a tool application that \nsolves the problem of recovery words backup.";
+// Button
 "GetStarted" = "Get Started";
-"TrermOfUse" = "Read the terms of use and get ready to explore Mnemonic!";
+"NextStep" = "Next Step";
+"StartBackup" = "Let's Backup!";
+"NotNow" = "Not Now";
+"UpdateButton" = "UPDATE APP";
+"TermsButton" = "I'm read!";
+"OopsButton" = "Try again";
+"SuccessButton" = "Done";
+"InAppreviewButton" = "Sure!";
+"DecryptButton" = "Decrypt";
+"CheckCardButton" = "Check";
+
+// Welcome Page
+"SloganFront" = "Your\nRecovery Words";
+"SloganRear" = "Under\nControl";
+"SloganDescription" = "Mnemonic is securely backup your recovery words, you never lose access to your wallet.";
 
 // Landing Page
 "LandingTitle" = "Welcome";
-"LandingHint" = "Choose your Backup Service!";
-"LandingW2CTitle" = "Word to Card";
-"LandingW2CContent" = "Backup your Recovery words\non the NFC card.";
-"LandingC2CTitle" = "Card to Card";
-"LandingC2CContent" = "Backup your old NFC card \ndata to a new NFC card.";
-"LandingC2WTitle" = "Card to Word";
-"LandingC2WContent" = "Decrypt your NFC card data\nto get your recovery words.";
+"LandingHint" = "Select Your Backup Action!";
+"LandingW2CTitle" = "Backup to Card";
+"LandingW2CContent" = "Safeguard your recovery words\nby store on the NFC card.";
+"LandingC2CTitle" = "Clone to Card";
+"LandingC2CContent" = "Clone from your old NFC card\nto a new one securely.";
+"LandingC2WTitle" = "Get the Words";
+"LandingC2WContent" = "Decrypt your NFC card data to restore your recovery words.";
+
+// Guide Page
+"GudieTitle" = "Let's follow the\nsteps to get the NFC card!";
+"GuideStep1Title" = "Which format is support?";
+"GuideStep1Content" = "We support NTAG215 NFC cards or above version, which can come in various styles such as traditional cards or stickers.";
+"GuideStep2Title" = "Where can buy the cards?";
+"GuideStep2Content" = "You can purchase it from Amazon, ebay or your local electronics retailer.";
+"GuideStep3Title" = "I'm aleady have a card.";
+"GuideStep3Content" = "If you already have a card but don’t know if it can be used, please click the button to check it now.";
+"GudieNoteContent" = "Kindly be aware that the backup action will overwrite the original contents of the card and switch to read-only mode. Mnemonic never records any user data. Please ensure to store the card in a secure place after completing the backup.";
 
 // Action Page
 "ActionSTEP1" = "STEP 1";
 "ActionSTEP2" = "STEP 2";
 "ActionSTEP3" = "STEP 3";
-
 "W2CStep1Title" = "Enter Recovery Words";
-"W2CStep1Content" = "Select all the correct 12 to 24 words \nfrom your recovery phrase,please list in order.";
-"W2CStep2Title" = "Set a Name & Password";
-"W2CStep2Content" = "You need to set & ensure your own \nprivate information.";
+"W2CStep1Content" = "Select the correct 12 to 24 words from your recovery words and list them in order.";
+"W2CStep2Title" = "Set Name & Password";
+"W2CStep2Content" = "Secure your data by setting your own name and password.";
 "W2CStep3Title" = "Confirm and Backup";
-"W2CStep3Content" = "You will then be prompted to bring the \nNFC card close to the back of your phone.";
-
-"C2CStep1Title" = "Read the Card\nInformation";
-"C2CStep1Content" = "Bring your NFC card close to your \nsmartphone and wait for the data to be readed.";
+"W2CStep3Content" = "Follow the prompts to backup your data securely to the NFC card.";
+"C2CStep1Title" = "Read the Card";
+"C2CStep1Content" = "Bring your NFC card close to your iPhone and wait for the data to be read.";
 "C2CStep2Title" = "Backup to a New Card";
-"C2CStep2Content" = "You will then be prompted to bring the new \nNFC card close to the back of your phone.";
-
-"C2WStep1Title" = "Read the Card\nInformation";
-"C2WStep1Content" = "Bring your NFC cara close to your \nsmartphone and wait for the data to be readed.";
-"C2WStep2Title" = "Decrypt Information";
-"C2WStep2Content" = "To verify your info, you may need to sign in \nto your account information.";
+"C2CStep2Content" = "You will get two backup cards upon success of the action, both containing your recovery words.";
+"C2WStep1Title" = "Read the Card";
+"C2WStep1Content" = "Bring your NFC card close to your iPhone and wait for the data to be read.";
+"C2WStep2Title" = "Decrypt the Card";
+"C2WStep2Content" = "Authenticate and decrypt your recovery words by enter the password.";
 
 // Alert
 "UpdateTitle" = "Hi There!";
-"UpdateContent" = "For more features and a better user \nexperience, upgrade your app please.";
-"UpdateButton" = "UPDATE APP";
+"UpdateContent" = "Unlock more features and enhance your user experience by updating your app now.";
 "BeforeTermsOfUse" = "Read the";
 "TermsOfUse" = "terms of use";
 "AfterTermsOfUse" = "and\nget ready to explore Mnemonic!";
-"TermsButton" = "I'm read!";
-"oopsTitle" = "Oops!";
-"oopsContent" = "Something’s gone wrong";
-"oopsHint" = "Let’s try again!";
-"oopsButton" = "Try again";
-"successTitle" = "Congratulations!";
-"successContent" = "Now your recovery words\nis backuped your NFC card.";
-"successButton" = "Done";
-"InAppreviewTitle" = "Do you like Mnemonic?";
-"InAppreviewContent" = "Hope to get your five-star review.";
-"InAppreviewButton" = "Sure!";
-
-// Button
-"NextStep" = "Next Step";
-"StartBackup" = "Let's Backup!";
-"NotNow" = "Not Now";
+"OopsTitle" = "Oops!";
+"OopsContent" = "Something’s gone wrong";
+"OopsHint" = "Let’s try again!";
+"SuccessTitle" = "Congratulations!";
+"SuccessBackupContent" = "Words are securely backup on your NFC card.\nPlease store the card in a safe place.";
+"SuccessCloneContent" = "You are securely backup to the a new NFC card.\nPlease store the 2 cards in a safe place.";
+"InAppreviewTitle" = "Enjoying Mnemonic?";
+"InAppreviewContent" = "We'd love your five-star review,\nit is the driving force for our efforts!";
 
 // TextFiled
 "EnterMnemonic" ="This is a 12, 15, 18, 21 or 24 words you were given when you created your previous wallet.";
 "MnemonicHint" = "Each word should be separated by a single space. \nNo numbers, special characters or line breaks.";
 "SetCardName" = "Choose a Name";
 "CardNameHint" = "Card name should be between 4 and 16 characters.";
-"SetPassword" = "Set a Password";
+"SetPassword" = "Create a Password";
 "ConfirmPassword" = "Confirm the Password";
 "PasswordHint" = "Password is between 4 and 16 characters long and includes both letters and numbers";
 "ConfirmPasswordHint" = "Please make sure the password is match";
-
 "VerifyPasswordHint" = "Please enter the Password.";
-"DecryptButton" = "Decrypt";
 
 // NFC Alert
-"NfcReadyAlert" = "Hold your iPhone near the NFC card and wait for a moment to read.";
-"NfcReadSuccess" = "NFC card information read successfully.";
-"NfcWriteSuccess" = "Congratulations!\nYour mnemonic is successfully backed up.";
+"NfcReadyReadAlert" = "Hold your iPhone near the NFC card and wait for a moment to read.";
+"NfcReadyWriteAlert" = "Hold your iPhone near the NFC card and wait for a moment to write.";
+"NfcReadyCheckAlert" = "Hold your iPhone near the NFC card and wait for a moment to check.";
+"NfcReadSuccess" = "NFC card data read successfully.";
+"NfcWriteSuccess" = "Congratulations!\nYour recovery words is successfully backup.";
+"NfcCheckSuccess" = "Congratulations!\nYour NFC card is accepted.";
 "ErrorNoTags" = "No NFC card detected.\nPlease try again.";
 "ErrorConnectFailed" = "Failed to connect to the NFC card.\nPlease try again.";
 "ErrorNotNDEF" = "Invalid NFC card format.\nPlease try again.";
 "ErrorReadNDEFStatusFailed" = "Failed to read NFC card status.\nPlease try again.";
 "ErrorStatusNotSupport" = "NFC card read and write are disallowed\nPlease try another card.";
-"ErrorReadNDEFMessageFailed" = "Failed to read NFC card information.\nPlease try again.";
-"ErrorPayloadParsingFailed" = "Invalid NFC card information.\nPlease try again.";
-"ErrorPayloadDecodingFailed" = "Failed to decode NFC card information.\nPlease try again.";
-"ErrorNoPayloadDetect" = "No information detected on the NFC card.\nPlease try again.";
+"ErrorReadNDEFMessageFailed" = "Failed to read NFC card data.\nPlease try again.";
+"ErrorPayloadParsingFailed" = "Invalid NFC card data.\nPlease try again.";
+"ErrorPayloadDecodingFailed" = "Failed to decode NFC card data.\nPlease try again.";
+"ErrorNoPayloadDetect" = "No data detected on the NFC card.\nPlease try again.";
 "ErrorStatusReadOnly" = "NFC card is read-only.\nPlease try another card.";
 "ErrorSizeInsufficient" = "Insufficient NFC card size.\nPlease try another card.";
-"ErrorWriteFailed" = "Failed to write information to the NFC card.\nPlease try again.";
+"ErrorWriteFailed" = "Failed to write data to the NFC card.\nPlease try again.";
 "ErrorLockFailed" = "Failed to set NFC card to read-only mode.\nPlease try again.";
 
 

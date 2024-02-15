@@ -27,7 +27,7 @@ struct CloneView: View {
             }
             
             if isSuccess {
-                SuccessAlertModel(toggle: $isSuccess) {
+                SuccessAlertModel(toggle: $isSuccess, content: "SuccessCloneContent") {
                     router.path = .init()
                 }
                 .zIndex(1)

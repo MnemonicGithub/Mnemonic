@@ -34,8 +34,15 @@ final class DataAlgorithm {
                 do {
                     //Encrypt
                     let sealedBox = try AES.GCM.seal(plaintextData, using: symmetricKey)
-                    let combine = sealedBox.combined?.base64EncodedString() ?? "Combine Error"
-                    return (true, combine)
+                    
+//                    let combine = sealedBox.combined?.base64EncodedString() {
+//                    return (true, combine)
+                    if let combine = sealedBox.combined {
+                        return (true, combine.base64EncodedString())
+                    } else {
+                        return (false, "BASE64 Encode Error")
+                    }
+                        
                 } catch {
                     print("Error: \(error)")
                     return (false, "Encrypt Error")
@@ -58,8 +65,15 @@ final class DataAlgorithm {
                     //Decrypt
                     let sealedBoxToOpen = try AES.GCM.SealedBox(combined: ciphertextData)
                     let decryptedData = try AES.GCM.open(sealedBoxToOpen, using: symmetricKey)
-                    let decryptedString = String(data: decryptedData, encoding: .utf8) ?? "UTF8 encode Error"
-                    return (true, decryptedString)
+                    
+//                    let decryptedString = String(data: decryptedData, encoding: .utf8) ?? "UTF8 encode Error"
+//                    return (true, decryptedString)
+                    if let decryptedString = String(data: decryptedData, encoding: .utf8) {
+                        return (true, decryptedString)
+                    } else {
+                        return (true, "UTF8 encode Error")
+                    }
+                    
                 } catch {
                     print("Error: \(error)")
                     return (false, "Decrypt Error")
@@ -81,14 +95,14 @@ final class DataAlgorithm {
         answer = istoCipherSuccess
         cipherBox = toCipherAnswer
         if !answer {
-            return (istoCipherSuccess, cipherBox, plainBox)
+            return (answer, cipherBox, plainBox)
         }
 
         let (istoPlainSuccess, toPlainAnswer) = toPlain(cardName: cardName, password: password, cipherText: cipherBox)
         answer = istoPlainSuccess
         plainBox = toPlainAnswer
         if !answer {
-            return (istoPlainSuccess, cipherBox, plainBox)
+            return (answer, cipherBox, plainBox)
         }
 
         return (answer, cipherBox, plainBox)

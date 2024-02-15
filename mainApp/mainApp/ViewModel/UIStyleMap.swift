@@ -161,8 +161,9 @@ enum AppImage {
     
     static let welcomeNaviBack: String = "cursorarrow.rays"
     static let navigationBack: String = "chevron.left"
-    static let gudie: String = "bell";
-    static let aboutUs: String = "info.circle"
+    static let sheetDismiss: String = "chevron.down.circle.fill"
+    static let gudie: String = "info.bubble.fill"
+    static let aboutUs: String = "sailboat.fill"
     static let reviewStart: String = "star.fill"
 
     

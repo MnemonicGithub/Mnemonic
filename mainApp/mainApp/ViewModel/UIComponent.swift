@@ -965,10 +965,10 @@ struct OopsAlertModel: View {
                 .padding(.top, 20)
                 
                 VStack(alignment: .center, spacing: 15) {
-                    Text("oopsTitle")
+                    Text("OopsTitle")
                         .font(AppFont.fontH)
                         .foregroundColor(AppColor.textPrimary)
-                    Text("\(Text("oopsContent"))\n\(Text("oopsHint").foregroundColor(AppColor.textPoint))")
+                    Text("\(Text("OopsContent"))\n\(Text("OopsHint").foregroundColor(AppColor.textPoint))")
                         .font(AppFont.fontBody2)
                         .foregroundColor(AppColor.textHint)
                         .multilineTextAlignment(.center)
@@ -979,7 +979,7 @@ struct OopsAlertModel: View {
                         }
                         action?()
                     }) {
-                        SecondaryButton2Model(text: "oopsButton")
+                        SecondaryButton2Model(text: "OopsButton")
                             .padding(.bottom, 20)
                     }
                 }
@@ -993,6 +993,7 @@ struct OopsAlertModel: View {
 
 struct SuccessAlertModel: View {
     @Binding var toggle: Bool
+    var content: LocalizedStringKey
     var action: (() -> Void)?
     
     var body: some View {
@@ -1010,10 +1011,10 @@ struct SuccessAlertModel: View {
                 .padding(.top, 20)
                 
                 VStack(alignment: .center, spacing: 15) {
-                    Text("successTitle")
+                    Text("SuccessTitle")
                         .font(AppFont.fontH)
                         .foregroundColor(AppColor.textPrimary)
-                    Text("successContent")
+                    Text(content)
                         .font(AppFont.fontBody2)
                         .foregroundColor(AppColor.textHint)
                         .multilineTextAlignment(.center)
@@ -1024,7 +1025,7 @@ struct SuccessAlertModel: View {
                         }
                         action?()
                     }) {
-                        SecondaryButton2Model(text: "successButton")
+                        SecondaryButton2Model(text: "SuccessButton")
                             .padding(.bottom, 20)
                     }
                 }

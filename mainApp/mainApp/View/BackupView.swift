@@ -172,7 +172,6 @@ struct bvSetPasswordView: View {
 struct bvStartBackView: View {
     @EnvironmentObject var router: Router
     @EnvironmentObject var dataBox: DataBox
-    @State var isRead: Bool = false
     private var dataAlgorithm = DataAlgorithm()
     private var nfcOperationsHandler = NfcOperationsHandler()
     @State var isEncryptSuccess: Bool = false
@@ -190,29 +189,30 @@ struct bvStartBackView: View {
                         .font(AppFont.fontH2)
                         .kerning(1)
                         .padding(.horizontal)
-
-                    VStack(alignment: .leading, spacing: 30) {
-                        HStack(alignment: .center) {
-                            Spacer()
-                            
-                            VStack {
-                                if isEncryptSuccess {
+                    
+                    if isEncryptSuccess {
+                        VStack(alignment: .leading, spacing: 30) {
+                            HStack(alignment: .center) {
+                                Spacer()
+                                
+                                VStack {
                                     NamePasswordBoxModel(name: dataBox.getCardName(), password: dataBox.getPassword())
                                     MnemonicBoxModel(words: plainText)
                                 }
+                                
+                                Spacer()
                             }
                             
-                            Spacer()
-                        }
-                        Button(action: {
-                            let combineString = dataBox.getCardName() + " " + cipherText
-                            if (nfcOperationsHandler.startNFCWriting(rawString: combineString)) {
-                                withAnimation {
-                                    isSuccess.toggle()
+                            Button(action: {
+                                let combineString = dataBox.getCardName() + " " + cipherText
+                                if (nfcOperationsHandler.startNFCWriting(rawString: combineString)) {
+                                    withAnimation {
+                                        isSuccess.toggle()
+                                    }
                                 }
+                            }) {
+                                SecondaryInteractiveButtonModel(text: "StartBackup", isActive: $isEncryptSuccess)
                             }
-                        }) {
-                            SecondaryInteractiveButtonModel(text: "StartBackup", isActive: $isRead)
                         }
                     }
                 }
@@ -223,30 +223,35 @@ struct bvStartBackView: View {
                     .scaledToFill()
                     .ignoresSafeArea()
             }
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    ToobarBackButtonModel()
+                }
+            }
+            .onAppear {
+                (isEncryptSuccess, cipherText, plainText) = dataAlgorithm.action(cardName: dataBox.getCardName(), password: dataBox.getPassword(), words: dataBox.getMnemonic())
                 
-            if !isRead {
-                TermsAlertModel(toggle: $isRead)
-                    .zIndex(1)
+                if !isEncryptSuccess {
+                    isOops.toggle()
+                }
+            }
+            .onDisappear {
+                dataAlgorithm.clearData()
+            }
+            
+            if isOops {
+                OopsAlertModel(toggle: $isOops) {
+                    router.path.removeLast()
+                }
             }
             
             if isSuccess {
-                SuccessAlertModel(toggle: $isSuccess) {
+                SuccessAlertModel(toggle: $isSuccess, content: "SuccessBackupContent") {
                     router.path = .init()
                 }
                 .zIndex(1)
             }
-        }
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                ToobarBackButtonModel()
-            }
-        }
-        .onAppear {
-            (isEncryptSuccess, cipherText, plainText) = dataAlgorithm.action(cardName: dataBox.getCardName(), password: dataBox.getPassword(), words: dataBox.getMnemonic())
-        }
-        .onDisappear {
-            dataAlgorithm.clearData()
         }
     }
 }

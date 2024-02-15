@@ -20,31 +20,32 @@ struct ContentView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
 
-            HStack {
-                VStack(alignment: .leading, spacing: 10) {
-                    Spacer()
-                    
+            VStack(alignment: .leading, spacing: 10) {
+                Spacer()
+                
+                VStack(alignment: .leading, spacing: 0) {
                     Text("SloganFront")
                         .font(AppFont.fontH)
-                        .foregroundColor(AppColor.textPrimary)
-                                        
+                    .foregroundColor(AppColor.textPrimary)
+                    
                     Text("SloganRear")
                         .font(AppFont.fontH)
                         .foregroundColor(AppColor.textPoint)
-                    
-                    Text("SloganDescription")
-                        .font(AppFont.fontBody2)
-                        .foregroundColor(AppColor.textPrimary)
-                    
-                    Spacer()
-
-                    ButtonBox(toggle: $isGetStarted) {
-                        SecondaryButtonModel(text: "GetStarted")
-                    }
-                    
-                    Spacer()
                 }
+                
+                Text("SloganDescription")
+                    .font(AppFont.fontBody2)
+                    .foregroundColor(AppColor.textHint)
+                
+                Spacer()
+
+                ButtonBox(toggle: $isGetStarted) {
+                    SecondaryButtonModel(text: "GetStarted")
+                }
+                
+                Spacer()
             }
+            .padding(.horizontal, 30)
             
             if (!isReadTerms && !isNeedUpadte){
                 TermsAlertModel(toggle: $isReadTerms)
