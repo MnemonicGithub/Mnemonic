@@ -298,8 +298,8 @@ class NfcOperationsHandler: NSObject, NFCNDEFReaderSessionDelegate{
     
     func VerifyFormat(rawString: String) -> Bool{
         if rawString.hasPrefix("MenmonicHero") {
-            let parsingString = rawString.split(separator: ":")
-            self.actionText = String(parsingString[1])
+            let parsingString = String(rawString.dropFirst("MenmonicHero".count))
+            self.actionText = parsingString
             return true
         } else {
             return false
@@ -308,6 +308,6 @@ class NfcOperationsHandler: NSObject, NFCNDEFReaderSessionDelegate{
     
     func combineFormat(rawString: String) {
         let prefix: String = "MenmonicHero"
-        self.actionText = prefix + ":" + rawString
+        self.actionText = prefix + rawString
     }
 }

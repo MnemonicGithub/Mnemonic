@@ -39,7 +39,7 @@ struct RestoreActionView: View {
         VStack(alignment: .center, spacing: 20) {
             Button(action: {
                 if let answer = nfcOperationsHandler.startNFCReading() {
-                    let parsingAnswer = answer.split(separator: " ")
+                    let parsingAnswer = answer.split(separator: "\0")
                     dataBox.actionC2WStep1 = true
                     dataBox.setCardName(String(parsingAnswer[0]))
                     dataBox.setMnemonic(String(parsingAnswer[1]))

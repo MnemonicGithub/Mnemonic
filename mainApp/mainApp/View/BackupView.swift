@@ -204,7 +204,7 @@ struct bvStartBackView: View {
                             }
                             
                             Button(action: {
-                                let combineString = dataBox.getCardName() + " " + cipherText
+                                let combineString = dataBox.getCardName() + "\0" + cipherText
                                 if (nfcOperationsHandler.startNFCWriting(rawString: combineString)) {
                                     withAnimation {
                                         isSuccess.toggle()
