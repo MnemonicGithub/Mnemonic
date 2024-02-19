@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 import StoreKit
+import AVKit
+import AVFoundation
 
 // MARK: - Text Filed
 
@@ -531,7 +533,7 @@ struct SecondaryIconButtonModel: View {
 struct PrimaryActionBlockModel: View {
     var textTitle: LocalizedStringKey
     var textContent: LocalizedStringKey
-    var image: String = ""
+    var image: String
     
     var body: some View {
         HStack(alignment: .center, spacing: 10) {
@@ -564,7 +566,7 @@ struct PrimaryActionBlockModel: View {
 struct PrimaryActionBlockNoBorderModel: View {
     var textTitle: LocalizedStringKey
     var textContent: LocalizedStringKey
-    var image: String = ""
+    var image: String
     
     var body: some View {
         HStack(alignment: .center) {
@@ -1136,39 +1138,48 @@ struct BackToRootButtonModel: View {
     }
 }
 
-// MARK: - Text View
+// MARK: - Video View
 
-struct TestView: View {
-    @State var toggle: Bool = false
-    var body: some View {
-        InAppReviewAlertModel(toggle: $toggle)
+struct VideoPlayerView: UIViewControllerRepresentable {
+    var videoURL: URL
+    
+    func makeUIViewController(context: Context) -> AVPlayerViewController {
+        let player = AVPlayer(url: videoURL)
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        playerViewController.showsPlaybackControls = false
+
+        // Set AVAudioSession category to ambient
+        try? AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default)
+        
+        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: player.currentItem, queue: nil) { (_) in
+            player.seek(to: .zero)
+            player.play()
+        }
+        
+        player.play()
+        return playerViewController
+    }
+    
+    func updateUIViewController(_ uiViewController: AVPlayerViewController, context: Context) {
+        // Update the view controller if needed
     }
 }
 
-struct DententView: View {
-    @Environment(\.dismiss) var dismiss
+// MARK: - Test View
+
+struct TestView: View {
+    @State var toggle: Bool = false
+//    var body: some View {
+//        VideoPlayerView(videoURL: Bundle.main.url(forResource: "LandingVideo", withExtension: "mp4")!)
+//            .edgesIgnoringSafeArea(.all)
+//    }
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 0) {
-                Rectangle()
-                    .foregroundColor(Color.teal)
-                    .edgesIgnoringSafeArea(.all)
-                    .scaledToFill()
-                    .opacity(0.6)
-                Rectangle()
-                    .foregroundColor(Color.blue)
-                    .edgesIgnoringSafeArea(.all)
-                    .scaledToFill()
-                    .opacity(0.6)
-                Rectangle()
-                    .foregroundColor(Color.gray)
-                    .edgesIgnoringSafeArea(.all)
-                    .scaledToFill()
-                    .opacity(0.6)
+        Button("Change Language") {
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         }
-        .presentationDetents([.fraction(0.2), .medium, .large])
-        .presentationDragIndicator(.automatic)
     }
 }
 

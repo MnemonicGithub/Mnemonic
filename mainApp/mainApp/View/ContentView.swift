@@ -15,10 +15,12 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            Image(AppImage.welcomeWallpaper)
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
+//            Image(AppImage.welcomeWallpaper)
+//                .resizable()
+//                .scaledToFill()
+//                .ignoresSafeArea()
+            VideoPlayerView(videoURL: Bundle.main.url(forResource: "LandingVideo", withExtension: "mp4")!)
+                    .ignoresSafeArea()
 
             VStack(alignment: .leading, spacing: 10) {
                 Spacer()

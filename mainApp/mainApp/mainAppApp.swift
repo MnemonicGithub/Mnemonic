@@ -14,10 +14,8 @@ struct mainAppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ZStack {
                 ContentView()
                     .preferredColorScheme(.dark)
-            }
         }
 //        .onChange(of: scenePhase) { newPhase in
 //            switch newPhase {

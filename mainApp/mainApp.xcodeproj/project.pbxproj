@@ -31,6 +31,7 @@
 		A19BEEF72B512B9500DED46A /* DataAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEF62B512B9500DED46A /* DataAlgorithm.swift */; };
 		A19BEEF92B512BCF00DED46A /* UserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEF82B512BCF00DED46A /* UserInfoViewModel.swift */; };
 		A19BEEFD2B512C0500DED46A /* NfcOperationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19BEEFC2B512C0500DED46A /* NfcOperationsHandler.swift */; };
+		A1A93C4E2B7E487D00B4C518 /* LandingVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A1A93C4D2B7E487D00B4C518 /* LandingVideo.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		A19BEEF62B512B9500DED46A /* DataAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAlgorithm.swift; sourceTree = "<group>"; };
 		A19BEEF82B512BCF00DED46A /* UserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewModel.swift; sourceTree = "<group>"; };
 		A19BEEFC2B512C0500DED46A /* NfcOperationsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfcOperationsHandler.swift; sourceTree = "<group>"; };
+		A1A93C4D2B7E487D00B4C518 /* LandingVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = LandingVideo.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 				A145A8872B74AD6D0026F91D /* Info.plist */,
 				A19BEEBA2B5128E600DED46A /* mainAppApp.swift */,
 				A19BEEBE2B5128E700DED46A /* Assets.xcassets */,
+				A1A93C502B7E4EFF00B4C518 /* Video */,
 				A19BEEF22B512A7C00DED46A /* View */,
 				A173D6922B550A9A00B069F2 /* ViewModel */,
 				A19BEEF32B512B2600DED46A /* Utility */,
@@ -204,6 +207,14 @@
 				A19BEEFC2B512C0500DED46A /* NfcOperationsHandler.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		A1A93C502B7E4EFF00B4C518 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				A1A93C4D2B7E487D00B4C518 /* LandingVideo.mp4 */,
+			);
+			path = Video;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,6 +324,7 @@
 				A19BEEC22B5128E700DED46A /* Preview Assets.xcassets in Resources */,
 				A148DE4C2B5CEA1300736B5F /* Localizable.strings in Resources */,
 				A19BEEBF2B5128E700DED46A /* Assets.xcassets in Resources */,
+				A1A93C4E2B7E487D00B4C518 /* LandingVideo.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
