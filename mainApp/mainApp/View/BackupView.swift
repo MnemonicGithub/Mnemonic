@@ -248,11 +248,9 @@ struct bvStartBackView: View {
             
             if isSuccess {
                 SuccessAlertModel(toggle: $isSuccess, content: "SuccessBackupContent") {
-                    router.path = .init()
-                }
-                .onAppear {
                     let inAppReviewAlert = InAppReviewAlert()
                     inAppReviewAlert.setIsAlert()
+                    router.path = .init()
                 }
                 .zIndex(1)
             }
