@@ -8,6 +8,31 @@
 import Foundation
 import SwiftUI
 
+struct InAppReviewAlert {
+    @AppStorage("isRate") var isRate: Bool = false
+    @AppStorage("isInAppReview") var isInAppReview: Bool = false
+    
+    func setIsAlert() {
+        isInAppReview = true
+    }
+    
+    func closeIsAlert() {
+        isInAppReview = false
+    }
+    
+    func getIsAlert() -> Bool {
+        return isInAppReview
+    }
+    
+    func setIsRate() {
+        isRate = true
+    }
+    
+    func getIsRate() -> Bool {
+        return isRate
+    }
+}
+
 enum AppLink {
     static let appStore: String = "https://apps.apple.com/tw/app/safari/id1146562112"
     static let termsOfUse: String = "https://github.com/MnemonicGithub/Mnemonic"

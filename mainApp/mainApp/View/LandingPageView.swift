@@ -19,7 +19,7 @@ struct LandingPageView: View {
     @StateObject var dataBox = DataBox()
     @State var isOpenAboutUsView: Bool = false
     @State var isOpenGudieView: Bool = false
-    @State var isInAppReview: Bool = true
+    @State var isInAppReview: Bool = false
     
     var body: some View {
         NavigationStack(path: $router.path) {
@@ -44,7 +44,7 @@ struct LandingPageView: View {
                         Spacer()
                         
                         ButtonBox(toggle: $isOpenGudieView) {
-                            SecondaryIconButtonModel(image: AppImage.gudie)
+                            SecondaryIconButtonModel(image: AppImage.guide)
                         }
                         ButtonBox(toggle: $isOpenAboutUsView) {
                             SecondaryIconButtonModel(image: AppImage.aboutUs)
@@ -87,6 +87,12 @@ struct LandingPageView: View {
                 if isInAppReview {
                     InAppReviewAlertModel(toggle: $isInAppReview)
                         .zIndex(1)
+                }
+            }
+            .onAppear {
+                let inAppReviewAlert = InAppReviewAlert()
+                if inAppReviewAlert.getIsAlert() && !inAppReviewAlert.getIsRate() {
+                    isInAppReview.toggle()
                 }
             }
         }

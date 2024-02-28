@@ -400,7 +400,6 @@ struct SecondaryInteractiveButtonModel: View {
             RoundedRectangle(cornerRadius: 15)
                 .stroke(isActive ? AppColor.borderSecondary : AppColor.borderSecondary, lineWidth: 1.5)
         )
-        .padding(.horizontal)
     }
 }
 
@@ -521,10 +520,10 @@ struct SecondaryIconButtonModel: View {
     let image: String
     
     var body: some View {
-        Image(systemName: image)
+        Image(image)
             .resizable()
             .scaledToFit()
-            .frame(width: 25, height: 25)
+            .frame(width: 25)
             .foregroundColor(AppColor.iconSecondary)
             .padding(.vertical)
     }
@@ -770,24 +769,33 @@ struct NavigationBox<Content: View>: View {
 struct LogoView: View {
     var body: some View {
         ZStack {
-            AppColor.backgroundColor
-                .ignoresSafeArea()
-                .opacity(0.2)
-            
             Rectangle()
                 .fill(.ultraThinMaterial)
                 .edgesIgnoringSafeArea(.all)
+                .zIndex(1)
+    
+            Image(AppImage.welcomeWallpaper)
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+                .opacity(0.8)
+                .zIndex(2)
+            
+            AppColor.backgroundColor
+                .ignoresSafeArea()
+                .opacity(0.2)
+                .zIndex(3)
             
             Image(AppImage.logoIcon)
-                .transition(.scale)
+                .zIndex(4)
         }
     }
 }
 
 struct InAppReviewAlertModel: View {
-    @AppStorage("isInAppReview") var isReview = false
     @Environment(\.requestReview) var requestReview
     @Binding var toggle: Bool
+    let inAppReviewAlert = InAppReviewAlert()
     
     var body: some View {
         ZStack {
@@ -848,6 +856,9 @@ struct InAppReviewAlertModel: View {
             .cornerRadius(15)
             .padding()
         }
+        .onDisappear {
+            inAppReviewAlert.closeIsAlert()
+        }
     }
     
     private func presentReview() {
@@ -855,6 +866,7 @@ struct InAppReviewAlertModel: View {
             // Delay for two seconds to avoid interrupting the person using the app.
             try await Task.sleep(for: .seconds(1))
             await requestReview()
+            inAppReviewAlert.setIsRate()
         }
     }
 }
