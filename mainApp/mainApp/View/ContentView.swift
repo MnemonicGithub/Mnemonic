@@ -15,10 +15,6 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-//            Image(AppImage.welcomeWallpaper)
-//                .resizable()
-//                .scaledToFill()
-//                .ignoresSafeArea()
             VideoPlayerView(videoURL: Bundle.main.url(forResource: "LandingVideo", withExtension: "mp4")!)
                     .ignoresSafeArea()
 
@@ -37,7 +33,7 @@ struct ContentView: View {
                 
                 Text("SloganDescription")
                     .font(AppFont.fontBody2)
-                    .foregroundColor(AppColor.textHint)
+                    .foregroundColor(AppColor.textPrimary)
                 
                 Spacer()
 
@@ -64,7 +60,7 @@ struct ContentView: View {
                     .zIndex(3)
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            withAnimation {
+                            withAnimation(.easeInOut) {
                                 showLogo.toggle()
                             }
                         }

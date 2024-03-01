@@ -73,15 +73,20 @@ struct bvSetMnemonicView: View {
 
     var body: some View {
         ScrollView {
-            VStack (alignment: .leading, spacing: 5){
+            VStack (alignment: .leading, spacing: 10){
                 Text("W2CStep1Title")
                     .foregroundColor(AppColor.textPrimary)
                     .font(AppFont.fontH2)
                     .kerning(1)
-                    .padding(.horizontal)
                 
                 VStack(alignment: .center, spacing: 20) {
                     MnemonicFieldModel(titleName: "EnterMnemonic", primaryHint: "MnemonicHint", fieldValue: $viewModel.mnemonic, isDone: $viewModel.isValidMnemonic)
+                        .onReceive(viewModel.$isValidMnemonic) { isValid in
+                            if isValid {
+                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+                            }
+                        }
+
                     Button(action: {
                         dataBox.actionW2CStep1.toggle()
                         dataBox.setMnemonic(viewModel.mnemonic)
@@ -94,6 +99,7 @@ struct bvSetMnemonicView: View {
                 
                 Spacer()
             }
+            .padding(.horizontal)
         }
         .background {
             Image(AppImage.actionWallpaper)
@@ -123,17 +129,17 @@ struct bvSetPasswordView: View {
 
     var body: some View {
         ScrollView {
-            VStack (alignment: .leading, spacing: 5) {
+            VStack (alignment: .leading, spacing: 10) {
                 Text("W2CStep2Title")
                     .foregroundColor(AppColor.textPrimary)
                     .font(AppFont.fontH2)
                     .kerning(1)
-                    .padding(.horizontal)
                 
                 VStack(alignment: .leading, spacing: 15) {
                     NormalFieldModel(titleName: "SetCardName", fieldName: "", fieldValue: $viewModel.cardname, primaryHint: "CardNameHint", isDone: $viewModel.isCardnamePass)
                     PasswordFieldModel(titleName: "SetPassword", fieldName: "", fieldValue: $viewModel.password, primaryHint: "PasswordHint", isDone: $viewModel.isPasswordPass)
                     PasswordFieldModel(titleName: "ConfirmPassword", fieldName: "", fieldValue: $viewModel.passwordConfirm, primaryHint: "ConfirmPasswordHint", isDone: $viewModel.isPasswordConfirmValid)
+                    
                     Button(action: {
                         dataBox.setCardName(viewModel.cardname)
                         dataBox.setPassword(viewModel.password)
@@ -142,11 +148,13 @@ struct bvSetPasswordView: View {
                     }) {
                         SecondaryInteractiveButtonModel(text: "NextStep", isActive: $viewModel.isAllPass)
                     }
+                    .padding(.top, 5)
                     .disabled(!viewModel.isAllPass)
                 }
                 
                 Spacer()
             }
+            .padding(.horizontal)
         }
         .background {
             Image(AppImage.actionWallpaper)

@@ -106,6 +106,7 @@ enum AppFont {
 }
 
 enum ColorSet {
+    static let gradientClear: LinearGradient = LinearGradient(colors: [Color.clear, Color.clear], startPoint: .topLeading, endPoint: .bottomTrailing)
     static let gradientGreen: LinearGradient =
     LinearGradient(stops: [
         Gradient.Stop(color: Color(red: 0.87, green: 1, blue: 0.7), location: 0.01),
@@ -131,6 +132,7 @@ enum ColorSet {
 }
 
 enum AppColor {
+    static let gradientClear: LinearGradient = ColorSet.gradientClear
     static let gradientPrimary: LinearGradient = ColorSet.gradientGreen
     static let borderPrimary: LinearGradient = ColorSet.gradientGreen
     static let borderSecondary: Color = ColorSet.darkGray
@@ -162,8 +164,9 @@ enum AppImage {
     static let welcomeNaviBack: String = "cursorarrow.rays"
     static let navigationBack: String = "chevron.left"
     static let sheetDismiss: String = "chevron.down.circle.fill"
-    static let gudie: String = "info.bubble.fill"
-    static let aboutUs: String = "sailboat.fill"
+    static let guide: String = "guide"
+    static let guidePage: String = "guide_lightgreen"
+    static let aboutUs: String = "about_us"
     static let reviewStart: String = "star.fill"
 
     

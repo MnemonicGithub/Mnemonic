@@ -110,7 +110,6 @@ struct PasswordFieldModel: View {
                     .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
             }
         }
-        .padding(.horizontal)
     }
 }
 
@@ -145,7 +144,6 @@ struct NormalFieldModel: View {
                     .foregroundColor(isDone ? AppColor.textHint : AppColor.textHint)
             }
         }
-        .padding(.horizontal)
     }
 }
 
@@ -231,7 +229,7 @@ struct MnemonicFieldModel: View {
     @Binding var isDone: Bool
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 15) {
+        VStack(alignment: .leading, spacing: 20) {
             Text(titleName)
                 .font(AppFont.fontH4)
                 .foregroundColor(AppColor.textHint)
@@ -240,7 +238,7 @@ struct MnemonicFieldModel: View {
                 HStack(alignment: .top, spacing: 10) {
                     TextEditorModel(fieldValue: $fieldValue)
                 }
-                .frame(height: 200, alignment: .topLeading)
+                .frame(height: 250, alignment: .topLeading)
                 .cornerRadius(6)
                 .overlay(
                     RoundedRectangle(cornerRadius: 6)
@@ -255,7 +253,6 @@ struct MnemonicFieldModel: View {
                     .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
             }
         }
-        .padding(.horizontal)
     }
 }
 
@@ -263,15 +260,26 @@ struct TextEditorModel: View {
     @Binding var fieldValue: String
     
     var body: some View {
-            TextEditor(text: $fieldValue)
-                .font(AppFont.fontH3)
-                .foregroundColor(AppColor.textPrimary)
-                .accentColor(AppColor.textPoint)
-                .keyboardType(.asciiCapable)
-                .scrollContentBackground(.hidden)
-                .autocapitalization(.none)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 18)
+        TextEditor(text: $fieldValue)
+            .font(AppFont.fontH3)
+            .foregroundColor(AppColor.textPrimary)
+            .accentColor(AppColor.textPoint)
+            .keyboardType(.asciiCapable)
+            .scrollContentBackground(.hidden)
+            .autocapitalization(.none)
+            .disableAutocorrection(true)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 18)
+        
+//        TextField("", text: $fieldValue, axis: .vertical)
+//            .font(AppFont.fontH3)
+//            .foregroundColor(AppColor.textPrimary)
+//            .accentColor(AppColor.textPoint)
+//            .keyboardType(.asciiCapable)
+//            .scrollContentBackground(.hidden)
+//            .autocapitalization(.none)
+//            .padding(.horizontal, 16)
+//            .padding(.vertical, 18)
 
 //        if #available(iOS 17.0, *) {
 //            TextEditor(text: $fieldValue)
@@ -389,16 +397,16 @@ struct SecondaryInteractiveButtonModel: View {
             Spacer()
             Text(text)
                 .font(AppFont.fontH4)
-                .foregroundColor(isActive ? AppColor.textPrimary : AppColor.textInactive)
+                .foregroundColor(isActive ? AppColor.textSecondary : AppColor.textInactive)
                 .padding(.horizontal, 26)
                 .padding(.vertical, 14)
-                .background(Color.clear)
             Spacer()
         }
+        .background(isActive ? AppColor.gradientPrimary : AppColor.gradientClear)
         .cornerRadius(15)
         .overlay(
             RoundedRectangle(cornerRadius: 15)
-                .stroke(isActive ? AppColor.borderSecondary : AppColor.borderSecondary, lineWidth: 1.5)
+                .stroke(isActive ? Color.clear : AppColor.borderSecondary, lineWidth: 1.5)
         )
     }
 }
