@@ -35,14 +35,14 @@
 "LandingC2WContent" = "Decrypt your NFC card data to restore your recovery words.";
 
 // Guide Page
-"GudieTitle" = "Let's follow the\nsteps to get the NFC card!";
+"GudieTitle" = "Follow the steps\nto get the NFC card!";
 "GuideStep1Title" = "Which format is support?";
 "GuideStep1Content" = "We support NTAG215 NFC cards or above version, which can come in various styles such as traditional cards or stickers.";
-"GuideStep2Title" = "Where can buy the cards?";
-"GuideStep2Content" = "You can purchase it from Amazon, ebay or your local electronics retailer.";
+"GuideStep2Title" = "Where can buy the card?";
+"GuideStep2Content" = "You can purchase it from Amazon, ebay or your local electronics retailer. Please note that we cannot provide any warranty";
 "GuideStep3Title" = "I'm aleady have a card.";
 "GuideStep3Content" = "If you already have a card but don’t know if it can be used, please click the button to check it now.";
-"GudieNoteContent" = "Kindly be aware that the backup action will overwrite the original contents of the card and switch to read-only mode. Mnemonic never records any user data. Please ensure to store the card in a secure place after completing the backup.";
+"GudieNoteContent" = "Kindly be aware that the backup action will overwrite the original contents of the card and switch it to read-only mode.  Mnemonic never records any user data. Please ensure to store the card in a secure place after completing the backup.";
 
 // Action Page
 "ActionSTEP1" = "STEP 1";
