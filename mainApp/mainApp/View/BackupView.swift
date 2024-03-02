@@ -291,8 +291,8 @@ struct bvStartBackView: View {
                             
                             Button(action: {
                                 let cardInfo = CardInfo(version: 1, name: dataBox.getCardName(), data: cipherText)
-                                if let base64String = JsonPackage.pack(cardInfo: cardInfo) {
-                                    if (nfcOperationsHandler.startNFCWriting(rawString: base64String)) {
+                                if let data = JsonPackage.pack(cardInfo: cardInfo) {
+                                    if (nfcOperationsHandler.startNFCWriting(rawString: data)) {
                                         withAnimation {
                                             isSuccess.toggle()
                                         }

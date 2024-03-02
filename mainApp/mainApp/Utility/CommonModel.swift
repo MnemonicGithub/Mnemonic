@@ -102,18 +102,17 @@ struct JsonPackage {
     static func pack(cardInfo: CardInfo) -> String? {
         let jsonEncoder = JSONEncoder()
         if let jsonData = try? jsonEncoder.encode(cardInfo) {
-            let base64EncodedData = jsonData.base64EncodedData()
-            if let base64String = String(data: base64EncodedData, encoding: .utf8) {
-                return base64String
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                return jsonString
             }
         }
         return nil
     }
     
-    static func unPack(from base64String: String) -> CardInfo? {
-        if let base64Data = Data(base64Encoded: base64String) {
+    static func unPack(from jsonString: String) -> CardInfo? {
+        if let jsonData = jsonString.data(using: .utf8) {
             let jsonDecoder = JSONDecoder()
-            if let decodedCardInfo = try? jsonDecoder.decode(CardInfo.self, from: base64Data) {
+            if let decodedCardInfo = try? jsonDecoder.decode(CardInfo.self, from: jsonData) {
                 return decodedCardInfo
             }
         }
