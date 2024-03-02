@@ -268,8 +268,8 @@ struct TextEditorModel: View {
             .scrollContentBackground(.hidden)
             .autocapitalization(.none)
             .disableAutocorrection(true)
-            .padding(.horizontal, 16)
-            .padding(.vertical, 18)
+            .padding(.horizontal, 15)
+            .padding(.vertical, 10)
         
 //        TextField("", text: $fieldValue, axis: .vertical)
 //            .font(AppFont.fontH3)
