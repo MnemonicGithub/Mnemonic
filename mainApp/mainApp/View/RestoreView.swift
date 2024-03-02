@@ -34,17 +34,20 @@ struct RestoreView: View {
 struct RestoreActionView: View {
     @EnvironmentObject var dataBox: DataBox
     private var nfcOperationsHandler = NfcOperationsHandler()
+    @State var isUnPackFailed: Bool = false
     
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
             Button(action: {
+                dataBox.actionC2WStep1 = false
                 if let answer = nfcOperationsHandler.startNFCReading() {
-                    let parsingAnswer = answer.split(separator: "\0")
-                    dataBox.actionC2WStep1 = true
-                    dataBox.setCardName(String(parsingAnswer[0]))
-                    dataBox.setMnemonic(String(parsingAnswer[1]))
-                } else {
-                    dataBox.actionC2WStep1 = false
+                    if let unpackedCardInfo: CardInfo = JsonPackage.unPack(from: answer) {
+                        dataBox.actionC2WStep1 = true
+                        dataBox.setCardName(unpackedCardInfo.name)
+                        dataBox.setMnemonic(unpackedCardInfo.data)
+                    } else {
+                        isUnPackFailed.toggle()
+                    }
                 }
             }) {
                 if dataBox.actionC2WStep1 {
@@ -61,6 +64,9 @@ struct RestoreActionView: View {
             .disabled(!dataBox.actionC2WStep1)
             
             Spacer()
+        }
+        .alert(isPresented: $isUnPackFailed) {
+            Alert(title: Text("JsonUpackFailedTitle"), message: Text("JsonUpackFailedContent"), dismissButton: .default(Text("Done")))
         }
     }
 }

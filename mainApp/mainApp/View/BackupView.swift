@@ -262,32 +262,43 @@ struct bvStartBackView: View {
     var body: some View {
         ZStack {
             ScrollView {
-                VStack (alignment: .leading, spacing: 5){
+                VStack (alignment: .leading, spacing: 10){
                     Text("W2CStep3Title")
                         .foregroundColor(AppColor.textPrimary)
                         .font(AppFont.fontH2)
                         .kerning(1)
-                        .padding(.horizontal)
                     
                     if isEncryptSuccess {
                         VStack(alignment: .leading, spacing: 30) {
+                            Spacer()
+                            
                             HStack(alignment: .center) {
                                 Spacer()
                                 
-                                VStack {
+                                VStack (alignment: .trailing, spacing: 10) {
                                     NamePasswordBoxModel(name: dataBox.getCardName(), password: dataBox.getPassword())
                                     MnemonicBoxModel(words: plainText)
+                                    Text("Please make sure all the information is correct.\nWe do not record any of your data.")
+                                        .foregroundColor(AppColor.textPoint)
+                                        .font(AppFont.fontBody3)
+                                        .multilineTextAlignment(.trailing)
                                 }
                                 
                                 Spacer()
                             }
                             
+                            Spacer()
+                            
                             Button(action: {
-                                let combineString = dataBox.getCardName() + "\0" + cipherText
-                                if (nfcOperationsHandler.startNFCWriting(rawString: combineString)) {
-                                    withAnimation {
-                                        isSuccess.toggle()
+                                let cardInfo = CardInfo(version: 1, name: dataBox.getCardName(), data: cipherText)
+                                if let base64String = JsonPackage.pack(cardInfo: cardInfo) {
+                                    if (nfcOperationsHandler.startNFCWriting(rawString: base64String)) {
+                                        withAnimation {
+                                            isSuccess.toggle()
+                                        }
                                     }
+                                } else {
+                                    isOops.toggle()
                                 }
                             }) {
                                 SecondaryInteractiveButtonModel(text: "StartBackup", isActive: $isEncryptSuccess)
@@ -295,6 +306,7 @@ struct bvStartBackView: View {
                         }
                     }
                 }
+                .padding(.horizontal)
             }
             .background {
                 Image(AppImage.actionWallpaper)
@@ -304,7 +316,7 @@ struct bvStartBackView: View {
             }
             .navigationBarBackButtonHidden(true)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .topBarLeading) {
                     ToobarBackButtonModel()
                 }
             }

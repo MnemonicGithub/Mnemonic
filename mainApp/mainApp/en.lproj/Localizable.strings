@@ -19,6 +19,8 @@
 "DecryptButton" = "Decrypt";
 "CheckCardButton" = "Check";
 "GotIt" = "Got it!";
+"CopyTitle" = "Copied!";
+"Done" = "Done";
 
 // Welcome Page
 "SloganFront" = "Your\nRecovery Words";
@@ -40,10 +42,21 @@
 "GuideStep1Title" = "Which format is support?";
 "GuideStep1Content" = "We support NTAG215 NFC cards or above version, which can come in various styles such as traditional cards or stickers.";
 "GuideStep2Title" = "Where can buy the card?";
-"GuideStep2Content" = "You can purchase it from Amazon, ebay or your local electronics retailer. Please note that we cannot provide any warranty";
+"GuideStep2Content" = "You can purchase it from Amazon, ebay or your local electronics retailer. Please note that we cannot provide any warranty on cards.";
 "GuideStep3Title" = "I'm aleady have a card.";
 "GuideStep3Content" = "If you already have a card but don’t know if it can be used, please click the button to check it now.";
 "GudieNoteContent" = "Kindly be aware that the backup action will overwrite the original contents of the card and switch it to read-only mode.  Mnemonic never records any user data. Please ensure to store the card in a secure place after completing the backup.";
+
+// About Us Page
+"AboutTitle1" = "New Idea";
+"AboutTitle2" = "Get Easy & Trust!";
+"AboutTitle3" = "Buy Me a Coffee";
+"AboutContent1" = "We've discovered that many users are storing their recovery words using screenshots or on paper. Both them carries certain risks, doesn't it? Are there any other secure alternatives?";
+"AboutContent2" = "Using NFC cards, a convenient and universally compatible product.
+We are not looking to replace existing methods, but to provide additional support to protect recovery words from potential losses.";
+"AboutContent3" = "We are a non-profit group and related on the web3 industry. Mnemonic is open source and does not collect any data from users.";
+"AboutContent4" = "If our concept has captured your interest, please don't hesitate to contact us via the button on right. Your encouragement or suggestions are the driving force behind our progress.";
+"AboutCopyAddress" = "Thank you for your generosity, the address is on the clipboard.";
 
 // Action Page
 "ActionSTEP1" = "STEP 1";
@@ -80,6 +93,8 @@
 "InAppreviewContent" = "We'd love your five-star review,\nit is the driving force for our efforts!";
 "NoCollectDataAlertTitle" = "Protected Mode";
 "NoCollectDataAlertContent" = "Mnemonic will not collect any user information and will be cleared after the operation is completed.";
+"JsonUpackFailedTitle" = "Upack Failed";
+"JsonUpackFailedContent" = "The data failed to unpack. Please ensure that the card is correct and try again.";
 
 // TextFiled
 "EnterMnemonic" ="This is a 12, 15, 18, 21 or 24 words you were given when you created your previous wallet.";

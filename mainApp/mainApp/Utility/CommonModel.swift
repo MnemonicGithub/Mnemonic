@@ -36,6 +36,9 @@ struct InAppReviewAlert {
 enum AppLink {
     static let appStore: String = "https://apps.apple.com/tw/app/safari/id1146562112"
     static let termsOfUse: String = "https://github.com/MnemonicGithub/Mnemonic"
+    static let contactUs: String = "https://github.com/MnemonicGithub/Mnemonic"
+    static let address: String = "0xCaB3f7146FF7ecC9551E9758C0D4e22B82573625"
+
 }
 
 final class DataBox: ObservableObject {
@@ -89,4 +92,31 @@ final class DataBox: ObservableObject {
     }
 }
 
+struct CardInfo: Codable {
+    var version: Int
+    var name: String
+    var data: String
+}
 
+struct JsonPackage {
+    static func pack(cardInfo: CardInfo) -> String? {
+        let jsonEncoder = JSONEncoder()
+        if let jsonData = try? jsonEncoder.encode(cardInfo) {
+            let base64EncodedData = jsonData.base64EncodedData()
+            if let base64String = String(data: base64EncodedData, encoding: .utf8) {
+                return base64String
+            }
+        }
+        return nil
+    }
+    
+    static func unPack(from base64String: String) -> CardInfo? {
+        if let base64Data = Data(base64Encoded: base64String) {
+            let jsonDecoder = JSONDecoder()
+            if let decodedCardInfo = try? jsonDecoder.decode(CardInfo.self, from: base64Data) {
+                return decodedCardInfo
+            }
+        }
+        return nil
+    }
+}
