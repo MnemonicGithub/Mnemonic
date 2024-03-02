@@ -18,6 +18,7 @@
 "InAppreviewButton" = "Sure!";
 "DecryptButton" = "Decrypt";
 "CheckCardButton" = "Check";
+"GotIt" = "Got it!";
 
 // Welcome Page
 "SloganFront" = "Your\nRecovery Words";
@@ -77,6 +78,8 @@
 "SuccessCloneContent" = "You are securely backup to the a new NFC card.\nPlease store the 2 cards in a safe place.";
 "InAppreviewTitle" = "Enjoying Mnemonic?";
 "InAppreviewContent" = "We'd love your five-star review,\nit is the driving force for our efforts!";
+"NoCollectDataAlertTitle" = "Protected Mode";
+"NoCollectDataAlertContent" = "Mnemonic will not collect any user information and will be cleared after the operation is completed.";
 
 // TextFiled
 "EnterMnemonic" ="This is a 12, 15, 18, 21 or 24 words you were given when you created your previous wallet.";

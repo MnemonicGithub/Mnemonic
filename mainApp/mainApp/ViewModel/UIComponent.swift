@@ -249,7 +249,7 @@ struct MnemonicFieldModel: View {
                 Text(primaryHint)
                     .font(AppFont.fontBody3)
                     .multilineTextAlignment(.trailing)
-                    .foregroundColor(isDone ? AppColor.textHint : AppColor.textPoint)
+                    .foregroundColor(isDone ? AppColor.textHint : AppColor.textHint)
                     .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
             }
         }
@@ -453,7 +453,6 @@ struct PrimaryButton2Model: View {
             .padding(.horizontal, 29)
             .padding(.vertical, 9)
             .background(AppColor.gradientPrimary)
-            .frame(minWidth: 160)
             .cornerRadius(13)
     }
 }
@@ -502,7 +501,6 @@ struct SecondaryButton3Model: View {
             .padding(.horizontal, 32)
             .padding(.vertical, 8)
             .background(Color.clear)
-            .frame(minWidth: 120)
             .cornerRadius(10)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
@@ -1144,6 +1142,25 @@ struct ToobarBackButtonModel: View {
     }
 }
 
+struct WordListSearchButtonModel: View {
+    let text: String
+    
+    var body: some View {
+        Text(text)
+            .font(AppFont.fontBody1)
+            .foregroundColor(AppColor.textPrimary)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 8)
+            .background(Color.clear)
+            .cornerRadius(13)
+            .overlay(
+                RoundedRectangle(cornerRadius: 13)
+                    .stroke(AppColor.borderThirdary, lineWidth: 1.5)
+                    .opacity(0.6)
+            )
+    }
+}
+
 struct BackToRootButtonModel: View {
     @EnvironmentObject var router: Router
 
@@ -1195,11 +1212,35 @@ struct TestView: View {
 //            .edgesIgnoringSafeArea(.all)
 //    }
     var body: some View {
-        Button("Change Language") {
-            if let url = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        ScrollView(.horizontal) {
+            HStack(alignment: .center, spacing: 10) {
+                Button {
+                    
+                } label: {
+                    WordListSearchButtonModel(text: "gooday")
+                }
+                
+                Button {
+                    
+                } label: {
+                    WordListSearchButtonModel(text: "abandon")
+                }
+                
+                Button {
+                    
+                } label: {
+                    WordListSearchButtonModel(text: "about")
+                }
+                
+                Button {
+                    
+                } label: {
+                    WordListSearchButtonModel(text: "art")
+                }
             }
+            .padding(.horizontal)
         }
+        .scrollIndicators(.hidden)
     }
 }
 

@@ -24,7 +24,7 @@ struct BackupView: View {
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
+            ToolbarItem(placement: .topBarLeading) {
                 ToobarBackButtonModel()
             }
         }
@@ -70,14 +70,25 @@ struct bvSetMnemonicView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var dataBox: DataBox
     @ObservedObject private var viewModel = Bip39ValidatorViewModel()
+    @State var isNoCollectDataAlert: Bool = false
 
     var body: some View {
         ScrollView {
             VStack (alignment: .leading, spacing: 10){
-                Text("W2CStep1Title")
+
+                HStack {
+                    Group {
+                        Text("W2CStep1Title")
+                        Button {
+                            isNoCollectDataAlert.toggle()
+                        } label: {
+                            Image(systemName: AppImage.noCollectDataAlert)
+                        }
+                    }
                     .foregroundColor(AppColor.textPrimary)
                     .font(AppFont.fontH2)
                     .kerning(1)
+                }
                 
                 VStack(alignment: .center, spacing: 20) {
                     MnemonicFieldModel(titleName: "EnterMnemonic", primaryHint: "MnemonicHint", fieldValue: $viewModel.mnemonic, isDone: $viewModel.isValidMnemonic)
@@ -86,10 +97,10 @@ struct bvSetMnemonicView: View {
                                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
                             }
                         }
-
                     Button(action: {
                         dataBox.actionW2CStep1.toggle()
-                        dataBox.setMnemonic(viewModel.mnemonic)
+                        let words = viewModel.mnemonic.components(separatedBy: " ").filter { !$0.isEmpty }
+                        dataBox.setMnemonic(words.joined(separator: " "))
                         dismiss()
                     }) {
                         SecondaryInteractiveButtonModel(text: "NextStep", isActive: $viewModel.isValidMnemonic)
@@ -109,9 +120,15 @@ struct bvSetMnemonicView: View {
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
+            ToolbarItem(placement: .topBarLeading) {
                 ToobarBackButtonModel()
             }
+            ToolbarItem(placement: .keyboard) {
+                wordListSearchBar(input: $viewModel.mnemonic)
+            }
+        }
+        .alert(isPresented: $isNoCollectDataAlert) {
+            Alert(title: Text("NoCollectDataAlertTitle"), message: Text("NoCollectDataAlertContent"), dismissButton: .default(Text("GotIt")))
         }
         .onAppear {
             dataBox.actionW2CStep1 = viewModel.isValidMnemonic
@@ -119,6 +136,60 @@ struct bvSetMnemonicView: View {
         .onDisappear {
             viewModel.clearData()
         }
+    }
+}
+
+struct wordListSearchBar: View {
+    @Binding var input: String
+    @State private var matchingWords: [String] = []
+
+    var body: some View {
+        ScrollView(.horizontal) {
+            HStack(alignment: .center, spacing: 15) {
+                ForEach(matchingWords.prefix(5), id: \.self) { word in
+                    Button(action: {
+                        if let researchWord = input.split(separator: " ").filter({ !$0.isEmpty }).last.map(String.init) {
+                            let remainingCharacters = String(word.dropFirst(researchWord.count))
+                            if remainingCharacters == "" {
+                                input += word + " "
+                            } else {
+                                input += remainingCharacters + " "
+                            }
+                        }
+                    }) {
+                        WordListSearchButtonModel(text: word)
+                    }
+                }
+            }
+            .padding(.horizontal)
+        }
+        .padding(.horizontal, -20)
+        .scrollIndicators(.hidden)
+        .onChange(of: input) { newValue in
+            matchingWords.removeAll()
+            guard let lastWord = newValue.split(separator: " ").filter({ !$0.isEmpty }).last.map(String.init) else {
+                return
+            }
+            matchingWords = findWordsStartingWith(prefix: lastWord)
+        }
+    }
+    
+    func findWordsStartingWith(prefix: String) -> [String] {
+        var matchingWords = [String]()
+        var count = 0
+
+        for word in WordLists.english {
+            if word.hasPrefix(prefix) {
+                matchingWords.append(word)
+                count += 1
+            }
+            
+            if count >= 5 {
+                break
+            }
+        }
+        
+        return matchingWords
     }
 }
 
@@ -164,7 +235,7 @@ struct bvSetPasswordView: View {
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
+            ToolbarItem(placement: .topBarLeading) {
                 ToobarBackButtonModel()
             }
         }

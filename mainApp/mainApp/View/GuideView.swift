@@ -32,6 +32,18 @@ struct GuideView: View {
                 }
             }
             
+            VStack {
+                Spacer()
+
+                Text("GudieNoteContent")
+                    .font(AppFont.fontBody3)
+                    .foregroundColor(AppColor.textHint)
+                    .opacity(0.6)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                    .frame(width: 360)
+            }
+            
             VStack(alignment: .leading, spacing: 30) {
                 
                 HStack (alignment: .firstTextBaseline, spacing: 20){
@@ -56,14 +68,6 @@ struct GuideView: View {
                 }
                 
                 Spacer()
-                
-                Text("GudieNoteContent")
-                    .font(AppFont.fontBody3)
-                    .foregroundColor(AppColor.textHint)
-                    .opacity(0.6)
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-                    .frame(width: 360)
             }
             .padding(.top, 50)
             .padding(.horizontal)

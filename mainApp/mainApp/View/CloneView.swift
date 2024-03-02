@@ -37,7 +37,7 @@ struct CloneView: View {
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
+            ToolbarItem(placement: .topBarLeading) {
                 ToobarBackButtonModel()
             }
         }
@@ -96,7 +96,7 @@ struct CloneActionView: View {
 //        }
 //        .navigationBarBackButtonHidden(true)
 //        .toolbar {
-//            ToolbarItem(placement: .navigationBarLeading) {
+//            ToolbarItem(placement: .topBarLeading) {
 //                ToobarBackButtonModel(title: "C2CStep1Title")
 //            }
 //        }
@@ -115,7 +115,7 @@ struct CloneActionView: View {
 //        }
 //        .navigationBarBackButtonHidden(true)
 //        .toolbar {
-//            ToolbarItem(placement: .navigationBarLeading) {
+//            ToolbarItem(placement: .topBarLeading) {
 //                ToobarBackButtonModel(title: "C2CStep2Title")
 //            }
 //        }

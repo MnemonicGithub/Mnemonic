@@ -31,7 +31,6 @@ struct LandingPageView: View {
                 
                 VStack(alignment: .leading, spacing: 10) {
                     HStack {
-
                         Button(action: {
                             dismiss()
                         }) {

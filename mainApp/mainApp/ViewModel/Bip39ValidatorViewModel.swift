@@ -32,7 +32,7 @@ class Bip39ValidatorViewModel: ObservableObject {
         $mnemonic
             .receive(on: RunLoop.main)
             .map { mnemonic in
-                let words = mnemonic.components(separatedBy: " ")
+                let words = mnemonic.components(separatedBy: " ").filter { !$0.isEmpty }
                 return self.bip39Validator.isValidMnemonic(words)
             }
             .assign(to: \.isValidMnemonic, on: self)

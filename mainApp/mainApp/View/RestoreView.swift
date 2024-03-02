@@ -24,7 +24,7 @@ struct RestoreView: View {
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
+            ToolbarItem(placement: .topBarLeading) {
                 ToobarBackButtonModel()
             }
         }

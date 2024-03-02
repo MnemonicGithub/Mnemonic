@@ -154,30 +154,20 @@ enum AppColor {
 // MARK: - Image Map
 
 enum AppImage {
+    
+    // System Name
+    static let welcomeNaviBack: String = "cursorarrow.rays"
+    static let navigationBack: String = "chevron.left"
+    static let sheetDismiss: String = "chevron.down.circle.fill"
+    static let reviewStart: String = "star.fill"
+    static let noCollectDataAlert: String = "lock.shield.fill"
+    
+    // Illustration
     static let inAppReview: String = "review_illustration"
     static let appUpdate: String = "update_illustration"
     static let readTerms: String = "terms_illustration"
     static let oops: String = "oops_illustration"
     static let success: String = "success_illustration"
-
-    
-    static let welcomeNaviBack: String = "cursorarrow.rays"
-    static let navigationBack: String = "chevron.left"
-    static let sheetDismiss: String = "chevron.down.circle.fill"
-    static let guide: String = "guide"
-    static let guidePageIcon: String = "guide_lightgreen"
-    static let guidePage: String = "guide_background"
-    static let aboutUs: String = "about_us"
-    static let reviewStart: String = "star.fill"
-
-    
-    static let showPassword: String = "eye_open"
-    static let hidePassword: String = "eye_close"
-    
-    static let welcomeWallpaper: String = "welcome_page"
-    static let actionWallpaper: String = "action_page"
-    static let logoName: String = "logo_name"
-    static let logoIcon: String = "logo"
     static let landingWallpaper: String = "landing_illustration"
     static let landingW2C: String = "wc_icon"
     static let landingC2C: String = "cc_icon"
@@ -185,4 +175,18 @@ enum AppImage {
     static let landingW2Cinverter: String = "wc_icon_inv"
     static let landingC2Cinverter: String = "cc_icon_inv"
     static let landingC2Winverter: String = "cw_icon_inv"
+    
+    // Icon
+    static let guide: String = "guide"
+    static let guidePageIcon: String = "guide_lightgreen"
+    static let guidePage: String = "guide_background"
+    static let aboutUs: String = "about_us"
+    static let showPassword: String = "eye_open"
+    static let hidePassword: String = "eye_close"
+    
+    // Wallpaper
+    static let welcomeWallpaper: String = "welcome_page"
+    static let actionWallpaper: String = "action_page"
+    static let logoName: String = "logo_name"
+    static let logoIcon: String = "logo"
 }
