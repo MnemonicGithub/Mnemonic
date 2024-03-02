@@ -106,7 +106,7 @@ struct GuideLine: View {
                     .foregroundColor(AppColor.textPrimary)
                 Text(stepContent)
                     .font(AppFont.fontBody1)
-                    .foregroundColor(AppColor.textHint)
+                    .foregroundColor(AppColor.textPrimary)
                     .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                 if isCheckButton {
                     Button(action: {

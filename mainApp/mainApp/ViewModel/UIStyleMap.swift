@@ -189,4 +189,14 @@ enum AppImage {
     static let actionWallpaper: String = "action_page"
     static let logoName: String = "logo_name"
     static let logoIcon: String = "logo"
+    
+    // About Us
+    static let aboutLine1: String = "ch1_line"
+    static let aboutLine2: String = "ch2_line"
+    static let aboutLine3: String = "ch3_line"
+    static let aboutIcon1: String = "ch1_icon"
+    static let aboutIcon2: String = "ch2_icon"
+    static let aboutIcon3: String = "ch3_icon"
+    static let aboutQRcode: String = "address_qrcode"
+    static let githubLogo: String = "github"
 }
