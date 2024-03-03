@@ -10,8 +10,10 @@ import SwiftUI
 
 struct AboutUsView: View {
     let websiteURL = URL(string: AppLink.contactUs)!
-    @State var isCopyAddress: Bool = false
-
+    let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .soft)
+    @State private var hearts: [UUID] = []
+    @State private var timer: Timer?
+    
     var body: some View {
         ZStack {
             AppColor.backgroundColor
@@ -101,56 +103,83 @@ struct AboutUsView: View {
                         }
                         .padding(.vertical)
                     }
-                    
-                    HStack(alignment: .top, spacing: 0) {
-                        Text("AboutContent4")
-                            .foregroundColor(AppColor.textPrimary)
-                            .font(AppFont.fontBody1)
-                            .frame(width: 290)
-                            .overlay(alignment: .topTrailing) {
-                                Button(action: {
-                                    UIApplication.shared.open(websiteURL)
-                                }) {
-                                    Image(systemName: "envelope.circle")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 35, height: 35)
-                                        .foregroundColor(AppColor.iconSecondary)
-                                        .padding(.trailing, 6)
+
+                    Group {
+                        HStack(alignment: .top, spacing: 0) {
+                            Text("AboutContent4")
+                                .foregroundColor(AppColor.textPrimary)
+                                .font(AppFont.fontBody1)
+                                .frame(width: 290)
+                                .overlay(alignment: .topTrailing) {
+                                    Button(action: {
+                                        UIApplication.shared.open(websiteURL)
+                                    }) {
+                                        Image(systemName: "envelope.circle")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 35, height: 35)
+                                            .foregroundColor(AppColor.iconSecondary)
+                                            .padding(.trailing, 6)
+                                    }
                                 }
-                            }
-                    }
-                    .padding()
-
-                    VStack (spacing: 10){
-                        Image(AppImage.aboutQRcode)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 200, height: 200)
-                            .opacity(0.8)
-
+                        }
+                        .padding()
                         
-                        Button(action: {
-                            UIPasteboard.general.string = AppLink.address
-                            isCopyAddress.toggle()
-                        }) {
-                            Text(AppLink.address)
+                        VStack (spacing: 10){
+                            Image(AppImage.aboutQRcode)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 200, height: 200)
+                                .opacity(0.8)
+                            
+                            Button {
+                                UIPasteboard.general.string = AppLink.address
+                                impactFeedbackGenerator.impactOccurred()
+                                withAnimation(.spring(response: 0.5, dampingFraction: 0.2, blendDuration: 10)) {
+                                    hearts.append(UUID())
+                                }
+                                
+                                self.timer?.invalidate()
+                                self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
+                                    hearts.removeAll()
+                                }
+                            } label: {
+                                HStack {
+                                    Image(systemName: "doc.on.clipboard")
+                                    Text(AppLink.address)
+
+                                        .underline()
+                                        .multilineTextAlignment(.center)
+                                }
                                 .foregroundColor(AppColor.textPoint)
                                 .font(AppFont.fontCaption)
                                 .frame(width: 200)
-                                .underline()
-                                .multilineTextAlignment(.center)
+                            }
+                        }
+                        .padding()
+                        
+                        ZStack {
+                            ForEach(hearts, id: \.self) { heartID in
+                                Image(systemName: "heart.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: CGFloat.random(in: 10...30))
+                                    .foregroundColor(Color.random)
+                                    .opacity(0.8)
+                                    .scaleEffect(1)
+                                    .offset(x: CGFloat.random(in: -200...200), y: CGFloat.random(in: -400...50))
+                                    .id(heartID)
+                            }
                         }
                     }
-                    .padding()
                 }
                 .padding(.top, 50)
             }
             .scrollIndicators(.hidden)
             .presentationDragIndicator(.visible)
-            .alert(isPresented: $isCopyAddress) {
-                Alert(title: Text("CopyTitle"), message: Text("AboutCopyAddress"), dismissButton: .default(Text("SuccessButton")))
-            }
+        }
+        .onAppear {
+            impactFeedbackGenerator.prepare()
         }
     }
 }

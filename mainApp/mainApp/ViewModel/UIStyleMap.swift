@@ -105,6 +105,25 @@ enum AppFont {
     static let fontCaption: Font = FontSet.Caption12
 }
 
+
+extension Color {
+    static var random: Color {
+        return Color(
+            red: .random(in: 0...1),
+            green: .random(in: 0...1),
+            blue: .random(in: 0...1)
+        )
+    }
+    
+    static var randomLight: Color {
+        return Color(
+            red: .random(in: 0.5...1),
+            green: .random(in: 0.5...1),
+            blue: .random(in: 0.5...1)
+        )
+    }
+}
+
 enum ColorSet {
     static let gradientClear: LinearGradient = LinearGradient(colors: [Color.clear, Color.clear], startPoint: .topLeading, endPoint: .bottomTrailing)
     static let gradientGreen: LinearGradient =

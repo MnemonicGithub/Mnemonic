@@ -1205,48 +1205,22 @@ struct VideoPlayerView: UIViewControllerRepresentable {
 
 // MARK: - Test View
 
-struct TestView: View {
-    @State var toggle: Bool = false
-//    var body: some View {
-//        VideoPlayerView(videoURL: Bundle.main.url(forResource: "LandingVideo", withExtension: "mp4")!)
-//            .edgesIgnoringSafeArea(.all)
-//    }
+
+struct Test: View {
+    @State private var hearts: [UUID] = []
+    @State private var timer: Timer?
+
     var body: some View {
-        ScrollView(.horizontal) {
-            HStack(alignment: .center, spacing: 10) {
-                Button {
-                    
-                } label: {
-                    WordListSearchButtonModel(text: "gooday")
-                }
-                
-                Button {
-                    
-                } label: {
-                    WordListSearchButtonModel(text: "abandon")
-                }
-                
-                Button {
-                    
-                } label: {
-                    WordListSearchButtonModel(text: "about")
-                }
-                
-                Button {
-                    
-                } label: {
-                    WordListSearchButtonModel(text: "art")
-                }
-            }
-            .padding(.horizontal)
+        VStack {
+            Text("Test")
         }
-        .scrollIndicators(.hidden)
     }
 }
 
+
 #Preview {
     Group {
-        TestView()
+        Test()
     }
         .preferredColorScheme(.dark)
 
