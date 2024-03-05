@@ -66,8 +66,9 @@ We are not looking to replace existing methods, but to provide additional suppor
 "W2CStep1Content" = "Select the correct 12 to 24 words from your recovery words and list them in order.";
 "W2CStep2Title" = "Set Name & Password";
 "W2CStep2Content" = "Secure your data by setting your own name and password.";
-"W2CStep3Title" = "Confirm and Backup";
+"W2CStep3Title" = "Start Backup";
 "W2CStep3Content" = "Follow the prompts to backup your data securely to the NFC card.";
+"W2CNoCard" = "I don't have a card.";
 "C2CStep1Title" = "Read the Card";
 "C2CStep1Content" = "Bring your NFC card close to your iPhone and wait for the data to be read.";
 "C2CStep2Title" = "Backup to a New Card";
@@ -95,6 +96,8 @@ We are not looking to replace existing methods, but to provide additional suppor
 "NoCollectDataAlertContent" = "Mnemonic will not collect any user information and will be cleared after the operation is completed.";
 "JsonUpackFailedTitle" = "Upack Failed";
 "JsonUpackFailedContent" = "The data failed to unpack. Please ensure that the card is correct and try again.";
+"BackupFailedTitle" = "Backup Failed";
+"BackupFailedContent" = "Failed to encrypt or pack. Please ensure that the information is correct and try again.";
 
 // TextFiled
 "EnterMnemonic" ="This is a 12, 15, 18, 21 or 24 words you were given when you created your previous wallet.";

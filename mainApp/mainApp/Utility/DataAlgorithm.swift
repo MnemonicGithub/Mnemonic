@@ -104,6 +104,10 @@ final class DataAlgorithm {
         if !answer {
             return (answer, cipherBox, plainBox)
         }
+        
+        if !(words == plainBox) {
+            return (false, cipherBox, plainBox)
+        }
 
         return (answer, cipherBox, plainBox)
     }

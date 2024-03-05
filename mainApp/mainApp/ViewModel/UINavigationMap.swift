@@ -17,11 +17,11 @@ public struct PathInfo {
     static let backupViewValue: Int = 2
     static let backupViewSetMnemonicValue: Int = 21
     static let backupViewSetPasswordValue: Int = 22
-    static let backupViewStartBackup: Int = 23
+//    static let backupViewStartBackup: Int = 23
     static let backupViewFrame = BackupView()
     static let backupViewSetMnemonicFrame = bvSetMnemonicView()
     static let backupViewSetPasswordFrame = bvSetPasswordView()
-    static let backupViewStartBackFrame = bvStartBackView()
+//    static let backupViewStartBackFrame = bvStartBackView()
     
     static let cloneViewValue: Int = 3
 //    static let cloneViewStartReadValue: Int = 31
@@ -52,8 +52,8 @@ public struct PathInfo {
             return AnyView(PathInfo.backupViewSetMnemonicFrame)
         case PathInfo.backupViewSetPasswordValue:
             return AnyView(PathInfo.backupViewSetPasswordFrame)
-        case PathInfo.backupViewStartBackup:
-            return AnyView(PathInfo.backupViewStartBackFrame)
+//        case PathInfo.backupViewStartBackup:
+//            return AnyView(PathInfo.backupViewStartBackFrame)
             
         case PathInfo.cloneViewValue:
             return AnyView(PathInfo.cloneViewFrame)

@@ -14,7 +14,6 @@ final class Router: ObservableObject {
 }
 
 struct LandingPageView: View {
-    @Environment(\.dismiss) var dismiss
     @StateObject var router: Router = Router()
     @StateObject var dataBox = DataBox()
     @State var isOpenAboutUsView: Bool = false
@@ -31,14 +30,10 @@ struct LandingPageView: View {
                 
                 VStack(alignment: .leading, spacing: 10) {
                     HStack {
-                        Button(action: {
-                            dismiss()
-                        }) {
-                            Text("LandingTitle")
-                                .font(AppFont.fontH)
-                                .foregroundColor(AppColor.textPrimary)
-                                .padding(.horizontal)
-                        }
+                        Text("LandingTitle")
+                            .font(AppFont.fontH)
+                            .foregroundColor(AppColor.textPrimary)
+                            .padding(.horizontal)
                         
                         Spacer()
                         
