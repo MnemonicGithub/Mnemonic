@@ -223,17 +223,12 @@ struct SecureFieldModel: View {
 }
 
 struct MnemonicFieldModel: View {
-    var titleName: LocalizedStringKey
     var primaryHint: LocalizedStringKey
     @Binding var fieldValue: String
     @Binding var isDone: Bool
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Text(titleName)
-                .font(AppFont.fontH4)
-                .foregroundColor(AppColor.textHint)
-            
             VStack(alignment: .trailing, spacing: 5) {
                 HStack(alignment: .top, spacing: 10) {
                     TextEditorModel(fieldValue: $fieldValue)

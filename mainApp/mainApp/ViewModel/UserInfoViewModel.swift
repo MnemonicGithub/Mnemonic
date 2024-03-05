@@ -35,7 +35,8 @@ class UserInfoViewModel: ObservableObject {
         $password
             .receive(on: RunLoop.main)
             .map { password in
-                let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)[ -~]{4,16}$"
+                //let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)[ -~]{4,16}$"
+                let passwordRegex = #"^[ -~]{8,16}$"#
                 return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
             }
             .assign(to: \.isPasswordPass, on: self)
