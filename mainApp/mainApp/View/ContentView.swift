@@ -24,11 +24,11 @@ struct ContentView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     Text("SloganFront")
                         .font(AppFont.fontH)
-                    .foregroundColor(AppColor.textPrimary)
+                        .foregroundColor(AppColor.textPrimary)
                     
                     Text("SloganRear")
                         .font(AppFont.fontH)
-                        .foregroundColor(AppColor.textPoint)
+                        .foregroundStyle(AppColor.gradientPrimary)
                 }
                 
                 Text("SloganDescription")

@@ -177,19 +177,7 @@ struct TextFieldModel: View {
             .keyboardType(.asciiCapable)
             .autocapitalization(.none)
             .disableAutocorrection(true)
-        
-//        if #available(iOS 17.0, *) {
-//            TextField(fieldName, text: $fieldValue)
-//                .font(AppFont.fontH4)
-//                .foregroundColor(AppColor.textPrimary)
-//                .accentColor(AppColor.textPoint)
-//                .padding(.horizontal)
-//                .keyboardType(.asciiCapable)
-//                .autocapitalization(.none)
-//                .onChange(of: fieldValue) { newValue, _ in
-//                    fieldValue = String(newValue.prefix(16))
-//                }
-//        }
+            .textContentType(.oneTimeCode)
     }
 }
 
@@ -206,19 +194,7 @@ struct SecureFieldModel: View {
             .keyboardType(.asciiCapable)
             .autocapitalization(.none)
             .disableAutocorrection(true)
-
-//        if #available(iOS 17.0, *) {
-//            SecureField(fieldName, text: $fieldValue)
-//                .font(AppFont.fontH4)
-//                .foregroundColor(AppColor.textPrimary)
-//                .accentColor(AppColor.textPoint)
-//                .padding(.horizontal)
-//                .keyboardType(.asciiCapable)
-//                .autocapitalization(.none)
-//                .onChange(of: fieldValue) { newValue, _ in
-//                    fieldValue = String(newValue.prefix(16))
-//                }
-//        }
+            .textContentType(.oneTimeCode)
     }
 }
 
@@ -233,7 +209,7 @@ struct MnemonicFieldModel: View {
                 HStack(alignment: .top, spacing: 10) {
                     TextEditorModel(fieldValue: $fieldValue)
                 }
-                .frame(height: 250, alignment: .topLeading)
+                .frame(height: 200, alignment: .topLeading)
                 .cornerRadius(6)
                 .overlay(
                     RoundedRectangle(cornerRadius: 6)
@@ -265,32 +241,6 @@ struct TextEditorModel: View {
             .disableAutocorrection(true)
             .padding(.horizontal, 15)
             .padding(.vertical, 10)
-        
-//        TextField("", text: $fieldValue, axis: .vertical)
-//            .font(AppFont.fontH3)
-//            .foregroundColor(AppColor.textPrimary)
-//            .accentColor(AppColor.textPoint)
-//            .keyboardType(.asciiCapable)
-//            .scrollContentBackground(.hidden)
-//            .autocapitalization(.none)
-//            .padding(.horizontal, 16)
-//            .padding(.vertical, 18)
-
-//        if #available(iOS 17.0, *) {
-//            TextEditor(text: $fieldValue)
-//                .font(AppFont.fontH3)
-//                .foregroundColor(AppColor.textPrimary)
-//                .accentColor(AppColor.borderPrimary)
-//                .keyboardType(.asciiCapable)
-//                .scrollContentBackground(.hidden)
-//                .autocapitalization(.none)
-//                .disableAutocorrection(true)
-//                .onChange(of: fieldValue) { newValue, _ in
-//                    fieldValue = String(newValue.prefix(216))
-//                }
-//                .padding(.horizontal, 16)
-//                .padding(.vertical, 18)
-//        }
     }
 }
 
@@ -332,7 +282,7 @@ struct NamePasswordBoxModel: View {
 }
 
 struct MnemonicBoxModel: View {
-    var words: String = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon art"
+    var words: String = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon art"
 //    var words: String = "zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo vote"
 
     var body: some View {
@@ -839,7 +789,7 @@ struct InAppReviewAlertModel: View {
                                 toggle.toggle()
                             }
                         }) {
-                            SecondaryButton2Model(text: "NotNow")
+                            SecondaryButton2Model(text: "NotNowButton")
                         }
                         
                         Button(action: {
@@ -1040,7 +990,7 @@ struct SuccessAlertModel: View {
                         }
                         action?()
                     }) {
-                        SecondaryButton2Model(text: "SuccessButton")
+                        SecondaryButton2Model(text: "DoneButton")
                             .padding(.bottom, 20)
                     }
                 }
@@ -1060,35 +1010,35 @@ struct EnterPasswordModel: View {
     let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
 
     var body: some View {
-        ZStack {
-
-            VStack(spacing: 0) {
-                HStack {
-                    Spacer()
-                    Image(AppImage.readTerms)
-                    Spacer()
-                }
-                .padding(.top, 20)
-                
-                VStack(alignment: .center, spacing: 30) {
-                    PasswordCheckFieldModel(titleName: "", fieldName: "VerifyPasswordHint", fieldValue: $password, isShake: $shouldShake)
-                    Button(action: {
-                        action()
-                        if !isVerify {
-                            self.impactFeedbackGenerator.impactOccurred()
-                            shouldShake.toggle()
-                            password = ""
-                        }
-                    }) {
-                        SecondaryButton2Model(text: "DecryptButton")
-                            .padding(.bottom, 20)
-                    }
-                }
+        VStack(spacing: 0) {
+            HStack {
+                Spacer()
+                Image(AppImage.lock)
+                Spacer()
             }
-            .background(AppColor.backgroundColor)
-            .cornerRadius(15)
-            .padding()
+            .padding(.top, 20)
+            
+            VStack(alignment: .center, spacing: 20) {
+                PasswordCheckFieldModel(titleName: "", fieldName: "", fieldValue: $password, isShake: $shouldShake)
+                Button(action: {
+                    action()
+                    if !isVerify {
+                        self.impactFeedbackGenerator.impactOccurred()
+                        shouldShake.toggle()
+                        password = ""
+                    }
+                }) {
+                    SecondaryButton2Model(text: "DecryptButton")
+                        .opacity(!(password.count < 6) ? 1 : 0.2)
+                }
+                .padding(.bottom, 20)
+                .disabled(password.count < 6)
+                
+            }
         }
+        .background(AppColor.backgroundColor)
+        .cornerRadius(15)
+        .padding(.horizontal)
     }
 }
 // MARK: - Environment Set
@@ -1199,24 +1149,283 @@ struct VideoPlayerView: UIViewControllerRepresentable {
 }
 
 // MARK: - Test View
-
-
-struct Test: View {
-    @State private var hearts: [UUID] = []
-    @State private var timer: Timer?
-
+struct CopyButtonModel: View {
+    let image: String
+    let title: LocalizedStringKey
+    
     var body: some View {
-        VStack {
-            Text("Test")
+        HStack {
+            Image(systemName: image)
+            Text(title)
         }
+        .font(AppFont.fontCaption)
+        .foregroundStyle(AppColor.gradientPrimary)
+        .frame(height: 40)
+        .padding(.horizontal, 25)
+        .overlay(
+            RoundedRectangle(cornerRadius: 15)
+                .stroke(AppColor.borderSecondary, lineWidth: 2)
+        )
+        .clipShape(RoundedRectangle(cornerRadius: 15))
     }
 }
 
 
+struct AnimationButtonModel: View {
+    let image: String
+    let title: LocalizedStringKey
+    @Binding var toggle: Bool
+    @State private var progress: Double = 0.0
+    @State private var startTime: Date?
+    @State private var timer: Timer?
+    
+    var body: some View {
+        VStack {
+            HStack {
+                Image(systemName: image)
+                Text(title)
+            }
+            .font(AppFont.fontCaption)
+            .foregroundStyle(AppColor.gradientPrimary)
+            .frame(height: 40)
+            .padding(.horizontal, 25)
+            .overlay(
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(AppColor.borderSecondary, lineWidth: 2)
+                    .background(
+                        GeometryReader { geometry in
+                            RoundedRectangle(cornerRadius: 0)
+                                .fill(AppColor.gradientPrimary)
+                                .frame(width: geometry.size.width * CGFloat(progress), height: 5)
+                                .padding(.top, 35)
+                        }
+                    )
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 15))
+            .gesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged { value in
+                        if startTime == nil {
+                            startTime = Date()
+                            startFilling()
+                        }
+                    }
+                    .onEnded { _ in
+                        withAnimation {
+                            timer?.invalidate()
+                            timer = nil
+                            startTime = nil
+                            progress = 0.0
+                        }
+                    }
+            )
+        }
+    }
+
+    func startFilling() {
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+            if let startTime = startTime {
+                let elapsedTime = Date().timeIntervalSince(startTime)
+                withAnimation {
+                    progress = min(elapsedTime / 0.5, 1.0)
+                }
+                if progress >= 1.0 {
+                    timer?.invalidate()
+                    timer = nil
+                    toggle.toggle()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        withAnimation {
+                            progress = 0.0
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct WordCaseModel: View {
+    let number: String
+    let text: String
+    
+    var body: some View {
+        HStack (alignment: .center, spacing: 5) {
+            Text(number)
+                .font(AppFont.fontCaption)
+                .foregroundStyle(AppColor.textHint)
+                .frame(width: 20)
+
+            Text(text)
+                .font(AppFont.fontH4)
+                .foregroundStyle(AppColor.gradientPrimary)
+        }
+        .fixedSize(horizontal: true, vertical: false)
+        .padding(.leading, 8)
+        .padding(.trailing, 12)
+        .padding(.top, 7)
+        .padding(.bottom, 9)
+        .background(AppColor.boxBackgroundColor)
+        .cornerRadius(15)
+    }
+}
+
+
+struct ShowMnemonicModel: View {
+    var words: String
+    @State private var wordArray: [String] = []
+    var body: some View {
+            WrappingHStack(horizontalSpacing: 10) {
+                ForEach(Array(wordArray.enumerated()), id: \.offset) { (index, word) in
+                    let count = String(format: "%02d", index + 1)
+                    WordCaseModel(number: count, text: word)
+                }
+            }
+            .onAppear {
+                self.wordArray = self.words.components(separatedBy: " ").filter { !$0.isEmpty }
+            }
+    }
+}
+
+public struct OverflowGrid: Layout {
+    private var horizontalSpacing: CGFloat
+    private var verticalSpacing: CGFloat
+    public init(horizontalSpacing: CGFloat, verticalSpacing: CGFloat? = nil) {
+        self.horizontalSpacing = horizontalSpacing
+        self.verticalSpacing = verticalSpacing ?? horizontalSpacing
+    }
+
+    private struct RowSize {
+        let width: CGFloat
+        let height: CGFloat
+
+        static let empty = RowSize(width: CGFloat(0), height: CGFloat(0))
+    }
+
+    public func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let rows = generateRowSizes(subviews: subviews, proposal: proposal)
+        let rowCount = CGFloat(rows.count)
+        let combinedHeights: CGFloat = rows.reduce(CGFloat(0)) { acc, rowSize in
+            return acc + rowSize.height
+        }
+        let calculatedSize = CGSize(width: rows.max(by: { $0.width < $1.width })?.width ?? 0,
+                                    height:  combinedHeights + ((rowCount - 1) * verticalSpacing))
+        return calculatedSize
+    }
+
+    private func generateRowSizes(subviews: Subviews, proposal: ProposedViewSize) -> [RowSize] {
+        var rows = [RowSize.empty]
+        for subview in subviews {
+            let rowIndex = rows.count - 1
+            let currentRowSize = rows.last ?? .empty
+            let subviewSize = subview.dimensions(in: proposal)
+            let subviewWidth = subviewSize.width
+            let subviewHeight = subviewSize.height
+
+            // Prevent creating infinite rows if the proposed width is smaller than any subview width.
+            if currentRowSize.width == 0 {
+                rows[rowIndex] = RowSize(width: subviewWidth,
+                                         height: max(currentRowSize.height, subviewHeight))
+            } else {
+                let currentRowWidth = currentRowSize.width
+                let newWidth = currentRowWidth + horizontalSpacing + subviewWidth
+                let viewWillFit = newWidth <= (proposal.width ?? 0)
+                if viewWillFit {
+                    rows[rowIndex] = RowSize(width: newWidth, height: max(currentRowSize.height, subviewHeight))
+                } else {
+                    rows.append(RowSize(width: subviewWidth, height: subviewHeight))
+                }
+            }
+        }
+        return rows
+    }
+
+    public func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        let rows = generateRowSizes(subviews: subviews, proposal: proposal)
+        var rowIndex = 0
+        let boundsMinX = bounds.minX
+        let boundsEnd = boundsMinX + bounds.width
+        var x = boundsMinX
+        var y = bounds.minY
+        for subview in subviews {
+            let subviewSize = subview.dimensions(in: proposal)
+            let isFirstElementInRow = x == boundsMinX
+            var elementStart = isFirstElementInRow ? x : x + horizontalSpacing
+            var elementEnd = elementStart + subviewSize.width
+            if elementEnd > boundsEnd && !isFirstElementInRow {
+                elementStart = boundsMinX
+                elementEnd = elementStart + subviewSize.width
+                x = boundsMinX
+                y += rows[rowIndex].height + verticalSpacing
+                rowIndex += 1
+            }
+            let subviewCenter = CGPoint(x: elementStart + subviewSize.width / 2, y: y + subviewSize.height / 2)
+            subview.place(
+                at: subviewCenter,
+                anchor: .center,
+                proposal: ProposedViewSize(width: subviewSize.width,
+                                           height: subviewSize.height))
+            x = elementEnd
+        }
+    }
+}
+
+private struct WrappingHStack: Layout {
+    private var horizontalSpacing: CGFloat
+    private var verticalSpacing: CGFloat
+    public init(horizontalSpacing: CGFloat, verticalSpacing: CGFloat? = nil) {
+        self.horizontalSpacing = horizontalSpacing
+        self.verticalSpacing = verticalSpacing ?? horizontalSpacing
+    }
+
+    public func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()) -> CGSize {
+        guard !subviews.isEmpty else { return .zero }
+
+        let height = subviews.map { $0.sizeThatFits(proposal).height }.max() ?? 0
+
+        var rowWidths = [CGFloat]()
+        var currentRowWidth: CGFloat = 0
+        subviews.forEach { subview in
+            if currentRowWidth + horizontalSpacing + subview.sizeThatFits(proposal).width >= proposal.width ?? 0 {
+                rowWidths.append(currentRowWidth)
+                currentRowWidth = subview.sizeThatFits(proposal).width
+            } else {
+                currentRowWidth += horizontalSpacing + subview.sizeThatFits(proposal).width
+            }
+        }
+        rowWidths.append(currentRowWidth)
+
+        let rowCount = CGFloat(rowWidths.count)
+        return CGSize(width: max(rowWidths.max() ?? 0, proposal.width ?? 0), height: rowCount * height + (rowCount - 1) * verticalSpacing)
+    }
+
+    public func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        let height = subviews.map { $0.dimensions(in: proposal).height }.max() ?? 0
+        guard !subviews.isEmpty else { return }
+        var x = bounds.minX
+        var y = height / 2 + bounds.minY
+        subviews.forEach { subview in
+            x += subview.dimensions(in: proposal).width / 2
+            if x + subview.dimensions(in: proposal).width / 2 > bounds.maxX {
+                x = bounds.minX + subview.dimensions(in: proposal).width / 2
+                y += height + verticalSpacing
+            }
+            subview.place(
+                at: CGPoint(x: x, y: y),
+                anchor: .center,
+                proposal: ProposedViewSize(
+                    width: subview.dimensions(in: proposal).width,
+                    height: subview.dimensions(in: proposal).height
+                )
+            )
+            x += subview.dimensions(in: proposal).width / 2 + horizontalSpacing
+        }
+    }
+}
+
 #Preview {
     Group {
-        Test()
+
+        ShowMnemonicModel(words: "clay absent correct dragon tumble girl ecology tag method panic such doll slice apple miss exit luxury amateur awkward card settle crowd nephew cruel")
     }
         .preferredColorScheme(.dark)
-
 }

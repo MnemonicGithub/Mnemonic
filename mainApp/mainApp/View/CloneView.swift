@@ -26,6 +26,17 @@ struct CloneView: View {
                     .ignoresSafeArea()
             }
             
+            VStack {
+                Spacer()
+
+                Text("NfcWriteHint")
+                    .font(AppFont.fontBody3)
+                    .foregroundColor(AppColor.textHint)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                    .frame(width: 360)
+            }
+            
             if isSuccess {
                 SuccessAlertModel(toggle: $isSuccess, content: "SuccessCloneContent") {
                     let inAppReviewAlert = InAppReviewAlert()
@@ -84,56 +95,12 @@ struct CloneActionView: View {
     }
 }
 
-//struct cvStartReadView: View {
-//    var body: some View {
-//        SetBackground() {
-//            VStack(alignment: .center, spacing: 30) {
-//                
-//                BackToRootButtonModel()
-//
-//            }
-//            .padding(.top, 30)
-//        }
-//        .navigationBarBackButtonHidden(true)
-//        .toolbar {
-//            ToolbarItem(placement: .topBarLeading) {
-//                ToobarBackButtonModel(title: "C2CStep1Title")
-//            }
-//        }
-//    }
-//}
-
-//struct cvStartCloneView: View {
-//    var body: some View {
-//        SetBackground() {
-//            VStack(alignment: .center, spacing: 30) {
-//                
-//                BackToRootButtonModel()
-//
-//            }
-//            .padding(.top, 30)
-//        }
-//        .navigationBarBackButtonHidden(true)
-//        .toolbar {
-//            ToolbarItem(placement: .topBarLeading) {
-//                ToobarBackButtonModel(title: "C2CStep2Title")
-//            }
-//        }
-//    }
-//}
-
 struct CVPreviews: PreviewProvider {
     static var previews: some View {
         Group {
             CloneView()
                 .environmentObject(DataBox())
                 .preferredColorScheme(.dark)
-            
-//            cvStartReadView()
-//                .preferredColorScheme(.dark)
-//            
-//            cvStartCloneView()
-//                .preferredColorScheme(.dark)
         }
     }
 }

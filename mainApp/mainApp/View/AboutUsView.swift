@@ -114,7 +114,7 @@ struct AboutUsView: View {
                                     Button(action: {
                                         UIApplication.shared.open(websiteURL)
                                     }) {
-                                        Image(systemName: "envelope.circle")
+                                        Image(systemName: AppImage.contactUs)
                                             .resizable()
                                             .scaledToFit()
                                             .frame(width: 35, height: 35)
@@ -145,31 +145,28 @@ struct AboutUsView: View {
                                 }
                             } label: {
                                 HStack {
-                                    Image(systemName: "doc.on.clipboard")
+                                    Image(systemName: AppImage.copyToClipboard)
                                     Text(AppLink.address)
-
                                         .underline()
                                         .multilineTextAlignment(.center)
                                 }
-                                .foregroundColor(AppColor.textPoint)
+                                .foregroundStyle(AppColor.gradientPrimary)
                                 .font(AppFont.fontCaption)
                                 .frame(width: 200)
                             }
                         }
                         .padding()
                         
-                        ZStack {
-                            ForEach(hearts, id: \.self) { heartID in
-                                Image(systemName: "heart.fill")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: CGFloat.random(in: 10...30))
-                                    .foregroundColor(Color.random)
-                                    .opacity(0.8)
-                                    .scaleEffect(1)
-                                    .offset(x: CGFloat.random(in: -200...200), y: CGFloat.random(in: -400...50))
-                                    .id(heartID)
-                            }
+                        ForEach(hearts, id: \.self) { heartID in
+                            Image(systemName:AppImage.buyMeCoffee)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: CGFloat.random(in: 10...30))
+                                .foregroundColor(Color.random)
+                                .opacity(0.8)
+                                .scaleEffect(1)
+                                .offset(x: CGFloat.random(in: -200...200), y: CGFloat.random(in: -400...50))
+                                .id(heartID)
                         }
                     }
                 }

@@ -66,55 +66,107 @@ struct RestoreActionView: View {
             Spacer()
         }
         .alert(isPresented: $isUnPackFailed) {
-            Alert(title: Text("JsonUpackFailedTitle"), message: Text("JsonUpackFailedContent"), dismissButton: .default(Text("Done")))
+            Alert(title: Text("JsonUpackFailedTitle"), message: Text("JsonUpackFailedContent"), dismissButton: .default(Text("DoneButton")))
         }
     }
 }
-
-//struct rvStartReadView: View {
-//    var body: some View {
-//        BackToRootButtonModel()
-//    }
-//}
 
 struct rvShowMnemonicView: View {
     @EnvironmentObject var router: Router
     @EnvironmentObject var dataBox: DataBox
     private var dataAlgorithm = DataAlgorithm()
-    @State var isDone: Bool = false
+    
+    @State var isNoCollectDataAlert: Bool = false
     @State var isDecryptSuccess: Bool = false
+    
+    @FocusState private var isStartEditing: Bool
     @State var password: String = ""
     @State private var plainText: String = ""
+    
+    @State private var showCopyAlert: Bool = false
+    let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .soft)
+    @State private var copyIcons: [UUID] = []
+    @State private var timer: Timer?
 
     var body: some View {
         ScrollView {
-            if isDecryptSuccess {
-                VStack(alignment: .leading, spacing: 30) {
-                    HStack(alignment: .center) {
+            VStack (alignment: .leading, spacing: 10){
+                HStack {
+                    Group {
+                        Text("C2WStep2Title")
+                        Button {
+                            isNoCollectDataAlert.toggle()
+                        } label: {
+                            Image(systemName: AppImage.noCollectDataAlert)
+                        }
+                    }
+                    .foregroundColor(AppColor.textPrimary)
+                    .font(AppFont.fontH2)
+                    .kerning(1)
+                }
+                
+                VStack (alignment: .leading, spacing: 20) {
+                    Text(isDecryptSuccess ? "NeverShareHint" : "EnterPasswordDescription")
+                        .font(AppFont.fontH4)
+                        .foregroundColor(AppColor.textHint)
+                    
+                    if isDecryptSuccess {
+                        VStack(alignment: .leading, spacing: 20) {
+                            ShowMnemonicModel(words: plainText)
+                            ZStack {
+                                Button {
+                                    UIPasteboard.general.string = plainText
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+                                        UIPasteboard.general.string = ""
+                                    }
+                                    
+                                    impactFeedbackGenerator.impactOccurred()
+                                    withAnimation(.spring(response: 0.5, dampingFraction: 0.2, blendDuration: 10)) {
+                                        copyIcons.append(UUID())
+                                    }
+                                    
+                                    self.timer?.invalidate()
+                                    self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
+                                        copyIcons.removeAll()
+                                    }
+                                } label: {
+                                    CopyButtonModel(image: AppImage.copyToClipboard, title: "Copy for 60s")
+                                }
+                                
+                                ForEach(copyIcons, id: \.self) { ID in
+                                    Image(systemName: AppImage.copyToClipboard)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: CGFloat.random(in: 10...20))
+                                        .foregroundColor(Color.random)
+                                        .opacity(0.8)
+                                        .scaleEffect(1)
+                                        .offset(x: CGFloat.random(in: -50...300), y: CGFloat.random(in: -400...50))
+                                        .id(ID)
+                                        .zIndex(2)
+                                }
+                            }
+                        }
+                        
                         Spacer()
                         
-                        VStack {
-                            NamePasswordBoxModel(name: dataBox.getCardName(), password: password)
-                            MnemonicBoxModel(words: plainText)
+                        Button(action: {
+                            router.path = .init()
+                        }) {
+                            SecondaryInteractiveButtonModel(text: "Finish", isActive: $isDecryptSuccess)
                         }
-
-                        Spacer()
-                    }
-                    Button(action: {
-                        router.path = .init()
-                    }) {
-                        SecondaryInteractiveButtonModel(text: "Finish", isActive: $isDecryptSuccess)
-                    }
-                }
-                .padding(.top, 30)
-            } else {
-                EnterPasswordModel(isVerify: $isDecryptSuccess, password: $password) {
-                    withAnimation {
-                        (isDecryptSuccess, plainText) = dataAlgorithm.toPlain(cardName: dataBox.getCardName(), password: password, cipherText: dataBox.getMnemonic())
+                    } else {
+                        EnterPasswordModel(isVerify: $isDecryptSuccess, password: $password) {
+                            withAnimation {
+                                (isDecryptSuccess, plainText) = dataAlgorithm.toPlain(cardName: dataBox.getCardName(), password: password, cipherText: dataBox.getMnemonic())
+                            }
+                        }
+                        .focused($isStartEditing)
+                        .zIndex(1)
                     }
                 }
-                .zIndex(1)
             }
+            .padding(.horizontal)
         }
         .background {
             Image(AppImage.actionWallpaper)
@@ -123,10 +175,18 @@ struct rvShowMnemonicView: View {
                 .ignoresSafeArea()
         }
         .navigationBarBackButtonHidden(true)
+        .scrollIndicators(.hidden)
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                ToobarBackButtonModel(title: "C2WStep2Title")
+            ToolbarItem(placement: .topBarLeading) {
+                ToobarBackButtonModel()
             }
+        }
+        .alert(isPresented: $isNoCollectDataAlert) {
+            Alert(title: Text("NoCollectDataAlertTitle"), message: Text("NoCollectDataAlertContent"), dismissButton: .default(Text("GotItButton")))
+        }
+        .onAppear {
+            isStartEditing.toggle()
+            impactFeedbackGenerator.prepare()
         }
         .onDisappear {
             dataAlgorithm.clearData()
@@ -138,7 +198,6 @@ struct RVPreviews: PreviewProvider {
     static var previews: some View {
         Group {
             RestoreView()
-//            rvStartReadView()
             rvShowMnemonicView()
         }
         .environmentObject(DataBox())

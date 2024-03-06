@@ -26,6 +26,17 @@ struct BackupView: View {
                     .ignoresSafeArea()
             }
             
+            VStack {
+                Spacer()
+
+                Text("NfcWriteHint")
+                    .font(AppFont.fontBody3)
+                    .foregroundColor(AppColor.textHint)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                    .frame(width: 360)
+            }
+            
             if isSuccess {
                 SuccessAlertModel(toggle: $isSuccess, content: "SuccessBackupContent") {
                     let inAppReviewAlert = InAppReviewAlert()
@@ -49,7 +60,6 @@ struct BackupActionView: View {
     var dataAlgorithm = DataAlgorithm()
     var nfcOperationsHandler = NfcOperationsHandler()
     @State var isEncryptSuccess: Bool = false
-
     @Binding var toggle: Bool
     @State var isActionFailed: Bool = false
     @State var isOpenGudieView: Bool = false
@@ -119,7 +129,7 @@ struct BackupActionView: View {
             GuideView()
         }
         .alert(isPresented: $isActionFailed) {
-            Alert(title: Text("BackupFailedTitle"), message: Text("BackupFailedContent"), dismissButton: .default(Text("Done")))
+            Alert(title: Text("BackupFailedTitle"), message: Text("BackupFailedContent"), dismissButton: .default(Text("DoneButton")))
         }
     }
 }
@@ -129,6 +139,7 @@ struct bvSetMnemonicView: View {
     @EnvironmentObject var dataBox: DataBox
     @ObservedObject private var viewModel = Bip39ValidatorViewModel()
     @State var isNoCollectDataAlert: Bool = false
+    @FocusState private var isStartEditing: Bool
 
     var body: some View {
         ScrollView {
@@ -153,18 +164,20 @@ struct bvSetMnemonicView: View {
                         .foregroundColor(AppColor.textHint)
                     
                     MnemonicFieldModel(primaryHint: "MnemonicHint", fieldValue: $viewModel.mnemonic, isDone: $viewModel.isValidMnemonic)
+                        .focused($isStartEditing)
                         .onReceive(viewModel.$isValidMnemonic) { isValid in
                             if isValid {
                                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
                             }
                         }
+                    
                     Button(action: {
                         dataBox.actionW2CStep1.toggle()
                         let words = viewModel.mnemonic.components(separatedBy: " ").filter { !$0.isEmpty }
                         dataBox.setMnemonic(words.joined(separator: " "))
                         dismiss()
                     }) {
-                        SecondaryInteractiveButtonModel(text: "NextStep", isActive: $viewModel.isValidMnemonic)
+                        SecondaryInteractiveButtonModel(text: "NextStepButton", isActive: $viewModel.isValidMnemonic)
                     }
                     .disabled(!viewModel.isValidMnemonic)
                 }
@@ -179,6 +192,7 @@ struct bvSetMnemonicView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
         }
+        .scrollIndicators(.hidden)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -189,9 +203,10 @@ struct bvSetMnemonicView: View {
             }
         }
         .alert(isPresented: $isNoCollectDataAlert) {
-            Alert(title: Text("NoCollectDataAlertTitle"), message: Text("NoCollectDataAlertContent"), dismissButton: .default(Text("GotIt")))
+            Alert(title: Text("NoCollectDataAlertTitle"), message: Text("NoCollectDataAlertContent"), dismissButton: .default(Text("GotItButton")))
         }
         .onAppear {
+            isStartEditing.toggle()
             dataBox.actionW2CStep1 = viewModel.isValidMnemonic
         }
         .onDisappear {
@@ -259,6 +274,7 @@ struct bvSetPasswordView: View {
     @EnvironmentObject var dataBox: DataBox
     @ObservedObject private var viewModel = UserInfoViewModel()
     @State var isNoCollectDataAlert: Bool = false
+    @FocusState private var isStartEditing: Bool
 
     var body: some View {
         ScrollView {
@@ -276,12 +292,15 @@ struct bvSetPasswordView: View {
                     .font(AppFont.fontH2)
                     .kerning(1)
                 }
+                
                 VStack(alignment: .leading, spacing: 20) {
-                    Text("PasswordDescribe")
+                    Text("PasswordDescription")
                         .font(AppFont.fontH4)
                         .foregroundColor(AppColor.textHint)
                     
                     PasswordFieldModel(titleName: "CreatePassword", fieldName: "", fieldValue: $viewModel.password, primaryHint: "PasswordHint", isDone: $viewModel.isPasswordPass)
+                        .focused($isStartEditing)
+
                     PasswordFieldModel(titleName: "ConfirmPassword", fieldName: "", fieldValue: $viewModel.passwordConfirm, primaryHint: "ConfirmPasswordHint", isDone: $viewModel.isPasswordConfirmValid)
                     
                     Button(action: {
@@ -291,7 +310,7 @@ struct bvSetPasswordView: View {
                         dataBox.actionW2CStep2.toggle()
                         dismiss()
                     }) {
-                        SecondaryInteractiveButtonModel(text: "NextStep", isActive: $viewModel.isPasswordConfirmValid)
+                        SecondaryInteractiveButtonModel(text: "NextStepButton", isActive: $viewModel.isPasswordConfirmValid)
                     }
                     .padding(.top, 5)
                     .disabled(!viewModel.isPasswordConfirmValid)
@@ -308,15 +327,17 @@ struct bvSetPasswordView: View {
                 .ignoresSafeArea()
         }
         .navigationBarBackButtonHidden(true)
+        .scrollIndicators(.hidden)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 ToobarBackButtonModel()
             }
         }
         .alert(isPresented: $isNoCollectDataAlert) {
-            Alert(title: Text("NoCollectDataAlertTitle"), message: Text("NoCollectDataAlertContent"), dismissButton: .default(Text("GotIt")))
+            Alert(title: Text("NoCollectDataAlertTitle"), message: Text("NoCollectDataAlertContent"), dismissButton: .default(Text("GotItButton")))
         }
         .onAppear{
+            isStartEditing.toggle()
             dataBox.actionW2CStep2 = viewModel.isAllPass
         }
         .onDisappear {
@@ -325,114 +346,12 @@ struct bvSetPasswordView: View {
     }
 }
 
-//struct bvStartBackView: View {
-//    @EnvironmentObject var router: Router
-//    @EnvironmentObject var dataBox: DataBox
-//    private var dataAlgorithm = DataAlgorithm()
-//    private var nfcOperationsHandler = NfcOperationsHandler()
-//    @State var isEncryptSuccess: Bool = false
-//    @State private var cipherText: String = ""
-//    @State private var plainText: String = ""
-//    @State var isOops: Bool = false
-//    @State var isSuccess: Bool = false
-//    
-//    var body: some View {
-//        ZStack {
-//            ScrollView {
-//                VStack (alignment: .leading, spacing: 10){
-//                    Text("W2CStep3Title")
-//                        .foregroundColor(AppColor.textPrimary)
-//                        .font(AppFont.fontH2)
-//                        .kerning(1)
-//                    
-//                    if isEncryptSuccess {
-//                        VStack(alignment: .leading, spacing: 30) {
-//                            Spacer()
-//                            
-//                            HStack(alignment: .center) {
-//                                Spacer()
-//                                
-//                                VStack (alignment: .trailing, spacing: 10) {
-//                                    NamePasswordBoxModel(name: dataBox.getCardName(), password: dataBox.getPassword())
-//                                    MnemonicBoxModel(words: plainText)
-//                                    Text("Please make sure all the information is correct.\nWe do not record any of your data.")
-//                                        .foregroundColor(AppColor.textPoint)
-//                                        .font(AppFont.fontBody3)
-//                                        .multilineTextAlignment(.trailing)
-//                                }
-//                                
-//                                Spacer()
-//                            }
-//                            
-//                            Spacer()
-//                            
-//                            Button(action: {
-//                                let cardInfo = CardInfo(version: 1, name: dataBox.getCardName(), data: cipherText)
-//                                if let data = JsonPackage.pack(cardInfo: cardInfo) {
-//                                    if (nfcOperationsHandler.startNFCWriting(rawString: data)) {
-//                                        withAnimation {
-//                                            isSuccess.toggle()
-//                                        }
-//                                    }
-//                                } else {
-//                                    isOops.toggle()
-//                                }
-//                            }) {
-//                                SecondaryInteractiveButtonModel(text: "StartBackup", isActive: $isEncryptSuccess)
-//                            }
-//                        }
-//                    }
-//                }
-//                .padding(.horizontal)
-//            }
-//            .background {
-//                Image(AppImage.actionWallpaper)
-//                    .resizable()
-//                    .scaledToFill()
-//                    .ignoresSafeArea()
-//            }
-//            .navigationBarBackButtonHidden(true)
-//            .toolbar {
-//                ToolbarItem(placement: .topBarLeading) {
-//                    ToobarBackButtonModel()
-//                }
-//            }
-//            .onAppear {
-//                (isEncryptSuccess, cipherText, plainText) = dataAlgorithm.action(cardName: dataBox.getCardName(), password: dataBox.getPassword(), words: dataBox.getMnemonic())
-//                
-//                if !isEncryptSuccess {
-//                    isOops.toggle()
-//                }
-//            }
-//            .onDisappear {
-//                dataAlgorithm.clearData()
-//            }
-//            
-//            if isOops {
-//                OopsAlertModel(toggle: $isOops) {
-//                    router.path.removeLast()
-//                }
-//            }
-//            
-//            if isSuccess {
-//                SuccessAlertModel(toggle: $isSuccess, content: "SuccessBackupContent") {
-//                    let inAppReviewAlert = InAppReviewAlert()
-//                    inAppReviewAlert.setIsAlert()
-//                    router.path = .init()
-//                }
-//                .zIndex(1)
-//            }
-//        }
-//    }
-//}
-
 struct BVPreviews: PreviewProvider {
     static var previews: some View {
         Group {
             BackupView()
             bvSetMnemonicView()
             bvSetPasswordView()
-            //bvStartBackView()
         }
         .environmentObject(DataBox())
         .preferredColorScheme(.dark)

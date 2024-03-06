@@ -8,19 +8,18 @@
 
 // Button
 "GetStarted" = "Get Started";
-"NextStep" = "Next Step";
 "StartBackup" = "Let's Backup!";
-"NotNow" = "Not Now";
+"NextStepButton" = "Next Step";
+"NotNowButton" = "Not Now";
 "UpdateButton" = "UPDATE APP";
 "TermsButton" = "I'm read!";
 "OopsButton" = "Try again";
-"SuccessButton" = "Done";
 "InAppreviewButton" = "Sure!";
 "DecryptButton" = "Decrypt";
 "CheckCardButton" = "Check";
-"GotIt" = "Got it!";
-"CopyTitle" = "Copied!";
-"Done" = "Done";
+"GotItButton" = "Got it!";
+"CopyButton" = "Copy to clipboard";
+"DoneButton" = "Done";
 
 // Welcome Page
 "SloganFront" = "Your\nRecovery Words";
@@ -46,6 +45,7 @@
 "GuideStep3Title" = "I'm aleady have a card.";
 "GuideStep3Content" = "If you already have a card but don’t know if it can be used, please click the button to check it now.";
 "GudieNoteContent" = "Kindly be aware that the backup action will overwrite the original contents of the card and switch it to read-only mode.  Mnemonic never records any user data. Please ensure to store the card in a secure place after completing the backup.";
+"NfcWriteHint" = "Kindly be aware that the backup action will overwrite the original contents of the card and switch it to read-only mode.";
 
 // About Us Page
 "AboutTitle1" = "New Idea";
@@ -76,7 +76,7 @@ We are not looking to replace existing methods, but to provide additional suppor
 "C2WStep1Title" = "Read the Card";
 "C2WStep1Content" = "Bring your NFC card close to your iPhone and wait for the data to be read.";
 "C2WStep2Title" = "Decrypt the Card";
-"C2WStep2Content" = "Authenticate and decrypt your recovery words by enter the password.";
+"C2WStep2Content" = "Never share your recovery words with anyone. We will never ask for your recovery words.";
 
 // Alert
 "UpdateTitle" = "Hi There!";
@@ -98,18 +98,22 @@ We are not looking to replace existing methods, but to provide additional suppor
 "JsonUpackFailedContent" = "The data failed to unpack. Please ensure that the card is correct and try again.";
 "BackupFailedTitle" = "Backup Failed";
 "BackupFailedContent" = "Failed to encrypt or pack. Please ensure that the information is correct and try again.";
+"C2WStep2PasswordContent" = "Please enter the Card Password to decrypt the data to your recovery words.";
+"C2WStep2NeverShareContent" = "Never share your recovery words with anyone. We will never ask for your recovery words.";
 
 // TextFiled
 "EnterMnemonic" ="This is a 12, 15, 18, 21 or 24 words you were given when you created your previous wallet.";
 "MnemonicHint" = "Each word should be separated by a single space. \nNo numbers, special characters or line breaks.";
 "SetCardName" = "Choose a Name";
 "CardNameHint" = "Card name should be between 4 and 16 characters.";
-"PasswordDescribe" = "Your recovery words will be encrypted into a cipher with the password you create.";
+"PasswordDescription" = "Your recovery words will be encrypted into a cipher with the password you create.";
 "CreatePassword" = "Password";
 "ConfirmPassword" = "Confirm the Password";
 "PasswordHint" = "Password is between 8 and 16 characters long.";
 "ConfirmPasswordHint" = "Please make sure the password is match";
 "VerifyPasswordHint" = "Please enter the Password.";
+"EnterPasswordDescription" = "Please enter the Card Password to decrypt the data to your recovery words.";
+"NeverShareHint" = "Never share your recovery words with anyone. We will never ask for your recovery words.";
 
 // NFC Alert
 "NfcReadyReadAlert" = "Hold your iPhone near the NFC card and wait for a moment to read.";

@@ -126,14 +126,15 @@ extension Color {
 
 enum ColorSet {
     static let gradientClear: LinearGradient = LinearGradient(colors: [Color.clear, Color.clear], startPoint: .topLeading, endPoint: .bottomTrailing)
+    
     static let gradientGreen: LinearGradient =
     LinearGradient(stops: [
         Gradient.Stop(color: Color(red: 0.87, green: 1, blue: 0.7), location: 0.01),
         Gradient.Stop(color: Color(red: 0.84, green: 0.98, blue: 0.47), location: 0.45),
         Gradient.Stop(color: Color(red: 0.82, green: 0.98, blue: 0.49), location: 0.50),
         Gradient.Stop(color: Color(red: 0.66, green: 0.96, blue: 0.71), location: 1.00),],
-        startPoint: UnitPoint(x: 0.42, y: -0.51),
-        endPoint: UnitPoint(x: 0.58, y: 1.51))
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing)
     
     static let gradientGray: LinearGradient = LinearGradient(colors: [ColorSet.neutralGray, ColorSet.neutralGray], startPoint: .topLeading, endPoint: .bottomTrailing)
     static let gradientPeach: LinearGradient = LinearGradient(colors: [ColorSet.peach, ColorSet.peach], startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -180,6 +181,9 @@ enum AppImage {
     static let sheetDismiss: String = "chevron.down.circle.fill"
     static let reviewStart: String = "star.fill"
     static let noCollectDataAlert: String = "lock.shield.fill"
+    static let copyToClipboard: String = "doc.on.clipboard"
+    static let buyMeCoffee: String = "heart.fill"
+    static let contactUs: String = "envelope.circle"
     
     // Illustration
     static let inAppReview: String = "review_illustration"
@@ -187,6 +191,7 @@ enum AppImage {
     static let readTerms: String = "terms_illustration"
     static let oops: String = "oops_illustration"
     static let success: String = "success_illustration"
+    static let lock: String = "lock_illustration"
     static let landingWallpaper: String = "landing_illustration"
     static let landingW2C: String = "wc_icon"
     static let landingC2C: String = "cc_icon"
