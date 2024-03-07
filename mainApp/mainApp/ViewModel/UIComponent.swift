@@ -247,93 +247,6 @@ struct TextEditorModel: View {
     }
 }
 
-// MARK: - Show Box
-
-struct NamePasswordBoxModel: View {
-    var name: String = "andy"
-    var password: String = "Have1Ncie7Day"
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 15) {
-            HStack {
-                Text("Card Name:")
-                    .font(AppFont.fontH4)
-                    .foregroundStyle(AppColor.textPoint)
-                    .frame(width: 90, alignment: .leading)
-                Text(name)
-                    .font(AppFont.fontH4)
-                    .foregroundStyle(AppColor.textPrimary)
-                    .frame(width: 140, alignment: .leading)
-            }
-            
-            HStack {
-                Text("Password:")
-                    .font(AppFont.fontH4)
-                    .foregroundStyle(AppColor.textPoint)
-                    .frame(width: 90, alignment: .leading)
-                Text(password)
-                    .font(AppFont.fontH4)
-                    .foregroundStyle(AppColor.textPrimary)
-                    .frame(width: 140, alignment: .leading)
-            }
-        }
-        .frame(width: 320)
-        .padding(.vertical, 15)
-        .background(AppColor.boxBackgroundColor)
-        .clipShape(RoundedRectangle(cornerRadius: 25))
-    }
-}
-
-struct MnemonicBoxModel: View {
-    var words: String = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon art"
-//    var words: String = "zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo vote"
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 15) {
-            ForEach(Array(pairWords.enumerated()), id: \.offset) { index, pair in
-                HStack(spacing: 25) {
-                    ForEach(pair.indices, id: \.self) { pairIndex in
-                        HStack (spacing: 3){
-                            Text("\(index * 2 + pairIndex + 1).")
-                                .font(AppFont.fontH4)
-                                .foregroundStyle(AppColor.textPoint)
-                                .frame(width: 30, alignment: .leading)
-                            Text(pair[pairIndex])
-                                .font(AppFont.fontH4)
-                                .foregroundStyle(AppColor.textPrimary)
-                                .frame(width: 80, alignment: .leading)
-                        }
-                    }
-                }
-            }
-        }
-        .frame(width: 320)
-        .padding(.vertical, 20)
-        .background(AppColor.boxBackgroundColor)
-        .clipShape(RoundedRectangle(cornerRadius: 25))
-    }
-    
-    private var pairWords: [[String]] {
-        let allWords = words.components(separatedBy: " ")
-        var pairs: [[String]] = []
-        var pair: [String] = []
-        
-        for word in allWords {
-            pair.append(word)
-            if pair.count == 2 {
-                pairs.append(pair)
-                pair = []
-            }
-        }
-        
-        if !pair.isEmpty {
-            pairs.append(pair)
-        }
-        
-        return pairs
-    }
-}
-
 // MARK: - Model and Box
 
 struct SecondaryInteractiveButtonModel: View {
@@ -1051,18 +964,6 @@ struct EnterPasswordModel: View {
 }
 // MARK: - Environment Set
 
-struct SetBackground<Content: View>: View {
-    var view: () -> Content
-
-    var body: some View {
-        ZStack {
-            AppColor.backgroundColor
-                .ignoresSafeArea()
-            view()
-        }
-    }
-}
-
 struct ToobarBackButtonModel: View {
     @Environment(\.dismiss) var dismiss
     var title: LocalizedStringKey = ""
@@ -1128,35 +1029,6 @@ struct BackToRootButtonModel: View {
     }
 }
 
-// MARK: - Video View
-
-struct VideoPlayerView: UIViewControllerRepresentable {
-    var videoURL: URL
-    
-    func makeUIViewController(context: Context) -> AVPlayerViewController {
-        let player = AVPlayer(url: videoURL)
-        let playerViewController = AVPlayerViewController()
-        playerViewController.player = player
-        playerViewController.showsPlaybackControls = false
-
-        // Set AVAudioSession category to ambient
-        try? AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default)
-        
-        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: player.currentItem, queue: nil) { (_) in
-            player.seek(to: .zero)
-            player.play()
-        }
-        
-        player.play()
-        return playerViewController
-    }
-    
-    func updateUIViewController(_ uiViewController: AVPlayerViewController, context: Context) {
-        // Update the view controller if needed
-    }
-}
-
-// MARK: - Test View
 struct CopyButtonModel: View {
     let image: String
     let title: LocalizedStringKey
@@ -1177,7 +1049,6 @@ struct CopyButtonModel: View {
         .clipShape(RoundedRectangle(cornerRadius: 15))
     }
 }
-
 
 struct AnimationButtonModel: View {
     let image: String
@@ -1277,12 +1148,11 @@ struct WordCaseModel: View {
     }
 }
 
-
 struct ShowMnemonicModel: View {
     var words: String
     @State private var wordArray: [String] = []
     var body: some View {
-            WrappingHStack(horizontalSpacing: 10) {
+            OverflowGrid(horizontalSpacing: 10) {
                 ForEach(Array(wordArray.enumerated()), id: \.offset) { (index, word) in
                     let count = String(format: "%02d", index + 1)
                     WordCaseModel(number: count, text: word)
@@ -1293,6 +1163,49 @@ struct ShowMnemonicModel: View {
             }
     }
 }
+
+// MARK: - Video View
+
+struct VideoPlayerView: UIViewControllerRepresentable {
+    var videoURL: URL
+    
+    func makeUIViewController(context: Context) -> AVPlayerViewController {
+        let player = AVPlayer(url: videoURL)
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        playerViewController.showsPlaybackControls = false
+
+        // Set AVAudioSession category to ambient
+        try? AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default)
+        
+        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: player.currentItem, queue: nil) { (_) in
+            player.seek(to: .zero)
+            player.play()
+        }
+        
+        player.play()
+        return playerViewController
+    }
+    
+    func updateUIViewController(_ uiViewController: AVPlayerViewController, context: Context) {
+        // Update the view controller if needed
+    }
+}
+
+// MARK: - Fix Hide navigation bar button without losing swipe back gesture in SwiftUI
+
+extension UINavigationController: UIGestureRecognizerDelegate {
+    override open func viewDidLoad() {
+        super.viewDidLoad()
+        interactivePopGestureRecognizer?.delegate = self
+    }
+    
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return viewControllers.count > 1
+    }
+}
+
+// MARK: - Replaces the issue that LazyVstack cannot automatically wrap lines  in SwiftUI
 
 public struct OverflowGrid: Layout {
     private var horizontalSpacing: CGFloat
@@ -1377,58 +1290,7 @@ public struct OverflowGrid: Layout {
     }
 }
 
-private struct WrappingHStack: Layout {
-    private var horizontalSpacing: CGFloat
-    private var verticalSpacing: CGFloat
-    public init(horizontalSpacing: CGFloat, verticalSpacing: CGFloat? = nil) {
-        self.horizontalSpacing = horizontalSpacing
-        self.verticalSpacing = verticalSpacing ?? horizontalSpacing
-    }
-
-    public func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()) -> CGSize {
-        guard !subviews.isEmpty else { return .zero }
-
-        let height = subviews.map { $0.sizeThatFits(proposal).height }.max() ?? 0
-
-        var rowWidths = [CGFloat]()
-        var currentRowWidth: CGFloat = 0
-        subviews.forEach { subview in
-            if currentRowWidth + horizontalSpacing + subview.sizeThatFits(proposal).width >= proposal.width ?? 0 {
-                rowWidths.append(currentRowWidth)
-                currentRowWidth = subview.sizeThatFits(proposal).width
-            } else {
-                currentRowWidth += horizontalSpacing + subview.sizeThatFits(proposal).width
-            }
-        }
-        rowWidths.append(currentRowWidth)
-
-        let rowCount = CGFloat(rowWidths.count)
-        return CGSize(width: max(rowWidths.max() ?? 0, proposal.width ?? 0), height: rowCount * height + (rowCount - 1) * verticalSpacing)
-    }
-
-    public func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
-        let height = subviews.map { $0.dimensions(in: proposal).height }.max() ?? 0
-        guard !subviews.isEmpty else { return }
-        var x = bounds.minX
-        var y = height / 2 + bounds.minY
-        subviews.forEach { subview in
-            x += subview.dimensions(in: proposal).width / 2
-            if x + subview.dimensions(in: proposal).width / 2 > bounds.maxX {
-                x = bounds.minX + subview.dimensions(in: proposal).width / 2
-                y += height + verticalSpacing
-            }
-            subview.place(
-                at: CGPoint(x: x, y: y),
-                anchor: .center,
-                proposal: ProposedViewSize(
-                    width: subview.dimensions(in: proposal).width,
-                    height: subview.dimensions(in: proposal).height
-                )
-            )
-            x += subview.dimensions(in: proposal).width / 2 + horizontalSpacing
-        }
-    }
-}
+// MARK: - Preview
 
 #Preview {
     Group {

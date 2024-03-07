@@ -74,16 +74,3 @@ public struct PathInfo {
         }
     }
 }
-
-// MARK: - Fix Hide navigation bar button without losing swipe back gesture in SwiftUI
-
-extension UINavigationController: UIGestureRecognizerDelegate {
-    override open func viewDidLoad() {
-        super.viewDidLoad()
-        interactivePopGestureRecognizer?.delegate = self
-    }
-    
-    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return viewControllers.count > 1
-    }
-}
