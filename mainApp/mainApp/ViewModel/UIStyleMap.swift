@@ -203,6 +203,7 @@ enum AppImage {
     // Icon
     static let guide: String = "guide"
     static let guidePageIcon: String = "guide_lightgreen"
+    static let guidePageLine: String = "guide_dot"
     static let guidePage: String = "guide_background"
     static let aboutUs: String = "about_us"
     static let showPassword: String = "eye_open"

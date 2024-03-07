@@ -1294,7 +1294,6 @@ public struct OverflowGrid: Layout {
 
 #Preview {
     Group {
-
         ShowMnemonicModel(words: "clay absent correct dragon tumble girl ecology tag method panic such doll slice apple miss exit luxury amateur awkward card settle crowd nephew cruel")
     }
         .preferredColorScheme(.dark)

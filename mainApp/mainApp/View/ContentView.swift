@@ -59,7 +59,7 @@ struct ContentView: View {
                 LogoView()
                     .zIndex(3)
                     .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             withAnimation(.easeInOut) {
                                 showLogo.toggle()
                             }

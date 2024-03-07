@@ -35,7 +35,7 @@ struct AboutUsView: View {
                             
                             VStack (alignment: .leading, spacing: 10){
                                 Text("AboutTitle1")
-                                    .foregroundStyle(AppColor.textPrimary)
+                                    .foregroundStyle(AppColor.gradientPrimary)
                                     .font(AppFont.fontH2)
                                 Text("AboutContent1")
                                     .foregroundStyle(AppColor.textPrimary)
@@ -59,7 +59,7 @@ struct AboutUsView: View {
                             Spacer()
                             
                             Image(AppImage.aboutIcon2)
-                                .opacity(0.4)
+                                .opacity(0.3)
                                 .padding(.horizontal)
                         }
                         .overlay(alignment: .bottom) {
@@ -72,7 +72,7 @@ struct AboutUsView: View {
                             HStack {
                                 VStack (alignment: .leading, spacing: 10){
                                     Text("AboutTitle2")
-                                        .foregroundStyle(AppColor.textPrimary)
+                                        .foregroundStyle(AppColor.gradientPrimary)
                                         .font(AppFont.fontH2)
                                     Text("AboutContent2")
                                         .foregroundStyle(AppColor.textPrimary)
@@ -87,12 +87,12 @@ struct AboutUsView: View {
                     Group {
                         HStack(alignment: .lastTextBaseline) {
                             Image(AppImage.aboutIcon3)
-                                .opacity(0.8)
+                                .opacity(0.6)
                                 .padding(.horizontal)
                             
                             VStack (alignment: .leading, spacing: 10){
                                 Text("AboutTitle3")
-                                    .foregroundStyle(AppColor.textPrimary)
+                                    .foregroundStyle(AppColor.gradientPrimary)
                                     .font(AppFont.fontH2)
                                 Text("AboutContent3")
                                     .foregroundStyle(AppColor.textPrimary)
@@ -125,48 +125,50 @@ struct AboutUsView: View {
                         }
                         .padding()
                         
-                        VStack (spacing: 10){
-                            Image(AppImage.aboutQRcode)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 200, height: 200)
-                                .opacity(0.8)
-                            
-                            Button {
-                                UIPasteboard.general.string = AppLink.address
-                                impactFeedbackGenerator.impactOccurred()
-                                withAnimation(.spring(response: 0.5, dampingFraction: 0.2, blendDuration: 10)) {
-                                    hearts.append(UUID())
-                                }
+                        ZStack {
+                            VStack (spacing: 10){
+                                Image(AppImage.aboutQRcode)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 200, height: 200)
+                                    .opacity(0.8)
                                 
-                                self.timer?.invalidate()
-                                self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
-                                    hearts.removeAll()
+                                Button {
+                                    UIPasteboard.general.string = AppLink.address
+                                    impactFeedbackGenerator.impactOccurred()
+                                    withAnimation(.spring(response: 0.5, dampingFraction: 0.2, blendDuration: 10)) {
+                                        hearts.append(UUID())
+                                    }
+                                    
+                                    self.timer?.invalidate()
+                                    self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
+                                        hearts.removeAll()
+                                    }
+                                } label: {
+                                    HStack {
+                                        Image(systemName: AppImage.copyToClipboard)
+                                        Text(AppLink.address)
+                                            .underline()
+                                            .multilineTextAlignment(.center)
+                                    }
+                                    .foregroundStyle(AppColor.gradientPrimary)
+                                    .font(AppFont.fontCaption)
+                                    .frame(width: 200)
                                 }
-                            } label: {
-                                HStack {
-                                    Image(systemName: AppImage.copyToClipboard)
-                                    Text(AppLink.address)
-                                        .underline()
-                                        .multilineTextAlignment(.center)
-                                }
-                                .foregroundStyle(AppColor.gradientPrimary)
-                                .font(AppFont.fontCaption)
-                                .frame(width: 200)
                             }
-                        }
-                        .padding()
-                        
-                        ForEach(hearts, id: \.self) { heartID in
-                            Image(systemName:AppImage.buyMeCoffee)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: CGFloat.random(in: 10...30))
-                                .foregroundStyle(Color.random)
-                                .opacity(0.8)
-                                .scaleEffect(1)
-                                .offset(x: CGFloat.random(in: -200...200), y: CGFloat.random(in: -400...50))
-                                .id(heartID)
+                            .padding()
+                            
+                            ForEach(hearts, id: \.self) { heartID in
+                                Image(systemName:AppImage.buyMeCoffee)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: CGFloat.random(in: 10...30))
+                                    .foregroundStyle(Color.random)
+                                    .opacity(0.8)
+                                    .scaleEffect(1)
+                                    .offset(x: CGFloat.random(in: -200...200), y: CGFloat.random(in: -400...50))
+                                    .id(heartID)
+                            }
                         }
                     }
                 }

@@ -59,7 +59,7 @@ struct GuideView: View {
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 
-                VStack(alignment: .leading, spacing: 20) {
+                VStack(alignment: .leading, spacing: 25) {
                     Group {
                         GuideLine(image: "1.circle", stepTitle: "GuideStep1Title", stepContent: "GuideStep1Content")
                         GuideLine(image: "2.circle", stepTitle: "GuideStep2Title", stepContent: "GuideStep2Content")
@@ -71,13 +71,8 @@ struct GuideView: View {
             }
             .padding(.top, 50)
             .padding(.horizontal)
-            .presentationDragIndicator(.visible)
         }
     }
-}
-
-#Preview {
-    GuideView()
 }
 
 struct GuideLine: View {
@@ -87,7 +82,6 @@ struct GuideLine: View {
     var stepContent: LocalizedStringKey
     var isCheckButton: Bool = false
     
-    
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
             VStack(alignment: .center, spacing: 10) {
@@ -95,17 +89,16 @@ struct GuideLine: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 25, height: 25)
-                    .foregroundStyle(AppColor.iconSecondary)
-                
-                Image("guide_dot")
+                    .foregroundStyle(AppColor.textHint)
+                Image(AppImage.guidePageLine)
             }
             
             VStack(alignment: .leading, spacing: 10) {
                 Text(stepTitle)
                     .font(AppFont.fontH3)
-                    .foregroundStyle(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textHint)
                 Text(stepContent)
-                    .font(AppFont.fontBody1)
+                    .font(AppFont.fontBody2)
                     .foregroundStyle(AppColor.textPrimary)
                     .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                 if isCheckButton {
@@ -119,3 +112,9 @@ struct GuideLine: View {
         }
     }
 }
+
+#Preview {
+    GuideView()
+}
+
+
