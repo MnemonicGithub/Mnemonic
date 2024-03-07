@@ -31,7 +31,7 @@ struct BackupView: View {
 
                 Text("NfcWriteHint")
                     .font(AppFont.fontBody3)
-                    .foregroundColor(AppColor.textHint)
+                    .foregroundStyle(AppColor.textHint)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                     .frame(width: 360)
@@ -116,7 +116,7 @@ struct BackupActionView: View {
                         .font(AppFont.fontBody2)
                         .underline()
                         .multilineTextAlignment(.trailing)
-                        .foregroundColor(AppColor.textHint)
+                        .foregroundStyle(AppColor.textHint)
                         .padding(.horizontal)
                 }
             }
@@ -153,7 +153,7 @@ struct bvSetMnemonicView: View {
                             Image(systemName: AppImage.noCollectDataAlert)
                         }
                     }
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
                     .font(AppFont.fontH2)
                     .kerning(1)
                 }
@@ -161,7 +161,7 @@ struct bvSetMnemonicView: View {
                 VStack(alignment: .leading, spacing: 20) {
                     Text("EnterMnemonic")
                         .font(AppFont.fontH4)
-                        .foregroundColor(AppColor.textHint)
+                        .foregroundStyle(AppColor.textHint)
                     
                     MnemonicFieldModel(primaryHint: "MnemonicHint", fieldValue: $viewModel.mnemonic, isDone: $viewModel.isValidMnemonic)
                         .focused($isStartEditing)
@@ -288,7 +288,7 @@ struct bvSetPasswordView: View {
                             Image(systemName: AppImage.noCollectDataAlert)
                         }
                     }
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
                     .font(AppFont.fontH2)
                     .kerning(1)
                 }
@@ -296,7 +296,7 @@ struct bvSetPasswordView: View {
                 VStack(alignment: .leading, spacing: 20) {
                     Text("PasswordDescription")
                         .font(AppFont.fontH4)
-                        .foregroundColor(AppColor.textHint)
+                        .foregroundStyle(AppColor.textHint)
                     
                     PasswordFieldModel(titleName: "CreatePassword", fieldName: "", fieldValue: $viewModel.password, primaryHint: "PasswordHint", isDone: $viewModel.isPasswordPass)
                         .focused($isStartEditing)

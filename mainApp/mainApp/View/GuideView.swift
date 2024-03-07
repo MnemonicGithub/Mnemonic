@@ -37,7 +37,7 @@ struct GuideView: View {
 
                 Text("GudieNoteContent")
                     .font(AppFont.fontBody3)
-                    .foregroundColor(AppColor.textHint)
+                    .foregroundStyle(AppColor.textHint)
                     .opacity(0.6)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
@@ -54,7 +54,7 @@ struct GuideView: View {
 
                     Text("GudieTitle")
                         .font(AppFont.fontH2)
-                        .foregroundColor(AppColor.textPrimary)
+                        .foregroundStyle(AppColor.textPrimary)
                         .multilineTextAlignment(.leading)
                         .fixedSize(horizontal: false, vertical: true)
                 }
@@ -95,7 +95,7 @@ struct GuideLine: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 25, height: 25)
-                    .foregroundColor(AppColor.iconSecondary)
+                    .foregroundStyle(AppColor.iconSecondary)
                 
                 Image("guide_dot")
             }
@@ -103,10 +103,10 @@ struct GuideLine: View {
             VStack(alignment: .leading, spacing: 10) {
                 Text(stepTitle)
                     .font(AppFont.fontH3)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
                 Text(stepContent)
                     .font(AppFont.fontBody1)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
                     .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                 if isCheckButton {
                     Button(action: {

@@ -25,7 +25,7 @@ struct PasswordCheckFieldModel: View {
             if titleName != "" {
                 Text(titleName)
                 .font(AppFont.fontH4)
-                .foregroundColor(AppColor.textHint)
+                .foregroundStyle(AppColor.textHint)
             }
 
             VStack(alignment: .trailing, spacing: 5) {
@@ -42,12 +42,12 @@ struct PasswordCheckFieldModel: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20, height: 20)
-                            .foregroundColor(AppColor.iconSecondary)
+                            .foregroundStyle(AppColor.iconSecondary)
                     }
                     .padding(.horizontal, 19)
                 }
                 .frame(height: 50, alignment: .leading)
-                .cornerRadius(5)
+                .clipShape(RoundedRectangle(cornerRadius: 5))
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
                         .inset(by: 0.5)
@@ -79,7 +79,7 @@ struct PasswordFieldModel: View {
         VStack(alignment: .leading, spacing: 15) {
             Text(titleName)
             .font(AppFont.fontH4)
-            .foregroundColor(AppColor.textHint)
+            .foregroundStyle(AppColor.textHint)
             VStack(alignment: .trailing, spacing: 5) {
                 HStack {
                     if isSecureToggle {
@@ -94,12 +94,12 @@ struct PasswordFieldModel: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20, height: 20)
-                            .foregroundColor(AppColor.iconSecondary)
+                            .foregroundStyle(AppColor.iconSecondary)
                     }
                     .padding(.horizontal, 19)
                 }
                 .frame(height: 50, alignment: .leading)
-                .cornerRadius(5)
+                .clipShape(RoundedRectangle(cornerRadius: 5))
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
                         .inset(by: 0.5)
@@ -109,7 +109,7 @@ struct PasswordFieldModel: View {
                 Text(primaryHint)
                     .font(AppFont.fontBody3)
                     .multilineTextAlignment(.trailing)
-                    .foregroundColor(isDone ? AppColor.textHint : AppColor.textHint)
+                    .foregroundStyle(isDone ? AppColor.textHint : AppColor.textHint)
                     .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
             }
         }
@@ -127,14 +127,14 @@ struct NormalFieldModel: View {
         VStack(alignment: .leading, spacing: 15) {
             Text(titleName)
             .font(AppFont.fontH4)
-            .foregroundColor(AppColor.textHint)
+            .foregroundStyle(AppColor.textHint)
 
             VStack(alignment: .trailing, spacing: 5) {
                 HStack {
                     TextFieldModel(fieldName: fieldName, fieldValue: $fieldValue)
                 }
                 .frame(height: 50, alignment: .leading)
-                .cornerRadius(5)
+                .clipShape(RoundedRectangle(cornerRadius: 5))
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
                         .inset(by: 0.5)
@@ -144,7 +144,7 @@ struct NormalFieldModel: View {
                 Text(primaryHint)
                     .font(AppFont.fontBody3)
                     .multilineTextAlignment(.trailing)
-                    .foregroundColor(isDone ? AppColor.textHint : AppColor.textHint)
+                    .foregroundStyle(isDone ? AppColor.textHint : AppColor.textHint)
             }
         }
     }
@@ -174,7 +174,7 @@ struct TextFieldModel: View {
     var body: some View {
         TextField(fieldName, text: $fieldValue)
             .font(AppFont.fontH4)
-            .foregroundColor(AppColor.textPrimary)
+            .foregroundStyle(AppColor.textPrimary)
             .accentColor(AppColor.textPoint)
             .padding(.horizontal)
             .keyboardType(.asciiCapable)
@@ -191,7 +191,7 @@ struct SecureFieldModel: View {
     var body: some View {
         SecureField(fieldName, text: $fieldValue)
             .font(AppFont.fontH4)
-            .foregroundColor(AppColor.textPrimary)
+            .foregroundStyle(AppColor.textPrimary)
             .accentColor(AppColor.textPoint)
             .padding(.horizontal)
             .keyboardType(.asciiCapable)
@@ -213,7 +213,7 @@ struct MnemonicFieldModel: View {
                     TextEditorModel(fieldValue: $fieldValue)
                 }
                 .frame(height: 200, alignment: .topLeading)
-                .cornerRadius(6)
+                .clipShape(RoundedRectangle(cornerRadius: 6))
                 .overlay(
                     RoundedRectangle(cornerRadius: 6)
                     .inset(by: 0.5)
@@ -223,7 +223,7 @@ struct MnemonicFieldModel: View {
                 Text(primaryHint)
                     .font(AppFont.fontBody3)
                     .multilineTextAlignment(.trailing)
-                    .foregroundColor(isDone ? AppColor.textHint : AppColor.textHint)
+                    .foregroundStyle(isDone ? AppColor.textHint : AppColor.textHint)
                     .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
             }
         }
@@ -236,7 +236,7 @@ struct TextEditorModel: View {
     var body: some View {
         TextEditor(text: $fieldValue)
             .font(AppFont.fontH3)
-            .foregroundColor(AppColor.textPrimary)
+            .foregroundStyle(AppColor.textPrimary)
             .accentColor(AppColor.textPoint)
             .keyboardType(.asciiCapable)
             .scrollContentBackground(.hidden)
@@ -258,29 +258,29 @@ struct NamePasswordBoxModel: View {
             HStack {
                 Text("Card Name:")
                     .font(AppFont.fontH4)
-                    .foregroundColor(AppColor.textPoint)
+                    .foregroundStyle(AppColor.textPoint)
                     .frame(width: 90, alignment: .leading)
                 Text(name)
                     .font(AppFont.fontH4)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
                     .frame(width: 140, alignment: .leading)
             }
             
             HStack {
                 Text("Password:")
                     .font(AppFont.fontH4)
-                    .foregroundColor(AppColor.textPoint)
+                    .foregroundStyle(AppColor.textPoint)
                     .frame(width: 90, alignment: .leading)
                 Text(password)
                     .font(AppFont.fontH4)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
                     .frame(width: 140, alignment: .leading)
             }
         }
         .frame(width: 320)
         .padding(.vertical, 15)
         .background(AppColor.boxBackgroundColor)
-        .cornerRadius(25)
+        .clipShape(RoundedRectangle(cornerRadius: 25))
     }
 }
 
@@ -296,11 +296,11 @@ struct MnemonicBoxModel: View {
                         HStack (spacing: 3){
                             Text("\(index * 2 + pairIndex + 1).")
                                 .font(AppFont.fontH4)
-                                .foregroundColor(AppColor.textPoint)
+                                .foregroundStyle(AppColor.textPoint)
                                 .frame(width: 30, alignment: .leading)
                             Text(pair[pairIndex])
                                 .font(AppFont.fontH4)
-                                .foregroundColor(AppColor.textPrimary)
+                                .foregroundStyle(AppColor.textPrimary)
                                 .frame(width: 80, alignment: .leading)
                         }
                     }
@@ -310,7 +310,7 @@ struct MnemonicBoxModel: View {
         .frame(width: 320)
         .padding(.vertical, 20)
         .background(AppColor.boxBackgroundColor)
-        .cornerRadius(25)
+        .clipShape(RoundedRectangle(cornerRadius: 25))
     }
     
     private var pairWords: [[String]] {
@@ -345,13 +345,13 @@ struct SecondaryInteractiveButtonModel: View {
             Spacer()
             Text(text)
                 .font(AppFont.fontH4)
-                .foregroundColor(isActive ? AppColor.textSecondary : AppColor.textInactive)
+                .foregroundStyle(isActive ? AppColor.textSecondary : AppColor.textInactive)
                 .padding(.horizontal, 26)
                 .padding(.vertical, 14)
             Spacer()
         }
         .background(isActive ? AppColor.gradientPrimary : AppColor.gradientClear)
-        .cornerRadius(15)
+        .clipShape(RoundedRectangle(cornerRadius: 15))
         .overlay(
             RoundedRectangle(cornerRadius: 15)
                 .stroke(isActive ? Color.clear : AppColor.borderSecondary, lineWidth: 1.5)
@@ -365,11 +365,11 @@ struct PrimaryButtonModel: View {
     var body: some View {
         Text(text)
             .font(AppFont.fontH4)
-            .foregroundColor(AppColor.textSecondary)
+            .foregroundStyle(AppColor.textSecondary)
             .padding(.horizontal, 26)
             .padding(.vertical, 14)
             .background(AppColor.gradientPrimary)
-            .cornerRadius(15)
+            .clipShape(RoundedRectangle(cornerRadius: 15))
     }
 }
 
@@ -379,11 +379,11 @@ struct SecondaryButtonModel: View {
     var body: some View {
         Text(text)
             .font(AppFont.fontH4)
-            .foregroundColor(AppColor.textPrimary)
+            .foregroundStyle(AppColor.textPrimary)
             .padding(.horizontal, 26)
             .padding(.vertical, 14)
             .background(Color.clear)
-            .cornerRadius(15)
+            .clipShape(RoundedRectangle(cornerRadius: 15))
             .overlay(
                 RoundedRectangle(cornerRadius: 15)
                     .stroke(AppColor.borderSecondary, lineWidth: 1.5)
@@ -397,11 +397,11 @@ struct PrimaryButton2Model: View {
     var body: some View {
         Text(text)
             .font(AppFont.fontH5)
-            .foregroundColor(AppColor.textSecondary)
+            .foregroundStyle(AppColor.textSecondary)
             .padding(.horizontal, 29)
             .padding(.vertical, 9)
             .background(AppColor.gradientPrimary)
-            .cornerRadius(13)
+            .clipShape(RoundedRectangle(cornerRadius: 13))
     }
 }
 
@@ -411,12 +411,12 @@ struct SecondaryButton2Model: View {
     var body: some View {
         Text(text)
             .font(AppFont.fontH5)
-            .foregroundColor(AppColor.textPrimary)
+            .foregroundStyle(AppColor.textPrimary)
             .padding(.horizontal, 29)
             .padding(.vertical, 10)
             .background(Color.clear)
             .frame(minWidth: 160)
-            .cornerRadius(13)
+            .clipShape(RoundedRectangle(cornerRadius: 13))
             .overlay(
                 RoundedRectangle(cornerRadius: 13)
                     .stroke(AppColor.borderSecondary, lineWidth: 1.5)
@@ -430,12 +430,12 @@ struct PrimaryButton3Model: View {
     var body: some View {
         Text(text)
             .font(AppFont.fontCaption)
-            .foregroundColor(AppColor.textSecondary)
+            .foregroundStyle(AppColor.textSecondary)
             .padding(.horizontal, 32)
             .padding(.vertical, 8)
             .background(AppColor.gradientPrimary)
             .frame(minWidth: 120)
-            .cornerRadius(10)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }
 
@@ -445,11 +445,11 @@ struct SecondaryButton3Model: View {
     var body: some View {
         Text(text)
             .font(AppFont.fontCaption)
-            .foregroundColor(AppColor.textPrimary)
+            .foregroundStyle(AppColor.textPrimary)
             .padding(.horizontal, 32)
             .padding(.vertical, 8)
             .background(Color.clear)
-            .cornerRadius(10)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(AppColor.borderSecondary, lineWidth: 1.5)
@@ -465,7 +465,7 @@ struct PrimaryIconButtonModel: View {
             .resizable()
             .scaledToFit()
             .frame(width: 25, height: 25)
-            .foregroundColor(AppColor.iconPrimary)
+            .foregroundStyle(AppColor.iconPrimary)
             .padding(.vertical)
     }
 }
@@ -478,7 +478,7 @@ struct SecondaryIconButtonModel: View {
             .resizable()
             .scaledToFit()
             .frame(width: 25)
-            .foregroundColor(AppColor.iconSecondary)
+            .foregroundStyle(AppColor.iconSecondary)
             .padding(.vertical)
     }
 }
@@ -494,11 +494,11 @@ struct PrimaryActionBlockModel: View {
                 Text(textTitle)
                     .font(AppFont.fontH3)
                     .kerning(1)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
 
                 Text(textContent)
                     .font(AppFont.fontBody3)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
                     .multilineTextAlignment(.leading)
             }
             Spacer()
@@ -506,7 +506,7 @@ struct PrimaryActionBlockModel: View {
         }
         .padding(.vertical, 10)
         .padding(.horizontal, 16)
-        .cornerRadius(10)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
         .overlay(
             RoundedRectangle(cornerRadius: 10)
                 .inset(by: 0.5)
@@ -527,11 +527,11 @@ struct PrimaryActionBlockNoBorderModel: View {
                 Text(textTitle)
                     .font(AppFont.fontH1)
                     .kerning(1)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
 
                 Text(textContent)
                     .font(AppFont.fontBody2)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
                     .multilineTextAlignment(.leading)
             }
             Spacer()
@@ -553,11 +553,11 @@ struct SecondaryActionBlockModel: View {
                 Text(textTitle)
                     .font(AppFont.fontH3)
                     .kerning(1)
-                    .foregroundColor(AppColor.textSecondary)
+                    .foregroundStyle(AppColor.textSecondary)
 
                 Text(textContent)
                     .font(AppFont.fontBody3)
-                    .foregroundColor(AppColor.textSecondary)
+                    .foregroundStyle(AppColor.textSecondary)
                     .multilineTextAlignment(.leading)
             }
             Spacer()
@@ -566,7 +566,7 @@ struct SecondaryActionBlockModel: View {
         .padding(.vertical, 10)
         .padding(.horizontal, 16)
         .background(AppColor.gradientPrimary)
-        .cornerRadius(10)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
         .padding(.horizontal)
     }
 }
@@ -581,46 +581,46 @@ struct PrimaryStepBlock: View {
             HStack(alignment: .center) {
                 Text(textStep)
                     .font(AppFont.fontCaption)
-                    .foregroundColor(AppColor.textSecondary)
+                    .foregroundStyle(AppColor.textSecondary)
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
                     .frame(width: 55, alignment: .center)
                     .background(AppColor.gradientPrimary)
-                    .cornerRadius(10)
-                
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+
                 Spacer()
                 
                 Image(systemName: "circle")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 25, height: 25)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
             }
             
             VStack(alignment: .leading, spacing: 5) {
                 Text(textTitle)
                     .font(AppFont.fontH3)
                     .kerning(1)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
                     .multilineTextAlignment(.leading)
 
                 HStack {
                     Text(textContent)
                         .font(AppFont.fontBody3)
-                        .foregroundColor(AppColor.textPrimary)
+                        .foregroundStyle(AppColor.textPrimary)
                         .multilineTextAlignment(.leading)
                     
                     Spacer()
                     
                     Image(systemName: "chevron.right")
                         .frame(width: 15, height: 15)
-                        .foregroundColor(AppColor.textPrimary)
+                        .foregroundStyle(AppColor.textPrimary)
                 }
             }
         }
         .padding(.vertical, 15)
         .padding(.horizontal, 20)
-        .cornerRadius(10)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
         .overlay(
             RoundedRectangle(cornerRadius: 10)
                 .inset(by: 0.5)
@@ -640,47 +640,43 @@ struct SecondaryStepBlock: View {
             HStack(alignment: .center) {
                 Text(textStep)
                     .font(AppFont.fontCaption)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
                     .frame(width: 55, alignment: .center)
                     .background(AppColor.textSecondary)
-                    .cornerRadius(10)
-                
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+
                 Spacer()
                 
                 Image(systemName: "checkmark.circle")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 25, height: 25)
-                    .foregroundColor(AppColor.textSecondary)
+                    .foregroundStyle(AppColor.textSecondary)
             }
             
             VStack(alignment: .leading, spacing: 5) {
                 Text(textTitle)
                 .font(AppFont.fontH3)
                 .kerning(1)
-                .foregroundColor(AppColor.textSecondary)
+                .foregroundStyle(AppColor.textSecondary)
                 .multilineTextAlignment(.leading)
                 
                 HStack {
                     Text(textContent)
                     .font(AppFont.fontBody3)
-                    .foregroundColor(AppColor.textSecondary)
+                    .foregroundStyle(AppColor.textSecondary)
                     .multilineTextAlignment(.leading)
 
                     Spacer()
-                    
-//                    Image(systemName: "chevron.right")
-//                        .frame(width: 15, height: 15)
-//                        .foregroundColor(AppColor.textSecondary)
                 }
             }
         }
         .padding(.vertical, 15)
         .padding(.horizontal, 20)
         .background(AppColor.gradientPrimary)
-        .cornerRadius(10)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
         .padding(.horizontal)
     }
 }
@@ -768,11 +764,11 @@ struct InAppReviewAlertModel: View {
                 VStack(alignment: .center, spacing: 15) {
                     Text("InAppreviewTitle")
                         .font(AppFont.fontH2)
-                        .foregroundColor(AppColor.textPrimary)
+                        .foregroundStyle(AppColor.textPrimary)
                     
                     Text("InAppreviewContent")
                         .font(AppFont.fontBody2)
-                        .foregroundColor(AppColor.textHint)
+                        .foregroundStyle(AppColor.textHint)
                         .multilineTextAlignment(.center)
                     
                     HStack(alignment: .center, spacing: 15) {
@@ -781,7 +777,7 @@ struct InAppReviewAlertModel: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 35, height: 35)
-                                .foregroundColor(AppColor.iconPrimary)
+                                .foregroundStyle(AppColor.iconPrimary)
                                 .padding(.vertical)
                         }
                     }
@@ -807,7 +803,7 @@ struct InAppReviewAlertModel: View {
                 }
             }
             .background(AppColor.backgroundColor)
-            .cornerRadius(15)
+            .clipShape(RoundedRectangle(cornerRadius: 15))
             .padding()
         }
         .onDisappear {
@@ -846,11 +842,11 @@ struct UpdateAlertModel: View {
                 VStack(alignment: .center, spacing: 15) {
                     Text("UpdateTitle")
                         .font(AppFont.fontH)
-                        .foregroundColor(AppColor.textPrimary)
+                        .foregroundStyle(AppColor.textPrimary)
                     
                     Text("UpdateContent")
                         .font(AppFont.fontBody2)
-                        .foregroundColor(AppColor.textHint)
+                        .foregroundStyle(AppColor.textHint)
                         .multilineTextAlignment(.center)
                     
                     Button(action: {
@@ -862,7 +858,7 @@ struct UpdateAlertModel: View {
                 }
             }
             .background(AppColor.backgroundColor)
-            .cornerRadius(15)
+            .clipShape(RoundedRectangle(cornerRadius: 15))
             .padding()
         }
     }
@@ -893,7 +889,7 @@ struct TermsAlertModel: View {
                     }) {
                         Text("\(Text("BeforeTermsOfUse")) \(Text("TermsOfUse").foregroundColor(AppColor.textPoint)) \(Text("AfterTermsOfUse"))")
                             .font(AppFont.fontBody1)
-                            .foregroundColor(AppColor.textHint)
+                            .foregroundStyle(AppColor.textHint)
                             .multilineTextAlignment(.center)
                     }
 
@@ -908,7 +904,7 @@ struct TermsAlertModel: View {
                 }
             }
             .background(AppColor.backgroundColor)
-            .cornerRadius(15)
+            .clipShape(RoundedRectangle(cornerRadius: 15))
             .padding()
         }
     }
@@ -935,10 +931,10 @@ struct OopsAlertModel: View {
                 VStack(alignment: .center, spacing: 15) {
                     Text("OopsTitle")
                         .font(AppFont.fontH)
-                        .foregroundColor(AppColor.textPrimary)
+                        .foregroundStyle(AppColor.textPrimary)
                     Text("\(Text("OopsContent"))\n\(Text("OopsHint").foregroundColor(AppColor.textPoint))")
                         .font(AppFont.fontBody2)
-                        .foregroundColor(AppColor.textHint)
+                        .foregroundStyle(AppColor.textHint)
                         .multilineTextAlignment(.center)
                     
                     Button(action: {
@@ -953,7 +949,7 @@ struct OopsAlertModel: View {
                 }
             }
             .background(AppColor.backgroundColor)
-            .cornerRadius(15)
+            .clipShape(RoundedRectangle(cornerRadius: 15))
             .padding()
         }
     }
@@ -981,10 +977,10 @@ struct SuccessAlertModel: View {
                 VStack(alignment: .center, spacing: 15) {
                     Text("SuccessTitle")
                         .font(AppFont.fontH)
-                        .foregroundColor(AppColor.textPrimary)
+                        .foregroundStyle(AppColor.textPrimary)
                     Text(content)
                         .font(AppFont.fontBody2)
-                        .foregroundColor(AppColor.textHint)
+                        .foregroundStyle(AppColor.textHint)
                         .multilineTextAlignment(.center)
                     
                     Button(action: {
@@ -999,7 +995,7 @@ struct SuccessAlertModel: View {
                 }
             }
             .background(AppColor.backgroundColor)
-            .cornerRadius(15)
+            .clipShape(RoundedRectangle(cornerRadius: 15))
             .padding()
         }
     }
@@ -1025,7 +1021,7 @@ struct EnterPasswordModel: View {
                 VStack (alignment: .center, spacing: 10){
                     Text("EnterPasswordDescription")
                         .font(AppFont.fontBody2)
-                        .foregroundColor(AppColor.textHint)
+                        .foregroundStyle(AppColor.textHint)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                     
@@ -1049,7 +1045,7 @@ struct EnterPasswordModel: View {
             }
         }
         .background(AppColor.backgroundColor)
-        .cornerRadius(15)
+        .clipShape(RoundedRectangle(cornerRadius: 15))
         .padding(.horizontal)
     }
 }
@@ -1084,12 +1080,12 @@ struct ToobarBackButtonModel: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 20, height: 20)
-                    .foregroundColor(AppColor.iconPrimary)
+                    .foregroundStyle(AppColor.iconPrimary)
                     .padding(.vertical)
             }
             
             Text(title)
-                .foregroundColor(AppColor.textPrimary)
+                .foregroundStyle(AppColor.textPrimary)
                 .font(AppFont.fontH3)
                 .kerning(1)
         }
@@ -1105,11 +1101,11 @@ struct WordListSearchButtonModel: View {
     var body: some View {
         Text(text)
             .font(AppFont.fontBody1)
-            .foregroundColor(AppColor.textPrimary)
+            .foregroundStyle(AppColor.textPrimary)
             .padding(.horizontal, 20)
             .padding(.vertical, 8)
             .background(Color.clear)
-            .cornerRadius(13)
+            .clipShape(RoundedRectangle(cornerRadius: 13))
             .overlay(
                 RoundedRectangle(cornerRadius: 13)
                     .stroke(AppColor.borderThirdary, lineWidth: 1.5)
@@ -1277,7 +1273,7 @@ struct WordCaseModel: View {
         .padding(.top, 7)
         .padding(.bottom, 9)
         .background(AppColor.boxBackgroundColor)
-        .cornerRadius(15)
+        .clipShape(RoundedRectangle(cornerRadius: 15))
     }
 }
 

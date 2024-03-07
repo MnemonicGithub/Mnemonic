@@ -35,10 +35,10 @@ struct AboutUsView: View {
                             
                             VStack (alignment: .leading, spacing: 10){
                                 Text("AboutTitle1")
-                                    .foregroundColor(AppColor.textPrimary)
+                                    .foregroundStyle(AppColor.textPrimary)
                                     .font(AppFont.fontH2)
                                 Text("AboutContent1")
-                                    .foregroundColor(AppColor.textPrimary)
+                                    .foregroundStyle(AppColor.textPrimary)
                                     .font(AppFont.fontBody1)
                             }
                             .padding(.leading, -60)
@@ -72,10 +72,10 @@ struct AboutUsView: View {
                             HStack {
                                 VStack (alignment: .leading, spacing: 10){
                                     Text("AboutTitle2")
-                                        .foregroundColor(AppColor.textPrimary)
+                                        .foregroundStyle(AppColor.textPrimary)
                                         .font(AppFont.fontH2)
                                     Text("AboutContent2")
-                                        .foregroundColor(AppColor.textPrimary)
+                                        .foregroundStyle(AppColor.textPrimary)
                                         .font(AppFont.fontBody1)
                                         .frame(width: 280)
                                 }
@@ -92,10 +92,10 @@ struct AboutUsView: View {
                             
                             VStack (alignment: .leading, spacing: 10){
                                 Text("AboutTitle3")
-                                    .foregroundColor(AppColor.textPrimary)
+                                    .foregroundStyle(AppColor.textPrimary)
                                     .font(AppFont.fontH2)
                                 Text("AboutContent3")
-                                    .foregroundColor(AppColor.textPrimary)
+                                    .foregroundStyle(AppColor.textPrimary)
                                     .font(AppFont.fontBody1)
                             }
                             .padding(.trailing)
@@ -107,7 +107,7 @@ struct AboutUsView: View {
                     Group {
                         HStack(alignment: .top, spacing: 0) {
                             Text("AboutContent4")
-                                .foregroundColor(AppColor.textPrimary)
+                                .foregroundStyle(AppColor.textPrimary)
                                 .font(AppFont.fontBody1)
                                 .frame(width: 290)
                                 .overlay(alignment: .topTrailing) {
@@ -118,7 +118,7 @@ struct AboutUsView: View {
                                             .resizable()
                                             .scaledToFit()
                                             .frame(width: 35, height: 35)
-                                            .foregroundColor(AppColor.iconSecondary)
+                                            .foregroundStyle(AppColor.iconSecondary)
                                             .padding(.trailing, 6)
                                     }
                                 }
@@ -162,7 +162,7 @@ struct AboutUsView: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: CGFloat.random(in: 10...30))
-                                .foregroundColor(Color.random)
+                                .foregroundStyle(Color.random)
                                 .opacity(0.8)
                                 .scaleEffect(1)
                                 .offset(x: CGFloat.random(in: -200...200), y: CGFloat.random(in: -400...50))

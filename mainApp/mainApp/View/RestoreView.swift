@@ -100,7 +100,7 @@ struct rvShowMnemonicView: View {
                             Image(systemName: AppImage.noCollectDataAlert)
                         }
                     }
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
                     .font(AppFont.fontH2)
                     .kerning(1)
                 }
@@ -109,7 +109,7 @@ struct rvShowMnemonicView: View {
                     if isDecryptSuccess {
                         Text("NeverShareHint")
                             .font(AppFont.fontH4)
-                            .foregroundColor(AppColor.textHint)
+                            .foregroundStyle(AppColor.textHint)
                         
                         VStack(alignment: .leading, spacing: 20) {
                             ShowMnemonicModel(words: plainText)
@@ -138,7 +138,7 @@ struct rvShowMnemonicView: View {
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: CGFloat.random(in: 10...20))
-                                        .foregroundColor(Color.random)
+                                        .foregroundStyle(Color.random)
                                         .opacity(0.8)
                                         .scaleEffect(1)
                                         .offset(x: CGFloat.random(in: -50...300), y: CGFloat.random(in: -400...50))

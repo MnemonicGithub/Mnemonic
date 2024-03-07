@@ -32,7 +32,7 @@ struct LandingPageView: View {
                     HStack {
                         Text("LandingTitle")
                             .font(AppFont.fontH)
-                            .foregroundColor(AppColor.textPrimary)
+                            .foregroundStyle(AppColor.textPrimary)
                             .padding(.horizontal)
                         
                         Spacer()
@@ -51,7 +51,7 @@ struct LandingPageView: View {
                         .padding(.horizontal)
                     Text("LandingHint")
                         .font(AppFont.fontBody1)
-                        .foregroundColor(AppColor.textPrimary)
+                        .foregroundStyle(AppColor.textPrimary)
                         .padding(.horizontal)
                     Group {
                         NavigationBox(viewValue: PathInfo.backupViewValue) {

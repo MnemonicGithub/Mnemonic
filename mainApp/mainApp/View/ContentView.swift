@@ -24,7 +24,7 @@ struct ContentView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     Text("SloganFront")
                         .font(AppFont.fontH)
-                        .foregroundColor(AppColor.textPrimary)
+                        .foregroundStyle(AppColor.textPrimary)
                     
                     Text("SloganRear")
                         .font(AppFont.fontH)
@@ -33,7 +33,7 @@ struct ContentView: View {
                 
                 Text("SloganDescription")
                     .font(AppFont.fontBody2)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
                 
                 Spacer()
 
