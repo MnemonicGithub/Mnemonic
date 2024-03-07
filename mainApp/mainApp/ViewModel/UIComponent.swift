@@ -22,9 +22,12 @@ struct PasswordCheckFieldModel: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
-            Text(titleName)
-            .font(AppFont.fontH4)
-            .foregroundColor(AppColor.textPrimary)
+            if titleName != "" {
+                Text(titleName)
+                .font(AppFont.fontH4)
+                .foregroundColor(AppColor.textHint)
+            }
+
             VStack(alignment: .trailing, spacing: 5) {
                 HStack {
                     if isSecureToggle {
@@ -1010,7 +1013,7 @@ struct EnterPasswordModel: View {
     let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
 
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 10) {
             HStack {
                 Spacer()
                 Image(AppImage.lock)
@@ -1019,7 +1022,16 @@ struct EnterPasswordModel: View {
             .padding(.top, 20)
             
             VStack(alignment: .center, spacing: 20) {
-                PasswordCheckFieldModel(titleName: "", fieldName: "", fieldValue: $password, isShake: $shouldShake)
+                VStack (alignment: .center, spacing: 10){
+                    Text("EnterPasswordDescription")
+                        .font(AppFont.fontBody2)
+                        .foregroundColor(AppColor.textHint)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+                    
+                    PasswordCheckFieldModel(titleName: "", fieldName: "", fieldValue: $password, isShake: $shouldShake)
+                }
+                
                 Button(action: {
                     action()
                     if !isVerify {
@@ -1029,7 +1041,7 @@ struct EnterPasswordModel: View {
                     }
                 }) {
                     SecondaryButton2Model(text: "DecryptButton")
-                        .opacity(!(password.count < 6) ? 1 : 0.2)
+                        .opacity(!(password.count < 6) ? 1 : 0.3)
                 }
                 .padding(.bottom, 20)
                 .disabled(password.count < 6)

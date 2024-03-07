@@ -106,11 +106,11 @@ struct rvShowMnemonicView: View {
                 }
                 
                 VStack (alignment: .leading, spacing: 20) {
-                    Text(isDecryptSuccess ? "NeverShareHint" : "EnterPasswordDescription")
-                        .font(AppFont.fontH4)
-                        .foregroundColor(AppColor.textHint)
-                    
                     if isDecryptSuccess {
+                        Text("NeverShareHint")
+                            .font(AppFont.fontH4)
+                            .foregroundColor(AppColor.textHint)
+                        
                         VStack(alignment: .leading, spacing: 20) {
                             ShowMnemonicModel(words: plainText)
                             ZStack {
@@ -161,6 +161,7 @@ struct rvShowMnemonicView: View {
                                 (isDecryptSuccess, plainText) = dataAlgorithm.toPlain(cardName: dataBox.getCardName(), password: password, cipherText: dataBox.getMnemonic())
                             }
                         }
+                        .padding(.top, 10)
                         .focused($isStartEditing)
                         .zIndex(1)
                     }
