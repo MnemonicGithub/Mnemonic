@@ -103,7 +103,7 @@ We are not looking to replace existing methods, but to provide additional suppor
 
 // TextFiled
 "EnterMnemonic" ="This is a 12, 15, 18, 21 or 24 words you were given when you created your previous wallet.";
-"MnemonicHint" = "Each word should be separated by a single space. \nNo numbers, special characters or line breaks.";
+"MnemonicHint" = "Each word should be separated by a single space. \nNo numbers, uppercase, special characters or line breaks.";
 "SetCardName" = "Choose a Name";
 "CardNameHint" = "Card name should be between 4 and 16 characters.";
 "PasswordDescription" = "Your recovery words will be encrypted into a cipher with the password you create.";

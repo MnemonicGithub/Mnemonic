@@ -226,11 +226,7 @@ struct wordListSearchBar: View {
                     Button(action: {
                         if let researchWord = input.split(separator: " ").filter({ !$0.isEmpty }).last.map(String.init) {
                             let remainingCharacters = String(word.dropFirst(researchWord.count))
-                            if remainingCharacters == "" {
-                                input += word + " "
-                            } else {
-                                input += remainingCharacters + " "
-                            }
+                            input += remainingCharacters + " "
                         }
                     }) {
                         WordListSearchButtonModel(text: word)
@@ -243,10 +239,12 @@ struct wordListSearchBar: View {
         .scrollIndicators(.hidden)
         .onChange(of: input) { newValue in
             matchingWords.removeAll()
-            guard let lastWord = newValue.split(separator: " ").filter({ !$0.isEmpty }).last.map(String.init) else {
-                return
+            if let lastCharacter = newValue.last, lastCharacter.isLetter {
+                guard let lastWord = newValue.split(separator: " ").filter({ !$0.isEmpty }).last.map(String.init) else {
+                    return
+                }
+                matchingWords = findWordsStartingWith(prefix: lastWord)
             }
-            matchingWords = findWordsStartingWith(prefix: lastWord)
         }
     }
     
