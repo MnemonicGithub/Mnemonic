@@ -50,14 +50,15 @@ class UserInfoViewModel: ObservableObject {
             .assign(to: \.isPasswordConfirmValid, on: self)
             .store(in: &cancellableSet)
         
-        Publishers.CombineLatest3(
-            $isCardnamePass,
+        
+        // remove cardname
+        Publishers.CombineLatest(
             $isPasswordPass,
             $isPasswordConfirmValid
         )
         .receive(on: RunLoop.main)
-        .map { isCardnamePass, isPasswordPass, isPasswordConfirmValid in
-            return isCardnamePass && isPasswordPass && isPasswordConfirmValid
+        .map { isPasswordPass, isPasswordConfirmValid in
+            return isPasswordPass && isPasswordConfirmValid
         }
         .assign(to: \.isAllPass, on: self)
         .store(in: &cancellableSet)

@@ -321,10 +321,10 @@ struct bvSetPasswordView: View {
                         dataBox.actionW2CStep2.toggle()
                         dismiss()
                     }) {
-                        SecondaryInteractiveButtonModel(text: "NextStepButton", isActive: $viewModel.isPasswordConfirmValid)
+                        SecondaryInteractiveButtonModel(text: "NextStepButton", isActive: $viewModel.isAllPass)
                     }
                     .padding(.top, 5)
-                    .disabled(!viewModel.isPasswordConfirmValid)
+                    .disabled(!viewModel.isAllPass)
                 }
                 
                 Spacer()
