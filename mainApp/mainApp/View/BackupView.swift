@@ -218,6 +218,7 @@ struct bvSetMnemonicView: View {
 struct wordListSearchBar: View {
     @Binding var input: String
     @State private var matchingWords: [String] = []
+    @State private var previousInput: String = ""
 
     var body: some View {
         ScrollView(.horizontal) {
@@ -239,11 +240,23 @@ struct wordListSearchBar: View {
         .scrollIndicators(.hidden)
         .onChange(of: input) { newValue in
             matchingWords.removeAll()
+            let isForward = newValue.count > previousInput.count
+            previousInput = newValue
+
             if let lastCharacter = newValue.last, lastCharacter.isLetter {
                 guard let lastWord = newValue.split(separator: " ").filter({ !$0.isEmpty }).last.map(String.init) else {
                     return
                 }
+                
                 matchingWords = findWordsStartingWith(prefix: lastWord)
+                if matchingWords.count == 1 && isForward {
+                    if let word = matchingWords.first {
+                        if let researchWord = newValue.split(separator: " ").filter({ !$0.isEmpty }).last.map(String.init) {
+                            let remainingCharacters = String(word.dropFirst(researchWord.count))
+                            input += remainingCharacters + " "
+                        }
+                    }
+                }
             }
         }
     }

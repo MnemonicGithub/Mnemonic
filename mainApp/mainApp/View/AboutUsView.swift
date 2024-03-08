@@ -87,7 +87,6 @@ struct AboutUsView: View {
                     Group {
                         HStack(alignment: .lastTextBaseline) {
                             Image(AppImage.aboutIcon3)
-                                .opacity(0.6)
                                 .padding(.horizontal)
                             
                             VStack (alignment: .leading, spacing: 10){
@@ -131,7 +130,6 @@ struct AboutUsView: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 200, height: 200)
-                                    .opacity(0.8)
                                 
                                 Button {
                                     UIPasteboard.general.string = AppLink.address
