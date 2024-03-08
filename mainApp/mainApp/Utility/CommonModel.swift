@@ -34,11 +34,10 @@ struct InAppReviewAlert {
 }
 
 enum AppLink {
-    static let appStore: String = "https://apps.apple.com/tw/app/safari/id1146562112"
-    static let termsOfUse: String = "https://github.com/MnemonicGithub/Mnemonic"
-    static let contactUs: String = "https://github.com/MnemonicGithub/Mnemonic"
+    static let appStore: String = "https://apps.apple.com/app/id6479014055"
+    static let termsOfUse: String = "https://github.com/MnemonicGithub/Mnemonic/blob/master/TERMS%20OF%20USE.pdf"
+    static let contactUs: String = "https://github.com/MnemonicGithub/Mnemonic/blob/master/README.md"
     static let address: String = "0xCaB3f7146FF7ecC9551E9758C0D4e22B82573625"
-
 }
 
 final class DataBox: ObservableObject {
@@ -119,3 +118,52 @@ struct JsonPackage {
         return nil
     }
 }
+
+struct CheckVersion {
+    func getAppStoreVersion(completion: @escaping (String?) -> Void) {
+        let bundleId = "Mnemonic.mainApplication"
+        let url = URL(string: "https://itunes.apple.com/lookup?bundleId=\(bundleId)")!
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                completion(nil)
+                return
+            }
+            
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                   let results = json["results"] as? [[String: Any]],
+                   let appStoreVersion = results.first?["version"] as? String {
+                    completion(appStoreVersion)
+                    return
+                }
+            } catch {
+                print("Error parsing JSON: \(error.localizedDescription)")
+            }
+            
+            completion(nil)
+        }
+        
+        task.resume()
+    }
+
+    func isUpdate(completion: @escaping (Bool) -> Void) {
+        let bundleVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+        
+        getAppStoreVersion { appStoreVersion in
+            guard let appStoreVersion = appStoreVersion else {
+                print("Failed to retrieve App Store version.")
+                completion(false)
+                return
+            }
+            
+            if bundleVersion != appStoreVersion {
+                print("A newer version (\(appStoreVersion)) is available on the App Store.")
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+    }
+}
+

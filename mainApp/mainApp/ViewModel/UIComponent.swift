@@ -807,7 +807,7 @@ struct TermsAlertModel: View {
                     }
 
                     Button(action: {
-                        withAnimation(.easeInOut) {
+                        withAnimation {
                             toggle.toggle()
                         }
                     }) {

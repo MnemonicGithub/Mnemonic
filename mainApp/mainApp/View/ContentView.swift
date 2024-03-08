@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @AppStorage("isReadTerms") var isReadTerms = false
-    @State var isNeedUpadte: Bool = false
+    @State var isNeedUpdate: Bool = false
     @State var showLogo = true
     @State var isGetStarted: Bool = false
 
@@ -45,13 +45,13 @@ struct ContentView: View {
             }
             .padding(.horizontal, 30)
             
-            if (!isReadTerms && !isNeedUpadte){
+            if (!isReadTerms && !isNeedUpdate){
                 TermsAlertModel(toggle: $isReadTerms)
                     .zIndex(1)
             }
             
-            if isNeedUpadte {
-                UpdateAlertModel(toggle: $isNeedUpadte)
+            if isNeedUpdate {
+                UpdateAlertModel(toggle: $isNeedUpdate)
                 .zIndex(2)
             }
             
@@ -68,9 +68,10 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            // Check - Is the latest app version?
-            
-            
+            let checkVersion = CheckVersion()
+            checkVersion.isUpdate { updateAvailable in
+                self.isNeedUpdate = updateAvailable
+            }
         }
         .fullScreenCover(isPresented: $isGetStarted) {
             LandingPageView()
