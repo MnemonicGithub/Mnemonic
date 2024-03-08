@@ -221,11 +221,6 @@ class NfcOperationsHandler: NSObject, NFCNDEFReaderSessionDelegate{
                             session.invalidate(errorMessage: NSLocalizedString("ErrorWriteFailed", comment: ""))
                             return
                         } else {
-                            
-                            print("Successfully wrote NDEF message to the NFC card.")
-                            self.isWriteSuccess = true
-                            session.alertMessage = NSLocalizedString("NfcWriteSuccess", comment: "")
-                            session.invalidate()
                             // Enable to lock card.
                             tag.writeLock { (lockError: Error?) in
                                 if let writeError = writeError {
