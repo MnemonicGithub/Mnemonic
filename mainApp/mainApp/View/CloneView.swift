@@ -65,9 +65,9 @@ struct CloneActionView: View {
         VStack(alignment: .center, spacing: 20) {
             Button(action: {
                 if let answer = nfcOperationsHandler.startNFCReading() {
+                    cloneData = answer
                     dataBox.actionC2CStep1 = true
-                    self.cloneData = answer
-                } else {
+                 } else {
                     dataBox.actionC2CStep1 = false
                 }
             }) {

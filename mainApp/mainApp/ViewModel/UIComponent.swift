@@ -920,6 +920,7 @@ struct EnterPasswordModel: View {
     @State var shouldShake: Bool = false
     var action: () -> Void
     let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+    let passwordCount: Int = 8
 
     var body: some View {
         VStack(spacing: 10) {
@@ -950,11 +951,10 @@ struct EnterPasswordModel: View {
                     }
                 }) {
                     SecondaryButton2Model(text: "DecryptButton")
-                        .opacity(!(password.count < 6) ? 1 : 0.3)
+                        .opacity(!(password.count < passwordCount) ? 1 : 0.3)
                 }
                 .padding(.bottom, 20)
-                .disabled(password.count < 6)
-                
+                .disabled(password.count < passwordCount)
             }
         }
         .background(AppColor.backgroundColor)
