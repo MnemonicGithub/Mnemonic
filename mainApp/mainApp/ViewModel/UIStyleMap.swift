@@ -105,7 +105,6 @@ enum AppFont {
     static let fontCaption: Font = FontSet.Caption12
 }
 
-
 extension Color {
     static var random: Color {
         return Color(
@@ -125,9 +124,11 @@ extension Color {
 }
 
 enum ColorSet {
-    static let gradientClear: LinearGradient = LinearGradient(colors: [Color.clear, Color.clear], startPoint: .topLeading, endPoint: .bottomTrailing)
     
-    static let gradientGreen: LinearGradient =
+    // Gradient Color
+    static let gradientClear: LinearGradient = LinearGradient(colors: [ColorSet.clear, ColorSet.clear], startPoint: .topLeading, endPoint: .bottomTrailing)
+    static let gradientWhite: LinearGradient = LinearGradient(colors: [ColorSet.white, ColorSet.white], startPoint: .topLeading, endPoint: .bottomTrailing)
+    static let gradientLightGreen: LinearGradient =
     LinearGradient(stops: [
         Gradient.Stop(color: Color(red: 0.87, green: 1, blue: 0.7), location: 0.01),
         Gradient.Stop(color: Color(red: 0.84, green: 0.98, blue: 0.47), location: 0.45),
@@ -135,41 +136,48 @@ enum ColorSet {
         Gradient.Stop(color: Color(red: 0.66, green: 0.96, blue: 0.71), location: 1.00),],
         startPoint: .topLeading,
         endPoint: .bottomTrailing)
-    
-    static let gradientGray: LinearGradient = LinearGradient(colors: [ColorSet.neutralGray, ColorSet.neutralGray], startPoint: .topLeading, endPoint: .bottomTrailing)
-    static let gradientPeach: LinearGradient = LinearGradient(colors: [ColorSet.peach, ColorSet.peach], startPoint: .topLeading, endPoint: .bottomTrailing)
-    
-    static let gradientBackgroundGray: LinearGradient = LinearGradient(colors: [ColorSet.charcoal, ColorSet.charcoal], startPoint: .topLeading, endPoint: .bottomTrailing)
+    static let gradientNeutralGray: LinearGradient = LinearGradient(colors: [ColorSet.neutralGray, ColorSet.neutralGray], startPoint: .topLeading, endPoint: .bottomTrailing)
+    static let gradientCharcoalGray: LinearGradient = LinearGradient(colors: [ColorSet.charcoalGray, ColorSet.charcoalGray], startPoint: .topLeading, endPoint: .bottomTrailing)
+    static let gradientBlack: LinearGradient = LinearGradient(colors: [ColorSet.black, ColorSet.black], startPoint: .topLeading, endPoint: .bottomTrailing)
 
-    static let lightGreen: Color = Color(red: 0.84, green: 0.98, blue: 0.47)
-    static let darkGray: Color = Color(red: 0.17, green: 0.17, blue: 0.17)
-    static let neutralGray: Color = Color(red: 0.59, green: 0.59, blue: 0.59)
-    static let black: Color = Color(.black)
+    // Color
+    static let clear: Color = Color.clear
     static let white: Color = Color(.white)
-    static let charcoal: Color = Color(red: 0.11, green: 0.11, blue: 0.11)
-    static let peach: Color = Color(red: 0.95, green: 0.56, blue: 0.5)
-    static let tangerine: Color = Color(red: 0.99, green: 0.55, blue: 0.3)
+    static let lightGreen: Color = Color(red: 0.84, green: 0.98, blue: 0.47)
+    static let neutralGray: Color = Color(red: 0.59, green: 0.59, blue: 0.59)
+    static let darkGray: Color = Color(red: 0.17, green: 0.17, blue: 0.17)
+    static let charcoalGray: Color = Color(red: 0.11, green: 0.11, blue: 0.11)
+    static let black: Color = Color(.black)
 }
 
 enum AppColor {
-    static let gradientClear: LinearGradient = ColorSet.gradientClear
-    static let gradientSceondary: LinearGradient = ColorSet.gradientGray
-    static let gradientPrimary: LinearGradient = ColorSet.gradientGreen
-    static let borderPrimary: LinearGradient = ColorSet.gradientGreen
-    static let borderSecondary: Color = ColorSet.darkGray
-    static let borderThirdary: LinearGradient = ColorSet.gradientGray
-    static let borderWarring: LinearGradient = ColorSet.gradientGray
     
-    static let iconPrimary: Color = ColorSet.lightGreen
-    static let iconSecondary: Color = ColorSet.white
+    // Dummy
+    static let gradientDummy: LinearGradient = ColorSet.gradientClear
+    static let ColorDummy: Color = ColorSet.clear
+    
+    // Text
     static let textPrimary: Color = ColorSet.white
     static let textSecondary: Color = ColorSet.black
     static let textPoint: Color = ColorSet.lightGreen
     static let textHint: Color = ColorSet.neutralGray
     static let textInactive: Color = ColorSet.darkGray
-    static let textWarring: Color = ColorSet.tangerine
-    static let backgroundColor: LinearGradient = ColorSet.gradientBackgroundGray
+    static let textGradientPoint: LinearGradient = ColorSet.gradientLightGreen
+    static let textGradientHint: LinearGradient = ColorSet.gradientNeutralGray
+
+    // Border
+    static let borderGradientPrimary: LinearGradient = ColorSet.gradientLightGreen
+    static let borderGradientSecondary: LinearGradient = ColorSet.gradientNeutralGray
+    static let borderButton: Color = ColorSet.darkGray
+    
+    // Icon
+    static let iconGradientPrimary: LinearGradient = ColorSet.gradientLightGreen
+    static let iconSecondary: Color = ColorSet.white
+    
+    // Background
+    static let backgroundColor: Color = ColorSet.charcoalGray
     static let boxBackgroundColor: Color = ColorSet.darkGray
+    static let buttonBackgroundGradientColor: LinearGradient = ColorSet.gradientLightGreen
 }
 
 // MARK: - Image Map
@@ -177,9 +185,7 @@ enum AppColor {
 enum AppImage {
     
     // System Name
-    static let welcomeNaviBack: String = "cursorarrow.rays"
     static let navigationBack: String = "chevron.left"
-    static let sheetDismiss: String = "chevron.down.circle.fill"
     static let reviewStart: String = "star.fill"
     static let noCollectDataAlert: String = "lock.shield.fill"
     static let copyToClipboard: String = "doc.on.clipboard"

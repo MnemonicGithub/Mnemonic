@@ -120,7 +120,7 @@ We are not looking to replace existing methods, but to provide additional suppor
 "NfcReadyWriteAlert" = "Hold your iPhone near the NFC card and wait for a moment to write.";
 "NfcReadyCheckAlert" = "Hold your iPhone near the NFC card and wait for a moment to check.";
 "NfcReadSuccess" = "NFC card data read successfully.";
-"NfcWriteSuccess" = "Congratulations!\nYour recovery words is successfully backup.";
+"NfcWriteSuccess" = "Your recovery words is successfully backup.";
 "NfcCheckSuccess" = "Congratulations!\nYour NFC card is accepted.";
 "ErrorNoTags" = "No NFC card detected.\nPlease try again.";
 "ErrorConnectFailed" = "Failed to connect to the NFC card.\nPlease try again.";

@@ -51,7 +51,7 @@ struct PasswordCheckFieldModel: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
                         .inset(by: 0.5)
-                        .stroke(AppColor.borderPrimary, lineWidth: 1)
+                        .stroke(AppColor.borderGradientPrimary, lineWidth: 1)
                 )
                 .modifier(ShakeEffect(shakes: isShake ? 1 : 0))
                 .animation(driveAnimation, value: isShake)
@@ -103,13 +103,13 @@ struct PasswordFieldModel: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
                         .inset(by: 0.5)
-                        .stroke(isDone ? AppColor.borderThirdary : AppColor.borderPrimary, lineWidth: 1)
+                        .stroke(isDone ? AppColor.borderGradientSecondary : AppColor.borderGradientPrimary, lineWidth: 1)
                 )
                 
                 Text(primaryHint)
                     .font(AppFont.fontBody3)
                     .multilineTextAlignment(.trailing)
-                    .foregroundStyle(isDone ? AppColor.gradientSceondary : AppColor.gradientPrimary)
+                    .foregroundStyle(isDone ? AppColor.textGradientHint : AppColor.textGradientPoint)
                     .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
             }
         }
@@ -138,7 +138,7 @@ struct NormalFieldModel: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
                         .inset(by: 0.5)
-                        .stroke(isDone ? AppColor.borderThirdary : AppColor.borderPrimary, lineWidth: 1)
+                        .stroke(isDone ? AppColor.borderGradientSecondary : AppColor.borderGradientPrimary, lineWidth: 1)
                 )
                 
                 Text(primaryHint)
@@ -217,13 +217,13 @@ struct MnemonicFieldModel: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 6)
                     .inset(by: 0.5)
-                    .stroke(isDone ? AppColor.borderThirdary : AppColor.borderPrimary, lineWidth: 1)
+                    .stroke(isDone ? AppColor.borderGradientSecondary : AppColor.borderGradientPrimary, lineWidth: 1)
                 )
                 
                 Text(primaryHint)
                     .font(AppFont.fontBody3)
                     .multilineTextAlignment(.trailing)
-                    .foregroundStyle(isDone ? AppColor.gradientSceondary : AppColor.gradientPrimary)
+                    .foregroundStyle(isDone ? AppColor.textGradientHint : AppColor.textGradientPoint)
                     .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
             }
         }
@@ -263,11 +263,11 @@ struct SecondaryInteractiveButtonModel: View {
                 .padding(.vertical, 14)
             Spacer()
         }
-        .background(isActive ? AppColor.gradientPrimary : AppColor.gradientClear)
+        .background(isActive ? AppColor.buttonBackgroundGradientColor : AppColor.gradientDummy)
         .clipShape(RoundedRectangle(cornerRadius: 15))
         .overlay(
             RoundedRectangle(cornerRadius: 15)
-                .stroke(isActive ? Color.clear : AppColor.borderSecondary, lineWidth: 1.5)
+                .stroke(isActive ? AppColor.ColorDummy : AppColor.borderButton, lineWidth: 1.5)
         )
     }
 }
@@ -281,7 +281,7 @@ struct PrimaryButtonModel: View {
             .foregroundStyle(AppColor.textSecondary)
             .padding(.horizontal, 26)
             .padding(.vertical, 14)
-            .background(AppColor.gradientPrimary)
+            .background(AppColor.buttonBackgroundGradientColor)
             .clipShape(RoundedRectangle(cornerRadius: 15))
     }
 }
@@ -295,11 +295,11 @@ struct SecondaryButtonModel: View {
             .foregroundStyle(AppColor.textPrimary)
             .padding(.horizontal, 26)
             .padding(.vertical, 14)
-            .background(Color.clear)
+            .background(AppColor.ColorDummy)
             .clipShape(RoundedRectangle(cornerRadius: 15))
             .overlay(
                 RoundedRectangle(cornerRadius: 15)
-                    .stroke(AppColor.borderSecondary, lineWidth: 1.5)
+                    .stroke(AppColor.borderButton, lineWidth: 1.5)
             )
     }
 }
@@ -313,7 +313,7 @@ struct PrimaryButton2Model: View {
             .foregroundStyle(AppColor.textSecondary)
             .padding(.horizontal, 29)
             .padding(.vertical, 9)
-            .background(AppColor.gradientPrimary)
+            .background(AppColor.buttonBackgroundGradientColor)
             .clipShape(RoundedRectangle(cornerRadius: 13))
     }
 }
@@ -327,12 +327,12 @@ struct SecondaryButton2Model: View {
             .foregroundStyle(AppColor.textPrimary)
             .padding(.horizontal, 29)
             .padding(.vertical, 10)
-            .background(Color.clear)
+            .background(AppColor.ColorDummy)
             .frame(minWidth: 160)
             .clipShape(RoundedRectangle(cornerRadius: 13))
             .overlay(
                 RoundedRectangle(cornerRadius: 13)
-                    .stroke(AppColor.borderSecondary, lineWidth: 1.5)
+                    .stroke(AppColor.borderButton, lineWidth: 1.5)
             )
     }
 }
@@ -346,7 +346,7 @@ struct PrimaryButton3Model: View {
             .foregroundStyle(AppColor.textSecondary)
             .padding(.horizontal, 32)
             .padding(.vertical, 8)
-            .background(AppColor.gradientPrimary)
+            .background(AppColor.buttonBackgroundGradientColor)
             .frame(minWidth: 120)
             .clipShape(RoundedRectangle(cornerRadius: 10))
     }
@@ -361,11 +361,11 @@ struct SecondaryButton3Model: View {
             .foregroundStyle(AppColor.textPrimary)
             .padding(.horizontal, 32)
             .padding(.vertical, 8)
-            .background(Color.clear)
+            .background(AppColor.ColorDummy)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(AppColor.borderSecondary, lineWidth: 1.5)
+                    .stroke(AppColor.borderButton, lineWidth: 1.5)
             )
     }
 }
@@ -378,7 +378,7 @@ struct PrimaryIconButtonModel: View {
             .resizable()
             .scaledToFit()
             .frame(width: 25, height: 25)
-            .foregroundStyle(AppColor.iconPrimary)
+            .foregroundStyle(AppColor.iconGradientPrimary)
             .padding(.vertical)
     }
 }
@@ -423,7 +423,7 @@ struct PrimaryActionBlockModel: View {
         .overlay(
             RoundedRectangle(cornerRadius: 10)
                 .inset(by: 0.5)
-                .stroke(AppColor.borderPrimary, lineWidth: 1)
+                .stroke(AppColor.borderGradientPrimary, lineWidth: 1)
         )
         .padding(.horizontal)
     }
@@ -478,7 +478,7 @@ struct SecondaryActionBlockModel: View {
         }
         .padding(.vertical, 10)
         .padding(.horizontal, 16)
-        .background(AppColor.gradientPrimary)
+        .background(AppColor.buttonBackgroundGradientColor)
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .padding(.horizontal)
     }
@@ -498,7 +498,7 @@ struct PrimaryStepBlock: View {
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
                     .frame(width: 55, alignment: .center)
-                    .background(AppColor.gradientPrimary)
+                    .background(AppColor.buttonBackgroundGradientColor)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
 
                 Spacer()
@@ -537,7 +537,7 @@ struct PrimaryStepBlock: View {
         .overlay(
             RoundedRectangle(cornerRadius: 10)
                 .inset(by: 0.5)
-                .stroke(AppColor.borderPrimary, lineWidth: 1)
+                .stroke(AppColor.borderGradientPrimary, lineWidth: 1)
         )
         .padding(.horizontal)
     }
@@ -588,7 +588,7 @@ struct SecondaryStepBlock: View {
         }
         .padding(.vertical, 15)
         .padding(.horizontal, 20)
-        .background(AppColor.gradientPrimary)
+        .background(AppColor.buttonBackgroundGradientColor)
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .padding(.horizontal)
     }
@@ -690,7 +690,7 @@ struct InAppReviewAlertModel: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 35, height: 35)
-                                .foregroundStyle(AppColor.iconPrimary)
+                                .foregroundStyle(AppColor.iconGradientPrimary)
                                 .padding(.vertical)
                         }
                     }
@@ -981,7 +981,7 @@ struct ToobarBackButtonModel: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 20, height: 20)
-                    .foregroundStyle(AppColor.iconPrimary)
+                    .foregroundStyle(AppColor.iconGradientPrimary)
                     .padding(.vertical)
             }
             
@@ -1005,11 +1005,11 @@ struct WordListSearchButtonModel: View {
             .foregroundStyle(AppColor.textPrimary)
             .padding(.horizontal, 20)
             .padding(.vertical, 8)
-            .background(Color.clear)
+            .background(AppColor.ColorDummy)
             .clipShape(RoundedRectangle(cornerRadius: 13))
             .overlay(
                 RoundedRectangle(cornerRadius: 13)
-                    .stroke(AppColor.borderThirdary, lineWidth: 1.5)
+                    .stroke(AppColor.borderGradientSecondary, lineWidth: 1.5)
                     .opacity(0.6)
             )
     }
@@ -1039,12 +1039,12 @@ struct CopyButtonModel: View {
             Text(title)
         }
         .font(AppFont.fontCaption)
-        .foregroundStyle(AppColor.gradientPrimary)
+        .foregroundStyle(AppColor.textGradientPoint)
         .frame(height: 40)
         .padding(.horizontal, 25)
         .overlay(
             RoundedRectangle(cornerRadius: 15)
-                .stroke(AppColor.borderSecondary, lineWidth: 2)
+                .stroke(AppColor.borderButton, lineWidth: 2)
         )
         .clipShape(RoundedRectangle(cornerRadius: 15))
     }
@@ -1065,16 +1065,16 @@ struct AnimationButtonModel: View {
                 Text(title)
             }
             .font(AppFont.fontCaption)
-            .foregroundStyle(AppColor.gradientPrimary)
+            .foregroundStyle(AppColor.textGradientPoint)
             .frame(height: 40)
             .padding(.horizontal, 25)
             .overlay(
                 RoundedRectangle(cornerRadius: 15)
-                    .stroke(AppColor.borderSecondary, lineWidth: 2)
+                    .stroke(AppColor.borderButton, lineWidth: 2)
                     .background(
                         GeometryReader { geometry in
                             RoundedRectangle(cornerRadius: 0)
-                                .fill(AppColor.gradientPrimary)
+                                .fill(AppColor.buttonBackgroundGradientColor)
                                 .frame(width: geometry.size.width * CGFloat(progress), height: 5)
                                 .padding(.top, 35)
                         }
@@ -1136,7 +1136,7 @@ struct WordCaseModel: View {
 
             Text(text)
                 .font(AppFont.fontH4)
-                .foregroundStyle(AppColor.gradientPrimary)
+                .foregroundStyle(AppColor.textGradientPoint)
         }
         .fixedSize(horizontal: true, vertical: false)
         .padding(.leading, 8)

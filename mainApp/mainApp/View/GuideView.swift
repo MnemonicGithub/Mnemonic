@@ -13,9 +13,6 @@ struct GuideView: View {
 
     var body: some View {
         ZStack {
-            AppColor.backgroundColor
-                .ignoresSafeArea()
-            
             VStack {
                 Spacer()
 
@@ -72,6 +69,8 @@ struct GuideView: View {
             .padding(.top, 50)
             .padding(.horizontal)
         }
+        .background(AppColor.backgroundColor)
+        .presentationDragIndicator(.visible)
     }
 }
 

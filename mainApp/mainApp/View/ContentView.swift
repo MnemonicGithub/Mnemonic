@@ -28,7 +28,7 @@ struct ContentView: View {
                     
                     Text("SloganRear")
                         .font(AppFont.fontH)
-                        .foregroundStyle(AppColor.gradientPrimary)
+                        .foregroundStyle(AppColor.textGradientPoint)
                 }
                 
                 Text("SloganDescription")
