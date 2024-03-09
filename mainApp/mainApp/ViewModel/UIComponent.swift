@@ -109,7 +109,7 @@ struct PasswordFieldModel: View {
                 Text(primaryHint)
                     .font(AppFont.fontBody3)
                     .multilineTextAlignment(.trailing)
-                    .foregroundStyle(isDone ? AppColor.textHint : AppColor.textHint)
+                    .foregroundStyle(isDone ? AppColor.gradientSceondary : AppColor.gradientPrimary)
                     .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
             }
         }
@@ -223,7 +223,7 @@ struct MnemonicFieldModel: View {
                 Text(primaryHint)
                     .font(AppFont.fontBody3)
                     .multilineTextAlignment(.trailing)
-                    .foregroundStyle(isDone ? AppColor.textHint : AppColor.textHint)
+                    .foregroundStyle(isDone ? AppColor.gradientSceondary : AppColor.gradientPrimary)
                     .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
             }
         }

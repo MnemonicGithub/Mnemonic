@@ -153,6 +153,7 @@ enum ColorSet {
 
 enum AppColor {
     static let gradientClear: LinearGradient = ColorSet.gradientClear
+    static let gradientSceondary: LinearGradient = ColorSet.gradientGray
     static let gradientPrimary: LinearGradient = ColorSet.gradientGreen
     static let borderPrimary: LinearGradient = ColorSet.gradientGreen
     static let borderSecondary: Color = ColorSet.darkGray

@@ -124,53 +124,52 @@ struct AboutUsView: View {
                         }
                         .padding()
                         
-                        ZStack {
-                            VStack (spacing: 10){
-                                Image(AppImage.aboutQRcode)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 200, height: 200)
-                                
-                                Button {
-                                    UIPasteboard.general.string = AppLink.address
-                                    impactFeedbackGenerator.impactOccurred()
-                                    withAnimation(.spring(response: 0.5, dampingFraction: 0.2, blendDuration: 10)) {
-                                        hearts.append(UUID())
-                                    }
-                                    
-                                    self.timer?.invalidate()
-                                    self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
-                                        hearts.removeAll()
-                                    }
-                                } label: {
-                                    HStack {
-                                        Image(systemName: AppImage.copyToClipboard)
-                                        Text(AppLink.address)
-                                            .underline()
-                                            .multilineTextAlignment(.center)
-                                    }
-                                    .foregroundStyle(AppColor.gradientPrimary)
-                                    .font(AppFont.fontCaption)
-                                    .frame(width: 200)
-                                }
-                            }
-                            .padding()
+                        VStack (spacing: 10){
+                            Image(AppImage.aboutQRcode)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 200, height: 200)
                             
-                            ForEach(hearts, id: \.self) { heartID in
-                                Image(systemName:AppImage.buyMeCoffee)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: CGFloat.random(in: 10...30))
-                                    .foregroundStyle(Color.random)
-                                    .opacity(0.8)
-                                    .scaleEffect(1)
-                                    .offset(x: CGFloat.random(in: -200...200), y: CGFloat.random(in: -400...50))
-                                    .id(heartID)
+                            Button {
+                                UIPasteboard.general.string = AppLink.address
+                                impactFeedbackGenerator.impactOccurred()
+                                withAnimation(.spring(response: 0.5, dampingFraction: 0.2, blendDuration: 10)) {
+                                    hearts.append(UUID())
+                                }
+                                
+                                self.timer?.invalidate()
+                                self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
+                                    hearts.removeAll()
+                                }
+                            } label: {
+                                HStack {
+                                    Image(systemName: AppImage.copyToClipboard)
+                                    Text(AppLink.address)
+                                        .underline()
+                                        .multilineTextAlignment(.center)
+                                }
+                                .foregroundStyle(AppColor.gradientPrimary)
+                                .font(AppFont.fontCaption)
+                                .frame(width: 200)
                             }
                         }
+                        .padding()
                     }
                 }
                 .padding(.top, 50)
+            }
+            .background {
+                ForEach(hearts, id: \.self) { heartID in
+                    Image(systemName:AppImage.buyMeCoffee)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: CGFloat.random(in: 10...30))
+                        .foregroundStyle(Color.random)
+                        .opacity(0.8)
+                        .scaleEffect(1)
+                        .position(x: CGFloat.random(in: 0...UIScreen.main.bounds.width), y: CGFloat.random(in: 0...UIScreen.main.bounds.height))
+                        .id(heartID)
+                }
             }
             .scrollIndicators(.hidden)
             .presentationDragIndicator(.visible)

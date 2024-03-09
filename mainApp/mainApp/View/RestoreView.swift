@@ -113,38 +113,24 @@ struct rvShowMnemonicView: View {
                         
                         VStack(alignment: .leading, spacing: 20) {
                             ShowMnemonicModel(words: plainText)
-                            ZStack {
-                                Button {
-                                    UIPasteboard.general.string = plainText
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
-                                        UIPasteboard.general.string = ""
-                                    }
-                                    
-                                    impactFeedbackGenerator.impactOccurred()
-                                    withAnimation(.spring(response: 0.5, dampingFraction: 0.2, blendDuration: 10)) {
-                                        copyIcons.append(UUID())
-                                    }
-                                    
-                                    self.timer?.invalidate()
-                                    self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
-                                        copyIcons.removeAll()
-                                    }
-                                } label: {
-                                    CopyButtonModel(image: AppImage.copyToClipboard, title: "Copy for 60s")
+                            
+                            Button {
+                                UIPasteboard.general.string = plainText
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+                                    UIPasteboard.general.string = ""
                                 }
                                 
-                                ForEach(copyIcons, id: \.self) { ID in
-                                    Image(systemName: AppImage.copyToClipboard)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: CGFloat.random(in: 10...20))
-                                        .foregroundStyle(Color.random)
-                                        .opacity(0.8)
-                                        .scaleEffect(1)
-                                        .offset(x: CGFloat.random(in: -50...300), y: CGFloat.random(in: -400...50))
-                                        .id(ID)
-                                        .zIndex(2)
+                                impactFeedbackGenerator.impactOccurred()
+                                withAnimation(.spring(response: 0.5, dampingFraction: 0.2, blendDuration: 10)) {
+                                    copyIcons.append(UUID())
                                 }
+                                
+                                self.timer?.invalidate()
+                                self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
+                                    copyIcons.removeAll()
+                                }
+                            } label: {
+                                CopyButtonModel(image: AppImage.copyToClipboard, title: "Copy for 60s")
                             }
                         }
                         
@@ -174,6 +160,20 @@ struct rvShowMnemonicView: View {
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
+                .zIndex(1)
+
+            ForEach(copyIcons, id: \.self) { ID in
+                Image(systemName: AppImage.copyToClipboard)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: CGFloat.random(in: 10...30))
+                    .foregroundStyle(Color.random)
+                    .opacity(0.8)
+                    .scaleEffect(1)
+                    .position(x: CGFloat.random(in: 0...UIScreen.main.bounds.width), y: CGFloat.random(in: 0...UIScreen.main.bounds.height))
+                    .id(ID)
+            }
+            .zIndex(2)
         }
         .navigationBarBackButtonHidden(true)
         .scrollIndicators(.hidden)
