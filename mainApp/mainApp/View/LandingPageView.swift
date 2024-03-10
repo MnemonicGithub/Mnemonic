@@ -23,37 +23,17 @@ struct LandingPageView: View {
     var body: some View {
         NavigationStack(path: $router.path) {
             ZStack {
-                Image(AppImage.actionWallpaper)
-                    .resizable()
-                    .scaledToFill()
-                    .ignoresSafeArea()
-                
-                VStack(alignment: .leading, spacing: 10) {
-                    HStack {
-                        Text("LandingTitle")
-                            .font(AppFont.fontH)
-                            .foregroundStyle(AppColor.textPrimary)
-                            .padding(.horizontal)
-                        
-                        Spacer()
-                        
-                        ButtonBox(toggle: $isOpenGudieView) {
-                            SecondaryIconButtonModel(image: AppImage.guide)
-                        }
-                        ButtonBox(toggle: $isOpenAboutUsView) {
-                            SecondaryIconButtonModel(image: AppImage.aboutUs)
-                        }
-                        .padding(.horizontal)
-                    }
-                    
+                VStack(alignment: .leading, spacing: 20) {
                     Image(AppImage.landingWallpaper)
+                        .resizable()
                         .scaledToFit()
                         .padding(.horizontal)
-                    Text("LandingHint")
-                        .font(AppFont.fontBody1)
-                        .foregroundStyle(AppColor.textPrimary)
-                        .padding(.horizontal)
-                    Group {
+
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("LandingHint")
+                            .font(AppFont.fontBody1)
+                            .foregroundStyle(AppColor.textPrimary)
+                            .padding(.horizontal)
                         NavigationBox(viewValue: PathInfo.backupViewValue) {
                             PrimaryActionBlockModel(textTitle: "LandingW2CTitle", textContent: "LandingW2CContent", image: AppImage.landingW2C)
                         }
@@ -65,6 +45,23 @@ struct LandingPageView: View {
                         }
                     }
                 }
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Text("LandingTitle")
+                            .font(AppFont.fontH)
+                            .foregroundStyle(AppColor.textPrimary)
+                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        HStack(alignment: .center, spacing: 20) {
+                            ButtonBox(toggle: $isOpenGudieView) {
+                                SecondaryIconButtonModel(image: AppImage.guide)
+                            }
+                            ButtonBox(toggle: $isOpenAboutUsView) {
+                                SecondaryIconButtonModel(image: AppImage.aboutUs)
+                            }
+                        }
+                    }
+                }                
                 .onAppear {
                     dataBox.clearData()
                 }
@@ -82,6 +79,12 @@ struct LandingPageView: View {
                     InAppReviewAlertModel(toggle: $isInAppReview)
                         .zIndex(1)
                 }
+            }
+            .background {
+                Image(AppImage.actionWallpaper)
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea()
             }
             .onAppear {
                 let inAppReviewAlert = InAppReviewAlert()

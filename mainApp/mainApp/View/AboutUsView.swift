@@ -156,6 +156,8 @@ struct AboutUsView: View {
         }
         .background {
             AppColor.backgroundColor
+                .scaledToFill()
+                .ignoresSafeArea()
                 .zIndex(1)
             ForEach(hearts, id: \.self) { heartID in
                 Image(systemName:AppImage.buyMeCoffee)

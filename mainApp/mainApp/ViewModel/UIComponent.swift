@@ -389,7 +389,7 @@ struct SecondaryIconButtonModel: View {
     var body: some View {
         Image(image)
             .resizable()
-            .scaledToFit()
+            .scaledToFill()
             .frame(width: 25)
             .foregroundStyle(AppColor.iconSecondary)
             .padding(.vertical)
