@@ -157,6 +157,7 @@ struct bvSetMnemonicView: View {
                     .font(AppFont.fontH2)
                     .kerning(1)
                 }
+                .padding(.top, 10)
                 
                 VStack(alignment: .leading, spacing: 20) {
                     Text("EnterMnemonic")
@@ -303,6 +304,7 @@ struct bvSetPasswordView: View {
                     .font(AppFont.fontH2)
                     .kerning(1)
                 }
+                .padding(.top, 10)
                 
                 VStack(alignment: .leading, spacing: 20) {
                     Text("PasswordDescription")

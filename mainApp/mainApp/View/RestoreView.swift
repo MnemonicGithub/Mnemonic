@@ -104,6 +104,8 @@ struct rvShowMnemonicView: View {
                     .font(AppFont.fontH2)
                     .kerning(1)
                 }
+                .padding(.top, 10)
+
                 
                 VStack (alignment: .leading, spacing: 20) {
                     if isDecryptSuccess {

@@ -981,6 +981,7 @@ struct ToobarBackButtonModel: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 20, height: 20)
+                    .bold()
                     .foregroundStyle(AppColor.iconGradientPrimary)
                     .padding(.vertical)
             }

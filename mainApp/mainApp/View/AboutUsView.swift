@@ -18,87 +18,70 @@ struct AboutUsView: View {
         ScrollView {
             VStack (spacing: 0) {
                 Group {
-                    Image(AppImage.aboutLine1)
+                    Image(AppImage.aboutIcon1)
                         .resizable()
-                        .scaledToFit()
-                        .ignoresSafeArea()
-                        .padding(.bottom)
-                    
-                    HStack(alignment: .top) {
-                        Image(AppImage.aboutIcon1)
-                            .opacity(0.1)
-                            .padding(.horizontal)
-                        
-                        VStack (alignment: .leading, spacing: 10){
-                            Text("AboutTitle1")
-                                .foregroundStyle(AppColor.textGradientPoint)
-                                .font(AppFont.fontH2)
-                            Text("AboutContent1")
-                                .foregroundStyle(AppColor.textPrimary)
-                                .font(AppFont.fontBody1)
-                        }
-                        .padding(.leading, -60)
-                        .padding(.trailing)
-                        .padding(.vertical)
-                        
-                        Spacer()
-                    }
-
-                    Image(AppImage.aboutLine2)
-                        .resizable()
-                        .scaledToFit()
-                        .ignoresSafeArea()
-                }
-
-                Group {
-                    HStack {
-                        Spacer()
-                        
-                        Image(AppImage.aboutIcon2)
-                            .opacity(0.3)
-                            .padding(.horizontal)
-                    }
-                    .overlay(alignment: .bottom) {
-                        Image(AppImage.aboutLine3)
-                            .resizable()
-                            .scaledToFit()
-                            .ignoresSafeArea()
-                    }
-                    .overlay(alignment: .top) {
-                        HStack {
-                            VStack (alignment: .leading, spacing: 10){
-                                Text("AboutTitle2")
-                                    .foregroundStyle(AppColor.textGradientPoint)
-                                    .font(AppFont.fontH2)
-                                Text("AboutContent2")
-                                    .foregroundStyle(AppColor.textPrimary)
-                                    .font(AppFont.fontBody1)
-                                    .frame(width: 280)
+                        .scaledToFill()
+                        .opacity(0.1)
+                        .overlay(alignment: .center) {
+                            HStack {
+                                Spacer()
+                                
+                                VStack (alignment: .leading, spacing: 10){
+                                    Text("AboutTitle1")
+                                        .foregroundStyle(AppColor.textGradientPoint)
+                                        .font(AppFont.fontH2)
+                                    Text("AboutContent1")
+                                        .foregroundStyle(AppColor.textPrimary)
+                                        .font(AppFont.fontBody1)
+                                }
+                                .frame(width: 245)
+                                .padding(.trailing)
                             }
-                            .padding(.top)
+                    }
+                    
+                    Image(AppImage.aboutIcon2)
+                        .resizable()
+                        .scaledToFill()
+                        .opacity(0.1)
+                        .overlay(alignment: .top) {
+                            HStack {
+                                VStack (alignment: .leading, spacing: 10){
+                                    Text("AboutTitle2")
+                                        .foregroundStyle(AppColor.textGradientPoint)
+                                        .font(AppFont.fontH2)
+                                    Text("AboutContent2")
+                                        .foregroundStyle(AppColor.textPrimary)
+                                        .font(AppFont.fontBody1)
+                                }
+                                .frame(width: 230)
+                                .padding(.leading, 50)
+                                
+                                Spacer()
+                            }
                         }
-                }
+                    
+                    Image(AppImage.aboutIcon3)
+                        .resizable()
+                        .scaledToFill()
+                        .opacity(0.1)
+                        .overlay(alignment: .top) {
+                            HStack {
+                                Spacer()
+
+                                VStack (alignment: .leading, spacing: 10){
+                                    Text("AboutTitle3")
+                                        .foregroundStyle(AppColor.textGradientPoint)
+                                        .font(AppFont.fontH2)
+                                    Text("AboutContent3")
+                                        .foregroundStyle(AppColor.textPrimary)
+                                        .font(AppFont.fontBody1)
+                                }
+                                .frame(width: 200)
+                                .padding(.trailing, 50)
+                            }
+                        }
                 }
                 
-                Group {
-                    HStack(alignment: .lastTextBaseline) {
-                        Image(AppImage.aboutIcon3)
-                            .padding(.horizontal)
-                        
-                        VStack (alignment: .leading, spacing: 10){
-                            Text("AboutTitle3")
-                                .foregroundStyle(AppColor.textGradientPoint)
-                                .font(AppFont.fontH2)
-                            Text("AboutContent3")
-                                .foregroundStyle(AppColor.textPrimary)
-                                .font(AppFont.fontBody1)
-                        }
-                        .padding(.trailing)
-                        
-                    }
-                    .padding(.vertical)
-                }
-
                 Group {
                     HStack(alignment: .top, spacing: 0) {
                         Text("AboutContent4")
@@ -118,7 +101,7 @@ struct AboutUsView: View {
                                 }
                             }
                     }
-                    .padding()
+                    .padding(.horizontal)
                     
                     VStack (spacing: 10){
                         Image(AppImage.aboutQRcode)
@@ -152,7 +135,7 @@ struct AboutUsView: View {
                     .padding()
                 }
             }
-            .padding(.top, 50)
+            .padding(.top, 20)
         }
         .background {
             AppColor.backgroundColor
@@ -167,8 +150,9 @@ struct AboutUsView: View {
                     .foregroundStyle(Color.random)
                     .opacity(0.8)
                     .scaleEffect(1)
-                    .position(x: CGFloat.random(in: 0...UIScreen.main.bounds.width), y: CGFloat.random(in: 0...UIScreen.main.bounds.height))
+                    .position(x: CGFloat.random(in: 0...UIScreen.main.bounds.width * 1.5), y: CGFloat.random(in: 0...UIScreen.main.bounds.height))
                     .id(heartID)
+                    // UIScreen.main.bounds.width * "1.5", fix the position error?
             }
             .zIndex(2)
         }
